@@ -1,6 +1,6 @@
-http://maybehugs.me
+http://maybehug.me
 
-
+This is just the web site for: https://github.com/zkat/maybe-hugs
 
 ## Building the site
 - clone the repo, then
