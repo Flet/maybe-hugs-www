@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Droid+Sans+Mono" />
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/octicons/3.0.1/octicons.min.css"/>
+<link rel="stylesheet" type="text/css" href="main.css" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/tomorrow-night-eighties.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+<body>
+  <div id="container"><banner>
+  <a href="index.html">maybehug.me</a>
+</banner>
+  <nav>
+  <a href="c.html">c++</a>
+  <a href="haskell.html">haskell</a>
+  <a href="java.html">java</a>
+  <a href="javascript.html">javascript</a>
+  <a href="perl.html">perl</a>
+  <a href="perl6.html">perl6</a>
+  <a href="php.html">php</a>
+  <a href="python.html">python</a>
+  <a href="ruby.html">ruby</a>
+  <a href="rust.html">rust</a>
+</nav>
+    <main>
+      <h2 id="perl6">perl6</h2>
+<h2 id="maybe-hugs">Maybe-Hugs</h2>
+<pre><code class="hljs perl6">need Cutie;
+use Maybe::Hug;
+
+my Cutie $alice = &quot;Alice&quot; does Cutie(:accept-hugs);
+my Cutie $betty = &quot;Betty&quot; does Cutie;
+my Str $spot = &quot;Spot&quot;;
+
+my Int $test = 0;
+
+say &quot;1..4&quot;;
+
+say &quot;{maybe-hug($alice) ?? &quot;ok&quot; !! &quot;not ok&quot;} {++$test} - {$alice} Hugs ({maybe-hug($alice)})&quot;;
+
+say &quot;{maybe-hug($betty) ?? &quot;not ok&quot; !! &quot;ok&quot;} {++$test} - {$betty} Doesn&#39;t Hug&quot;;
+
+try {
+  say &quot;not ok {++$test} - {$spot} doesn&#39;t even ({maybe-hug($spot)})&quot;;
+  CATCH {
+    when X::Method::NotFound {
+      say &quot;ok {$test} - {$spot} doesn&#39;t even&quot;;
+    }
+  }
+}
+
+$alice.accept-hugs = False;
+say &quot;{maybe-hug($alice) ?? &quot;not ok&quot; !! &quot;ok&quot;} {++$test} - {$alice} changed her mind&quot;;
+</code></pre>
+<h3 id="meta-info">META.info</h3>
+<pre><code class="hljs info">{
+    &quot;name&quot;        : &quot;Maybe::Hugs&quot;,
+    &quot;version&quot;     : &quot;1.0.0&quot;,
+    &quot;description&quot; : &quot;Conditional hugging implementation for Perl6&quot;,
+    &quot;provides&quot;    : {
+        &quot;Maybe::Hug&quot; : &quot;lib/Maybe/Hug.pm&quot;,
+        &quot;Cutie&quot;      : &quot;lib/Cutie.pm&quot;
+    },
+    &quot;author&quot;      : &quot;Rebecca Turner&quot;,
+    &quot;depends&quot;     : [],
+    &quot;source-type&quot; : &quot;git&quot;,
+    &quot;source-url&quot;  : &quot;git://github.com/zkat/maybe-hugs.git&quot;
+}
+</code></pre>
+<h3 id="lib-cutie-pm">lib/Cutie.pm</h3>
+<pre><code class="hljs pm">role Cutie {
+  has Bool $.accept-hugs is rw = False;
+}
+</code></pre>
+<h3 id="lib-maybe-hug-pm">lib/Maybe/Hug.pm</h3>
+<pre><code class="hljs pm">class Maybe::Hug {
+  has $.cutie where { defined .accept-hugs };
+  method hug { $.cutie.accept-hugs ?? &quot;HUG!&quot; but True !! &quot;Empathy!&quot; but False }
+}
+
+sub maybe-hug($cutie) is export { Maybe::Hug.new(:$cutie).hug() }
+</code></pre>
+<h3 id="t-basic-t">t/basic.t</h3>
+<pre><code class="hljs t">need Cutie;
+use Maybe::Hug;
+
+my Cutie $alice = &quot;Alice&quot; does Cutie(:accept-hugs);
+my Cutie $betty = &quot;Betty&quot; does Cutie;
+my Str $spot = &quot;Spot&quot;;
+
+my Int $test = 0;
+
+say &quot;1..4&quot;;
+
+say &quot;{maybe-hug($alice) ?? &quot;ok&quot; !! &quot;not ok&quot;} {++$test} - {$alice} Hugs ({maybe-hug($alice)})&quot;;
+
+say &quot;{maybe-hug($betty) ?? &quot;not ok&quot; !! &quot;ok&quot;} {++$test} - {$betty} Doesn&#39;t Hug&quot;;
+
+try {
+  say &quot;not ok {++$test} - {$spot} doesn&#39;t even ({maybe-hug($spot)})&quot;;
+  CATCH {
+    when X::Method::NotFound {
+      say &quot;ok {$test} - {$spot} doesn&#39;t even&quot;;
+    }
+  }
+}
+
+$alice.accept-hugs = False;
+say &quot;{maybe-hug($alice) ?? &quot;not ok&quot; !! &quot;ok&quot;} {++$test} - {$alice} changed her mind&quot;;
+</code></pre>
+
+    </main>
+    <footer>
+        <a href="https://github.com/zkat/maybe-hugs">
+          <span class="mega-octicon octicon-mark-github"></span>
+        </a>
+        <a href="http://creativecommons.org/publicdomain/zero/1.0/">
+          <img src="https://camo.githubusercontent.com/c5160f944848828fa33126d9a697e9abe43ea98f/687474703a2f2f692e6372656174697665636f6d6d6f6e732e6f72672f702f7a65726f2f312e302f38387833312e706e67"/>
+        </a>
+    </footer>
+  </div>
+</body>

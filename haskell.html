@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Droid+Sans+Mono" />
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/octicons/3.0.1/octicons.min.css"/>
+<link rel="stylesheet" type="text/css" href="main.css" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/tomorrow-night-eighties.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+<body>
+  <div id="container"><banner>
+  <a href="index.html">maybehug.me</a>
+</banner>
+  <nav>
+  <a href="c.html">c++</a>
+  <a href="haskell.html">haskell</a>
+  <a href="java.html">java</a>
+  <a href="javascript.html">javascript</a>
+  <a href="perl.html">perl</a>
+  <a href="perl6.html">perl6</a>
+  <a href="php.html">php</a>
+  <a href="python.html">python</a>
+  <a href="ruby.html">ruby</a>
+  <a href="rust.html">rust</a>
+</nav>
+    <main>
+      <h2 id="haskell">haskell</h2>
+<h3 id="setup-hs">Setup.hs</h3>
+<pre><code class="hljs hs"><span class="hljs-import"><span class="hljs-keyword">import</span> Distribution.Simple</span>
+<span class="hljs-title">main</span> = defaultMain
+</code></pre>
+<h3 id="app-main-hs">app/Main.hs</h3>
+<pre><code class="hljs hs"><span class="hljs-module"><span class="hljs-keyword">module</span> Main <span class="hljs-keyword">where</span></span>
+
+<span class="hljs-import"><span class="hljs-keyword">import</span> <span class="hljs-keyword">qualified</span> MaybeHug</span>
+
+<span class="hljs-comment">-- any type can be an instance of Huggable</span>
+<span class="hljs-class"><span class="hljs-keyword">instance</span> <span class="hljs-type">MaybeHug</span>.<span class="hljs-type">Huggable</span> <span class="hljs-type">Int</span> <span class="hljs-keyword">where</span></span>
+  wantsHug n = <span class="hljs-type">True</span>
+
+<span class="hljs-comment">-- a Cutie</span>
+<span class="hljs-typedef"><span class="hljs-keyword">data</span> <span class="hljs-type">Cutie</span> = <span class="hljs-type">Cutie</span> <span class="hljs-container">{ <span class="hljs-title">name</span> :: <span class="hljs-type">String</span>, <span class="hljs-title">wantsHug</span> :: <span class="hljs-type">Bool</span> }</span></span>
+
+<span class="hljs-comment">-- let's make Cutie Huggable</span>
+<span class="hljs-class"><span class="hljs-keyword">instance</span> <span class="hljs-type">MaybeHug</span>.<span class="hljs-type">Huggable</span> <span class="hljs-type">Cutie</span> <span class="hljs-keyword">where</span></span>
+  wantsHug = wantsHug
+
+<span class="hljs-title">main</span> :: <span class="hljs-type">IO</span> ()
+<span class="hljs-title">main</span> = <span class="hljs-keyword">do</span>
+  <span class="hljs-comment">-- hug an Int</span>
+  putStrLn $ <span class="hljs-type">MaybeHug</span>.maybeHug (<span class="hljs-number">3</span>::<span class="hljs-type">Int</span>)
+  <span class="hljs-comment">-- hug a cutie</span>
+  putStrLn $ <span class="hljs-type">MaybeHug</span>.maybeHug $ <span class="hljs-type">Cutie</span> { name = <span class="hljs-string">"Brad"</span>, wantsHug = <span class="hljs-type">True</span> }
+  <span class="hljs-comment">-- this cutie doesn't want hugs</span>
+  putStrLn $ <span class="hljs-type">MaybeHug</span>.maybeHug $ <span class="hljs-type">Cutie</span> { name = <span class="hljs-string">"Jen"</span>, wantsHug = <span class="hljs-type">False</span> }
+</code></pre>
+<h3 id="maybe-hug-cabal">maybe-hug.cabal</h3>
+<pre><code class="hljs cabal">name:                maybe-hug
+version:             0.1.0.0
+synopsis:            Initial project template from stack
+description:         Please see README.md
+homepage:            http://github.com/name/project
+license:             CC0-1.0
+author:              Your name here
+maintainer:          your.address@example.com
+-- copyright:
+category:            Web
+build-type:          Simple
+-- extra-source-files:
+cabal-version:       &gt;=1.10
+
+library
+  hs-source-dirs:      src
+  exposed-modules:     MaybeHug
+  build-depends:       base &gt;= 4.7 &amp;&amp; &lt; 5
+  default-language:    Haskell2010
+
+executable maybe-hug
+  hs-source-dirs:      app
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+                     , maybe-hug
+  default-language:    Haskell2010
+
+test-suite maybe-hug-test
+  type:                exitcode-stdio-1.0
+  hs-source-dirs:      test
+  main-is:             Spec.hs
+  build-depends:       base
+                     , maybe-hug
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  default-language:    Haskell2010
+
+source-repository head
+  type:     git
+  location: https://github.com/name/project
+</code></pre>
+<h3 id="src-maybehug-hs">src/MaybeHug.hs</h3>
+<pre><code class="hljs hs"><span class="hljs-module"><span class="hljs-keyword">module</span> MaybeHug
+    <span class="hljs-container">( <span class="hljs-type">Huggable</span>,
+      <span class="hljs-title">maybeHug</span>,
+      <span class="hljs-title">wantsHug</span>
+    )</span> <span class="hljs-keyword">where</span></span>
+<span class="hljs-class">
+<span class="hljs-keyword">class</span> <span class="hljs-type">Huggable</span> a <span class="hljs-keyword">where</span></span>
+  wantsHug :: a -&gt; <span class="hljs-type">Bool</span>
+
+<span class="hljs-title">maybeHug</span> :: (<span class="hljs-type">Huggable</span> a) =&gt; a -&gt; <span class="hljs-type">String</span>
+<span class="hljs-title">maybeHug</span> h =
+  <span class="hljs-keyword">if</span> wantsHug h
+    <span class="hljs-keyword">then</span> <span class="hljs-string">"Hug!"</span>
+    <span class="hljs-keyword">else</span> <span class="hljs-string">"Empathy!"</span>
+</code></pre>
+<h3 id="stack-yaml">stack.yaml</h3>
+<pre><code class="hljs yaml">flags: {}
+packages:
+- &#39;.&#39;
+extra-deps: []
+resolver: lts-2.20
+</code></pre>
+
+    </main>
+    <footer>
+        <a href="https://github.com/zkat/maybe-hugs">
+          <span class="mega-octicon octicon-mark-github"></span>
+        </a>
+        <a href="http://creativecommons.org/publicdomain/zero/1.0/">
+          <img src="https://camo.githubusercontent.com/c5160f944848828fa33126d9a697e9abe43ea98f/687474703a2f2f692e6372656174697665636f6d6d6f6e732e6f72672f702f7a65726f2f312e302f38387833312e706e67"/>
+        </a>
+    </footer>
+  </div>
+</body>

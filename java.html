@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Droid+Sans+Mono" />
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/octicons/3.0.1/octicons.min.css"/>
+<link rel="stylesheet" type="text/css" href="main.css" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/tomorrow-night-eighties.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+<body>
+  <div id="container"><banner>
+  <a href="index.html">maybehug.me</a>
+</banner>
+  <nav>
+  <a href="c.html">c++</a>
+  <a href="haskell.html">haskell</a>
+  <a href="java.html">java</a>
+  <a href="javascript.html">javascript</a>
+  <a href="perl.html">perl</a>
+  <a href="perl6.html">perl6</a>
+  <a href="php.html">php</a>
+  <a href="python.html">python</a>
+  <a href="ruby.html">ruby</a>
+  <a href="rust.html">rust</a>
+</nav>
+    <main>
+      <h2 id="java">java</h2>
+<h3 id="cutie-java">Cutie.java</h3>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Cutie</span> </span>{
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">boolean</span> respondsToHugs;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> hugs;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> tlc;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Cutie</span><span class="hljs-params">()</span> </span>{
+        respondsToHugs = <span class="hljs-keyword">false</span>;
+        hugs = <span class="hljs-number">0</span>;
+        tlc = <span class="hljs-number">0</span>;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setAcceptsHugs</span><span class="hljs-params">(<span class="hljs-keyword">boolean</span> value)</span> </span>{
+        respondsToHugs = value;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">acceptsHugs</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> respondsToHugs;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">hug</span><span class="hljs-params">()</span> </span>{
+        hugs++;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">empathy</span><span class="hljs-params">()</span> </span>{
+        tlc++;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getNumberOfHugs</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> hugs;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getNumberOfTlc</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> tlc;
+    }
+}
+</code></pre>
+<h3 id="main-java">Main.java</h3>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Main</span> </span>{
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{
+        <span class="hljs-comment">// Test out the hugging capabilities</span>
+        Cutie hugger = <span class="hljs-keyword">new</span> Cutie();
+        Cutie nonHugger = <span class="hljs-keyword">new</span> Cutie();
+        testHugger(hugger, <span class="hljs-keyword">true</span>);
+        testHugger(nonHugger, <span class="hljs-keyword">false</span>);
+
+        System.out.println(<span class="hljs-string">"Hugger got "</span> + hugger.getNumberOfHugs() + <span class="hljs-string">" hugs "</span>
+                + <span class="hljs-string">" and "</span> + hugger.getNumberOfTlc() + <span class="hljs-string">" empathies.\n"</span>);
+        System.out.println(<span class="hljs-string">"Non-hugger got "</span> + nonHugger.getNumberOfHugs() + <span class="hljs-string">" hugs "</span>
+                + <span class="hljs-string">" and "</span> + nonHugger.getNumberOfTlc() + <span class="hljs-string">" empathies.\n"</span>);
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testHugger</span><span class="hljs-params">(Cutie cutie, <span class="hljs-keyword">boolean</span> testVal)</span>
+    </span>{
+        cutie.setAcceptsHugs(testVal);
+        MaybeHug maybeHug = <span class="hljs-keyword">null</span>;
+        <span class="hljs-keyword">try</span> {
+            maybeHug = <span class="hljs-keyword">new</span> MaybeHug(cutie);
+            maybeHug.hug();
+        } <span class="hljs-keyword">catch</span> (NoCutieException e) {
+            System.err.println(<span class="hljs-string">"No cutie to hug! :("</span>);
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre>
+<h3 id="maybehug-java">MaybeHug.java</h3>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MaybeHug</span> </span>{
+
+    <span class="hljs-keyword">private</span> Cutie cutie;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MaybeHug</span><span class="hljs-params">(Cutie cutie)</span> <span class="hljs-keyword">throws</span> NoCutieException </span>{
+        <span class="hljs-keyword">if</span> (cutie == <span class="hljs-keyword">null</span>) {
+            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> NoCutieException();
+        }
+        <span class="hljs-keyword">this</span>.cutie = cutie;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">hug</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">if</span> (cutie.acceptsHugs()) {
+            cutie.hug();
+        } <span class="hljs-keyword">else</span> {
+            cutie.empathy();
+        }
+    }
+}
+</code></pre>
+<h3 id="nocutieexception-java">NoCutieException.java</h3>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NoCutieException</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Exception</span> </span>{
+}
+</code></pre>
+
+    </main>
+    <footer>
+        <a href="https://github.com/zkat/maybe-hugs">
+          <span class="mega-octicon octicon-mark-github"></span>
+        </a>
+        <a href="http://creativecommons.org/publicdomain/zero/1.0/">
+          <img src="https://camo.githubusercontent.com/c5160f944848828fa33126d9a697e9abe43ea98f/687474703a2f2f692e6372656174697665636f6d6d6f6e732e6f72672f702f7a65726f2f312e302f38387833312e706e67"/>
+        </a>
+    </footer>
+  </div>
+</body>

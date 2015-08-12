@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Droid+Sans+Mono" />
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/octicons/3.0.1/octicons.min.css"/>
+<link rel="stylesheet" type="text/css" href="main.css" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/tomorrow-night-eighties.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+<body>
+  <div id="container"><banner>
+  <a href="index.html">maybehug.me</a>
+</banner>
+  <nav>
+  <a href="c.html">c++</a>
+  <a href="haskell.html">haskell</a>
+  <a href="java.html">java</a>
+  <a href="javascript.html">javascript</a>
+  <a href="perl.html">perl</a>
+  <a href="perl6.html">perl6</a>
+  <a href="php.html">php</a>
+  <a href="python.html">python</a>
+  <a href="ruby.html">ruby</a>
+  <a href="rust.html">rust</a>
+</nav>
+    <main>
+      <h2 id="python">python</h2>
+<h3 id="maybehug-py">MaybeHug.py</h3>
+<pre><code class="hljs py"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MaybeHug</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, cutie)</span>:</span>
+        self._cutie = cutie
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">hug</span><span class="hljs-params">(self)</span>:</span>
+        func = getattr(self._cutie, <span class="hljs-string">'hug'</span>, <span class="hljs-keyword">None</span>)
+        <span class="hljs-keyword">if</span> callable(func):
+            <span class="hljs-keyword">return</span> self._cutie.hug()
+        <span class="hljs-keyword">return</span> <span class="hljs-string">'Cutie prefers empathy!'</span>
+</code></pre>
+<h3 id="maybehugtest-py">MaybeHugTest.py</h3>
+<pre><code class="hljs py"><span class="hljs-keyword">import</span> unittest
+<span class="hljs-keyword">from</span> MaybeHug <span class="hljs-keyword">import</span> MaybeHug
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MaybeHugTest</span><span class="hljs-params">(unittest.TestCase)</span>:</span>
+    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">cutie</span><span class="hljs-params">()</span>:</span>
+        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">hug</span><span class="hljs-params">(self)</span>:</span>
+            <span class="hljs-keyword">return</span> <span class="hljs-string">'HUG!'</span>
+
+    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NoHugs</span><span class="hljs-params">()</span>:</span> <span class="hljs-keyword">pass</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">testGethug</span><span class="hljs-params">(self)</span>:</span>
+        res  = MaybeHug(MaybeHugTest.cutie()).hug()
+        self.assertEqual(res, <span class="hljs-string">'HUG!'</span>)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">testNoHug</span><span class="hljs-params">(self)</span>:</span>
+        res  = MaybeHug(MaybeHugTest.NoHugs()).hug()
+        self.assertEqual(res,<span class="hljs-string">'Cutie prefers empathy!'</span>)
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>:</span>
+    unittest.main()
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">"__main__"</span>:
+    main()
+</code></pre>
+<h3 id="__init__-py"><strong>init</strong>.py</h3>
+<pre><code class="hljs py">
+</code></pre>
+
+    </main>
+    <footer>
+        <a href="https://github.com/zkat/maybe-hugs">
+          <span class="mega-octicon octicon-mark-github"></span>
+        </a>
+        <a href="http://creativecommons.org/publicdomain/zero/1.0/">
+          <img src="https://camo.githubusercontent.com/c5160f944848828fa33126d9a697e9abe43ea98f/687474703a2f2f692e6372656174697665636f6d6d6f6e732e6f72672f702f7a65726f2f312e302f38387833312e706e67"/>
+        </a>
+    </footer>
+  </div>
+</body>

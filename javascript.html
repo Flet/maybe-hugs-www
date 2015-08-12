@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Droid+Sans+Mono" />
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/octicons/3.0.1/octicons.min.css"/>
+<link rel="stylesheet" type="text/css" href="main.css" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/tomorrow-night-eighties.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+<body>
+  <div id="container"><banner>
+  <a href="index.html">maybehug.me</a>
+</banner>
+  <nav>
+  <a href="c.html">c++</a>
+  <a href="haskell.html">haskell</a>
+  <a href="java.html">java</a>
+  <a href="javascript.html">javascript</a>
+  <a href="perl.html">perl</a>
+  <a href="perl6.html">perl6</a>
+  <a href="php.html">php</a>
+  <a href="python.html">python</a>
+  <a href="ruby.html">ruby</a>
+  <a href="rust.html">rust</a>
+</nav>
+    <main>
+      <h2 id="javascript">javascript</h2>
+<h3 id="index-js">index.js</h3>
+<pre><code class="hljs js"><span class="hljs-built_in">module</span>.exports = MaybeHug
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">MaybeHug</span> (<span class="hljs-params">cutie</span>) </span>{
+  <span class="hljs-keyword">if</span> (cutie === <span class="hljs-literal">null</span> || cutie === <span class="hljs-literal">undefined</span>) {
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">TypeError</span>(<span class="hljs-string">"no cutie to maybe hug :("</span>)
+  }
+  <span class="hljs-keyword">if</span> (!(<span class="hljs-keyword">this</span> <span class="hljs-keyword">instanceof</span> MaybeHug)) {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> MaybeHug(cutie).hug()
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-keyword">this</span>.cutie = cutie
+  }
+}
+
+MaybeHug.prototype.hug = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.cutie.acceptsHugs ? <span class="hljs-string">"HUG!"</span> : <span class="hljs-string">"Empathy!"</span>
+}
+</code></pre>
+<h3 id="package-json">package.json</h3>
+<pre><code class="hljs json">{
+  "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"maybe-hugs"</span></span>,
+  "<span class="hljs-attribute">version</span>": <span class="hljs-value"><span class="hljs-string">"1.0.0"</span></span>,
+  "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Conditional hugging implementation for JavaScript"</span></span>,
+  "<span class="hljs-attribute">main</span>": <span class="hljs-value"><span class="hljs-string">"index.js"</span></span>,
+  "<span class="hljs-attribute">scripts</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">test</span>": <span class="hljs-value"><span class="hljs-string">"tap test/*.js"</span>
+  </span>}</span>,
+  "<span class="hljs-attribute">repository</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"git"</span></span>,
+    "<span class="hljs-attribute">url</span>": <span class="hljs-value"><span class="hljs-string">"git+https://github.com/zkat/maybe-hugs.git"</span>
+  </span>}</span>,
+  "<span class="hljs-attribute">keywords</span>": <span class="hljs-value">[
+    <span class="hljs-string">"hugs"</span>,
+    <span class="hljs-string">"cute"</span>
+  ]</span>,
+  "<span class="hljs-attribute">author</span>": <span class="hljs-value"><span class="hljs-string">"Kat Marchán &lt;kzm@sykosomatic.org&gt;"</span></span>,
+  "<span class="hljs-attribute">license</span>": <span class="hljs-value"><span class="hljs-string">"CC0-1.0"</span></span>,
+  "<span class="hljs-attribute">bugs</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">url</span>": <span class="hljs-value"><span class="hljs-string">"https://github.com/zkat/maybe-hugs/issues"</span>
+  </span>}</span>,
+  "<span class="hljs-attribute">homepage</span>": <span class="hljs-value"><span class="hljs-string">"https://github.com/zkat/maybe-hugs#readme"</span></span>,
+  "<span class="hljs-attribute">devDependencies</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">tap</span>": <span class="hljs-value"><span class="hljs-string">"^1.3.2"</span>
+  </span>}
+</span>}
+</code></pre>
+<h3 id="test-hugs-js">test/hugs.js</h3>
+<pre><code class="hljs js"><span class="hljs-keyword">var</span> t = <span class="hljs-built_in">require</span>(<span class="hljs-string">"tap"</span>)
+<span class="hljs-keyword">var</span> maybeHugs = <span class="hljs-built_in">require</span>(<span class="hljs-string">"../"</span>)
+
+t.test(<span class="hljs-string">"cutie is required"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">t</span>) </span>{
+  t.throws(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    maybeHugs()
+  })
+  t.throws(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">new</span> maybeHugs().hug()
+  })
+  t.end()
+})
+
+t.test(<span class="hljs-string">"empathy test"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">t</span>) </span>{
+  <span class="hljs-keyword">var</span> noHugs = [
+    { acceptsHugs: <span class="hljs-literal">false</span> },
+    { acceptsHugs: <span class="hljs-literal">null</span> },
+    { acceptsHugs: <span class="hljs-string">""</span> },
+    { acceptsHugs: <span class="hljs-number">0</span> },
+    {},
+    <span class="hljs-string">"asdf"</span>,
+    <span class="hljs-string">""</span>,
+    <span class="hljs-literal">false</span>,
+    <span class="hljs-literal">true</span>,
+    <span class="hljs-number">10</span>,
+  ]
+  t.plan(noHugs.length * <span class="hljs-number">2</span>)
+  noHugs.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">nh</span>) </span>{
+    t.equal(maybeHugs(nh), <span class="hljs-string">"Empathy!"</span>)
+    t.equal(<span class="hljs-keyword">new</span> maybeHugs(nh).hug(), <span class="hljs-string">"Empathy!"</span>)
+  })
+})
+
+t.test(<span class="hljs-string">"hug test"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">t</span>) </span>{
+  <span class="hljs-keyword">var</span> yesHugs = [
+    { acceptsHugs: <span class="hljs-literal">true</span> },
+    { acceptsHugs: <span class="hljs-number">1000</span> },
+    { acceptsHugs: [] },
+    { acceptsHugs: {} },
+    { acceptsHugs: <span class="hljs-regexp">/^hugs?/</span> },
+    <span class="hljs-keyword">new</span> (<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Huggee</span> (<span class="hljs-params"></span>) </span>{ <span class="hljs-keyword">this</span>.acceptsHugs = <span class="hljs-keyword">this</span> }),
+  ]
+
+  t.plan(yesHugs.length * <span class="hljs-number">2</span>)
+  yesHugs.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">yh</span>) </span>{
+    t.equal(maybeHugs(yh), <span class="hljs-string">"HUG!"</span>)
+    t.equal(<span class="hljs-keyword">new</span> maybeHugs(yh).hug(), <span class="hljs-string">"HUG!"</span>)
+  })
+})
+</code></pre>
+
+    </main>
+    <footer>
+        <a href="https://github.com/zkat/maybe-hugs">
+          <span class="mega-octicon octicon-mark-github"></span>
+        </a>
+        <a href="http://creativecommons.org/publicdomain/zero/1.0/">
+          <img src="https://camo.githubusercontent.com/c5160f944848828fa33126d9a697e9abe43ea98f/687474703a2f2f692e6372656174697665636f6d6d6f6e732e6f72672f702f7a65726f2f312e302f38387833312e706e67"/>
+        </a>
+    </footer>
+  </div>
+</body>

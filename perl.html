@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Droid+Sans+Mono" />
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/octicons/3.0.1/octicons.min.css"/>
+<link rel="stylesheet" type="text/css" href="main.css" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/tomorrow-night-eighties.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+<body>
+  <div id="container"><banner>
+  <a href="index.html">maybehug.me</a>
+</banner>
+  <nav>
+  <a href="c.html">c++</a>
+  <a href="haskell.html">haskell</a>
+  <a href="java.html">java</a>
+  <a href="javascript.html">javascript</a>
+  <a href="perl.html">perl</a>
+  <a href="perl6.html">perl6</a>
+  <a href="php.html">php</a>
+  <a href="python.html">python</a>
+  <a href="ruby.html">ruby</a>
+  <a href="rust.html">rust</a>
+</nav>
+    <main>
+      <h2 id="perl">perl</h2>
+<h2 id="maybe-hug">Maybe::Hug</h2>
+<pre><code class="hljs perl"><span class="hljs-keyword">use</span> Moops;
+<span class="hljs-keyword">use</span> Maybe::Hug;
+
+class CutiePerson with Cutie {
+  has <span class="hljs-string">name =&gt;</span> (<span class="hljs-string">is =&gt;</span> <span class="hljs-string">"ro"</span>, <span class="hljs-string">isa =&gt;</span> <span class="hljs-string">"Str"</span>);
+}
+
+class CutiePet {
+  has <span class="hljs-string">name =&gt;</span> (<span class="hljs-string">is =&gt;</span> <span class="hljs-string">"ro"</span>, <span class="hljs-string">isa =&gt;</span> <span class="hljs-string">"Str"</span>);
+}
+
+<span class="hljs-keyword">my</span> <span class="hljs-variable">$alice</span> = new CutiePerson(<span class="hljs-string">name=&gt;</span><span class="hljs-string">"Alice"</span>, <span class="hljs-string">acceptHugs=&gt;</span><span class="hljs-number">1</span>);
+<span class="hljs-keyword">my</span> <span class="hljs-variable">$betty</span> = new CutiePerson(<span class="hljs-string">name=&gt;</span><span class="hljs-string">"Betty"</span>);
+
+<span class="hljs-keyword">say</span> maybeHug(<span class="hljs-variable">$alice</span>); <span class="hljs-comment"># HUGS!</span>
+<span class="hljs-keyword">say</span> Maybe::Hug-&gt;new(<span class="hljs-variable">$betty</span>)-&gt;hug; <span class="hljs-comment"># Empathy!</span>
+</code></pre>
+<h3 id="manifest">MANIFEST</h3>
+<pre><code>Makefile.PL
+MANIFEST
+README.md
+t/Maybe-Hug.t
+lib/Cutie.pm
+lib/Maybe/Hug.pm
+</code></pre><h3 id="makefile-pl">Makefile.PL</h3>
+<pre><code class="hljs PL">use ExtUtils::MakeMaker;
+WriteMakefile(
+    NAME              =&gt; 'Maybe::Hug',
+    VERSION_FROM      =&gt; 'lib/Maybe/Hug.pm',
+    PREREQ_PM         =&gt; {'Moops'=&gt;0.034, 'Kavorka'=&gt;0.036},
+    AUTHOR            =&gt; 'Rebecca Turner &lt;me@re-becca.org&gt;',
+    LICENSE           =&gt; 'mit',
+);
+</code></pre>
+<h3 id="lib-cutie-pm">lib/Cutie.pm</h3>
+<pre><code class="hljs pm">use Moops;
+
+role Cutie {
+  has acceptHugs =&gt; (is =&gt; "rw", isa=&gt;"Bool", default=&gt;0)
+}
+</code></pre>
+<h3 id="lib-maybe-hug-pm">lib/Maybe/Hug.pm</h3>
+<pre><code class="hljs pm">use Moops;
+our $VERSION = 1.0.0;
+
+use Cutie;
+
+class Maybe::Hug {
+  has cutie =&gt; (is =&gt; "ro", isa =&gt; ConsumerOf["Cutie"]);
+  method hug() { $self-&gt;cutie-&gt;acceptHugs ? "HUG!" : "Empathy!" }
+}
+
+package Maybe::Hug {
+  use Kavorka;
+  use parent qw( Exporter );
+  our @EXPORT = qw( maybeHug );
+
+  fun maybeHug($cutie) { Maybe::Hug-&gt;new(cutie=&gt;$cutie)-&gt;hug }
+}
+</code></pre>
+<h3 id="t-maybe-hug-t">t/Maybe-Hug.t</h3>
+<pre><code class="hljs t">use strict;
+use warnings;
+use Test::More tests =&gt; 4;
+use Moops;
+use Maybe::Hug;
+
+class CutiePerson with Cutie {
+  has name =&gt; (is =&gt; "ro", isa =&gt; "Str");
+}
+
+class CutiePet {
+  has name =&gt; (is =&gt; "ro", isa =&gt; "Str");
+}
+
+my $alice = new CutiePerson(name=&gt;"Alice", acceptHugs=&gt;1);
+my $betty = new CutiePerson(name=&gt;"Betty");
+my $spot  = new CutiePet(name=&gt;"Spot");
+
+is(maybeHug($alice), 'HUG!', $alice-&gt;name . " Hugs");
+is(maybeHug($betty), 'Empathy!', $betty-&gt;name . " Doesn't Hug");
+
+eval {
+  maybeHug($spot);
+  fail($spot-&gt;name . "doesn't even");
+};
+if ($@) {
+  pass($spot-&gt;name . "doesn't even");
+}
+
+$alice-&gt;acceptHugs(0);
+is(maybeHug($alice), 'Empathy!', $alice-&gt;name . " changed her mind");
+</code></pre>
+
+    </main>
+    <footer>
+        <a href="https://github.com/zkat/maybe-hugs">
+          <span class="mega-octicon octicon-mark-github"></span>
+        </a>
+        <a href="http://creativecommons.org/publicdomain/zero/1.0/">
+          <img src="https://camo.githubusercontent.com/c5160f944848828fa33126d9a697e9abe43ea98f/687474703a2f2f692e6372656174697665636f6d6d6f6e732e6f72672f702f7a65726f2f312e302f38387833312e706e67"/>
+        </a>
+    </footer>
+  </div>
+</body>
