@@ -11,7 +11,10 @@
 </banner>
   <nav>
   <a href="c.html">c++</a>
+  <a href="clojure.html">clojure</a>
+  <a href="go.html">go</a>
   <a href="haskell.html">haskell</a>
+  <a href="hy.html">hy</a>
   <a href="java.html">java</a>
   <a href="javascript.html">javascript</a>
   <a href="perl.html">perl</a>
@@ -20,36 +23,43 @@
   <a href="python.html">python</a>
   <a href="ruby.html">ruby</a>
   <a href="rust.html">rust</a>
+  <a href="scala.html">scala</a>
 </nav>
     <main>
       <h2 id="perl6">perl6</h2>
 <h2 id="maybe-hugs">Maybe-Hugs</h2>
-<pre><code class="hljs perl6">need Cutie;
+<pre><code class="hljs perl6">use Test;
+need Cutie;
 use Maybe::Hug;
 
-my Cutie $alice = &quot;Alice&quot; does Cutie(:accept-hugs);
-my Cutie $betty = &quot;Betty&quot; does Cutie;
-my Str $spot = &quot;Spot&quot;;
-
-my Int $test = 0;
-
-say &quot;1..4&quot;;
-
-say &quot;{maybe-hug($alice) ?? &quot;ok&quot; !! &quot;not ok&quot;} {++$test} - {$alice} Hugs ({maybe-hug($alice)})&quot;;
-
-say &quot;{maybe-hug($betty) ?? &quot;not ok&quot; !! &quot;ok&quot;} {++$test} - {$betty} Doesn&#39;t Hug&quot;;
-
-try {
-  say &quot;not ok {++$test} - {$spot} doesn&#39;t even ({maybe-hug($spot)})&quot;;
-  CATCH {
-    when X::Method::NotFound {
-      say &quot;ok {$test} - {$spot} doesn&#39;t even&quot;;
-    }
-  }
+role Huggable does Cutie {
+  has Bool $.hug-ok is rw = False;
+  method accept-hugs() { $.hug-ok }
 }
 
-$alice.accept-hugs = False;
-say &quot;{maybe-hug($alice) ?? &quot;not ok&quot; !! &quot;ok&quot;} {++$test} - {$alice} changed her mind&quot;;
+role AlternatingHuggable does Cutie {
+  has $!hugs = 0;
+  method accept-hugs() { Bool(++$!hugs % 2) }
+}
+
+my Cutie $alice = &quot;Alice&quot; does Huggable(:hug-ok);
+my Cutie $betty = &quot;Betty&quot; does Huggable;
+my Cutie $carol = &quot;Carol&quot; does AlternatingHuggable;
+my $elision = &quot;Elision&quot;;
+
+plan 6;
+
+ok maybe-hug($alice), &quot;$alice Hugs&quot;;
+
+ok !maybe-hug($betty), &quot;$betty Didn&#39;t positively affirm huggability, so no hugs&quot;;
+
+ok maybe-hug($carol), &quot;$carol wants one this time&quot;;
+ok !maybe-hug($carol), &quot;$carol doesn&#39;t now though&quot;;
+
+throws-like { maybe-hug $elision }, X::TypeCheck, &quot;$elision doesn&#39;t even&quot;;
+
+$alice.hug-ok = False;
+ok !maybe-hug($alice), &quot;$alice changed her mind&quot;;
 </code></pre>
 <h3 id="meta-info">META.info</h3>
 <pre><code class="hljs info">{
@@ -68,44 +78,50 @@ say &quot;{maybe-hug($alice) ?? &quot;not ok&quot; !! &quot;ok&quot;} {++$test} 
 </code></pre>
 <h3 id="lib-cutie-pm">lib/Cutie.pm</h3>
 <pre><code class="hljs pm">role Cutie {
-  has Bool $.accept-hugs is rw = False;
+  method accept-hugs { … }
 }
 </code></pre>
 <h3 id="lib-maybe-hug-pm">lib/Maybe/Hug.pm</h3>
 <pre><code class="hljs pm">class Maybe::Hug {
-  has $.cutie where { defined .accept-hugs };
-  method hug { $.cutie.accept-hugs ?? &quot;HUG!&quot; but True !! &quot;Empathy!&quot; but False }
+  has $.cutie where { .can(&#39;accept-hugs&#39;) };
+  method hug { $.cutie.accept-hugs() ?? &quot;HUG!&quot; but True !! &quot;Empathy!&quot; but False }
 }
 
 sub maybe-hug($cutie) is export { Maybe::Hug.new(:$cutie).hug() }
 </code></pre>
 <h3 id="t-basic-t">t/basic.t</h3>
-<pre><code class="hljs t">need Cutie;
+<pre><code class="hljs t">use Test;
+need Cutie;
 use Maybe::Hug;
 
-my Cutie $alice = &quot;Alice&quot; does Cutie(:accept-hugs);
-my Cutie $betty = &quot;Betty&quot; does Cutie;
-my Str $spot = &quot;Spot&quot;;
-
-my Int $test = 0;
-
-say &quot;1..4&quot;;
-
-say &quot;{maybe-hug($alice) ?? &quot;ok&quot; !! &quot;not ok&quot;} {++$test} - {$alice} Hugs ({maybe-hug($alice)})&quot;;
-
-say &quot;{maybe-hug($betty) ?? &quot;not ok&quot; !! &quot;ok&quot;} {++$test} - {$betty} Doesn&#39;t Hug&quot;;
-
-try {
-  say &quot;not ok {++$test} - {$spot} doesn&#39;t even ({maybe-hug($spot)})&quot;;
-  CATCH {
-    when X::Method::NotFound {
-      say &quot;ok {$test} - {$spot} doesn&#39;t even&quot;;
-    }
-  }
+role Huggable does Cutie {
+  has Bool $.hug-ok is rw = False;
+  method accept-hugs() { $.hug-ok }
 }
 
-$alice.accept-hugs = False;
-say &quot;{maybe-hug($alice) ?? &quot;not ok&quot; !! &quot;ok&quot;} {++$test} - {$alice} changed her mind&quot;;
+role AlternatingHuggable does Cutie {
+  has $!hugs = 0;
+  method accept-hugs() { Bool(++$!hugs % 2) }
+}
+
+my Cutie $alice = &quot;Alice&quot; does Huggable(:hug-ok);
+my Cutie $betty = &quot;Betty&quot; does Huggable;
+my Cutie $carol = &quot;Carol&quot; does AlternatingHuggable;
+my $elision = &quot;Elision&quot;;
+
+plan 6;
+
+ok maybe-hug($alice), &quot;$alice Hugs&quot;;
+
+ok !maybe-hug($betty), &quot;$betty Didn&#39;t positively affirm huggability, so no hugs&quot;;
+
+ok maybe-hug($carol), &quot;$carol wants one this time&quot;;
+ok !maybe-hug($carol), &quot;$carol doesn&#39;t now though&quot;;
+
+throws-like { maybe-hug $elision }, X::TypeCheck, &quot;$elision doesn&#39;t even&quot;;
+
+$alice.hug-ok = False;
+ok !maybe-hug($alice), &quot;$alice changed her mind&quot;;
 </code></pre>
 
     </main>
