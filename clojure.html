@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Droid+Sans+Mono" />
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/octicons/3.0.1/octicons.min.css"/>
+<link rel="stylesheet" type="text/css" href="main.css" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/tomorrow-night-eighties.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+<body>
+  <div id="container"><banner>
+  <a href="index.html">maybehug.me</a>
+</banner>
+  <nav>
+  <a href="c.html">c++</a>
+  <a href="clojure.html">clojure</a>
+  <a href="go.html">go</a>
+  <a href="haskell.html">haskell</a>
+  <a href="hy.html">hy</a>
+  <a href="java.html">java</a>
+  <a href="javascript.html">javascript</a>
+  <a href="perl.html">perl</a>
+  <a href="perl6.html">perl6</a>
+  <a href="php.html">php</a>
+  <a href="python.html">python</a>
+  <a href="ruby.html">ruby</a>
+  <a href="rust.html">rust</a>
+  <a href="scala.html">scala</a>
+</nav>
+    <main>
+      <h2 id="clojure">clojure</h2>
+<h1 id="maybe-hugs">maybe-hugs</h1>
+<p>A Clojure implementation of zkat&#39;s maybe-hugs</p>
+<h2 id="installation">Installation</h2>
+<p>Download from <a href="https://github.com/zkat/maybe-hugs">https://github.com/zkat/maybe-hugs</a></p>
+<h2 id="usage">Usage</h2>
+<p>Run the maybe-hugs program with a list of names like this:</p>
+<pre><code>$ lein run Sean Jay And Other People You Might Know
+</code></pre><p>Run the maybe-hugs tests like this:</p>
+<pre><code>$ lein test
+</code></pre><p>If you don&#39;t have Leiningen installed, see <a href="http://leiningen.org">http://leiningen.org</a></p>
+<h3 id="project-clj">project.clj</h3>
+<pre><code class="hljs clj"><span class="hljs-list">(<span class="hljs-keyword">defproject</span> maybe-hugs <span class="hljs-string">"0.1.0-SNAPSHOT"</span>
+  <span class="hljs-attribute">:description</span> <span class="hljs-string">"A Clojure implementation of zkat's maybe-hugs"</span>
+  <span class="hljs-attribute">:url</span> <span class="hljs-string">"https://github.com/zkat/maybe-hugs/"</span>
+  <span class="hljs-attribute">:license</span> <span class="hljs-collection">{<span class="hljs-attribute">:name</span> <span class="hljs-string">"CC0 1.0 Universal"</span>
+            <span class="hljs-attribute">:url</span> <span class="hljs-string">"https://github.com/zkat/maybe-hugs/blob/master/LICENSE"</span>}</span>
+  <span class="hljs-attribute">:dependencies</span> <span class="hljs-collection">[<span class="hljs-collection">[org.clojure/clojure <span class="hljs-string">"1.7.0"</span>]</span>]</span>
+  <span class="hljs-attribute">:main</span> ^<span class="hljs-attribute">:skip-aot</span> maybe-hugs.core
+  <span class="hljs-attribute">:target-path</span> <span class="hljs-string">"target/%s"</span>
+  <span class="hljs-attribute">:profiles</span> <span class="hljs-collection">{<span class="hljs-attribute">:uberjar</span> <span class="hljs-collection">{<span class="hljs-attribute">:aot</span> <span class="hljs-attribute">:all</span>}</span>}</span>)</span>
+</code></pre>
+<h3 id="src-maybe_hugs-core-clj">src/maybe_hugs/core.clj</h3>
+<pre><code class="hljs clj"><span class="hljs-list">(<span class="hljs-keyword"><span class="hljs-built_in">ns</span></span> maybe-hugs.core
+  <span class="hljs-string">"Some cuties want hugs, some cuties just want empathy!"</span>
+  <span class="hljs-list">(<span class="hljs-attribute">:gen-class</span>)</span>)</span>
+
+<span class="hljs-list">(<span class="hljs-keyword"><span class="hljs-built_in">defprotocol</span></span> MaybeHuggable
+  <span class="hljs-list">(<span class="hljs-keyword">huggable?</span> <span class="hljs-collection">[_]</span> <span class="hljs-string">"Ask if they want a hug?"</span>)</span>)</span>
+
+<span class="hljs-list">(<span class="hljs-keyword"><span class="hljs-built_in">defprotocol</span></span> Huggable
+  <span class="hljs-list">(<span class="hljs-keyword">hug</span> <span class="hljs-collection">[_]</span> <span class="hljs-string">"Give them a hug!"</span>)</span>)</span>
+
+<span class="hljs-list">(<span class="hljs-keyword"><span class="hljs-built_in">defprotocol</span></span> Empathic
+  <span class="hljs-list">(<span class="hljs-keyword">empathy</span> <span class="hljs-collection">[_]</span> <span class="hljs-string">"Comfort them with empathy."</span>)</span>)</span>
+
+<span class="hljs-list">(<span class="hljs-keyword"><span class="hljs-built_in">defrecord</span></span> HuggableCutie <span class="hljs-collection">[name]</span>
+  MaybeHuggable
+  <span class="hljs-list">(<span class="hljs-keyword">huggable?</span> <span class="hljs-collection">[_]</span> <span class="hljs-literal">true</span>)</span>
+  Huggable
+  <span class="hljs-list">(<span class="hljs-keyword">hug</span> <span class="hljs-collection">[this]</span> <span class="hljs-list">(<span class="hljs-keyword"><span class="hljs-built_in">str</span></span> <span class="hljs-list">(<span class="hljs-attribute">:name</span> this)</span> <span class="hljs-string">" gets a hug!"</span>)</span>)</span>)</span>
+
+<span class="hljs-list">(<span class="hljs-keyword"><span class="hljs-built_in">defrecord</span></span> EmpathicCutie <span class="hljs-collection">[name]</span>
+  MaybeHuggable
+  <span class="hljs-list">(<span class="hljs-keyword">huggable?</span> <span class="hljs-collection">[_]</span> <span class="hljs-literal">false</span>)</span>
+  Empathic
+  <span class="hljs-list">(<span class="hljs-keyword">empathy</span> <span class="hljs-collection">[this]</span> <span class="hljs-list">(<span class="hljs-keyword"><span class="hljs-built_in">str</span></span> <span class="hljs-list">(<span class="hljs-attribute">:name</span> this)</span> <span class="hljs-string">" is comforted by your empathy - thank you!"</span>)</span>)</span>)</span>
+
+<span class="hljs-list">(<span class="hljs-keyword"><span class="hljs-built_in">defn</span></span> conditional-hug
+  <span class="hljs-string">"Given a cutie, either hug them comfort them."</span>
+  <span class="hljs-collection">[cutie]</span>
+  <span class="hljs-list">(<span class="hljs-keyword"><span class="hljs-built_in">if</span></span> <span class="hljs-list">(<span class="hljs-keyword">huggable?</span> cutie)</span>
+    <span class="hljs-list">(<span class="hljs-keyword">hug</span> cutie)</span>
+    <span class="hljs-list">(<span class="hljs-keyword">empathy</span> cutie)</span>)</span>)</span>
+
+<span class="hljs-list">(<span class="hljs-keyword"><span class="hljs-built_in">defn</span></span> cutie
+  <span class="hljs-string">"Given a name, create a cutie who may or may not want hugs."</span>
+  <span class="hljs-collection">[name]</span>
+  <span class="hljs-list">(<span class="hljs-keyword"><span class="hljs-built_in">let</span></span> <span class="hljs-collection">[cutie-maker <span class="hljs-list">(<span class="hljs-keyword"><span class="hljs-built_in">if</span></span> <span class="hljs-list">(<span class="hljs-keyword"><span class="hljs-built_in">even?</span></span> <span class="hljs-list">(<span class="hljs-keyword"><span class="hljs-built_in">rand-int</span></span> <span class="hljs-number">100</span>)</span>)</span> -&gt;HuggableCutie -&gt;EmpathicCutie)</span>]</span>
+    <span class="hljs-list">(<span class="hljs-keyword">cutie-maker</span> name)</span>)</span>)</span>
+
+<span class="hljs-list">(<span class="hljs-keyword"><span class="hljs-built_in">defn</span></span> -main
+  <span class="hljs-string">"I create cuties and try to hug them!"</span>
+  <span class="hljs-collection">[&amp; args]</span>
+  <span class="hljs-list">(<span class="hljs-keyword"><span class="hljs-built_in">if</span></span> <span class="hljs-list">(<span class="hljs-keyword"><span class="hljs-built_in">seq</span></span> args)</span>
+    <span class="hljs-list">(<span class="hljs-keyword"><span class="hljs-built_in">doseq</span></span> <span class="hljs-collection">[name args]</span>
+      <span class="hljs-list">(<span class="hljs-keyword">println</span> <span class="hljs-list">(<span class="hljs-keyword">conditional-hug</span> <span class="hljs-list">(<span class="hljs-keyword">cutie</span> name)</span>)</span>)</span>)</span>
+    <span class="hljs-list">(<span class="hljs-keyword">println</span> <span class="hljs-string">"usage: lein run {list of cutie names}"</span>)</span>)</span>)</span>
+</code></pre>
+<h3 id="test-maybe_hugs-core_test-clj">test/maybe_hugs/core_test.clj</h3>
+<pre><code class="hljs clj"><span class="hljs-list">(<span class="hljs-keyword"><span class="hljs-built_in">ns</span></span> maybe-hugs.core-test
+  <span class="hljs-list">(<span class="hljs-attribute">:require</span> <span class="hljs-collection">[clojure.test <span class="hljs-attribute">:refer</span> <span class="hljs-attribute">:all</span>]</span>
+            <span class="hljs-collection">[maybe-hugs.core <span class="hljs-attribute">:refer</span> <span class="hljs-attribute">:all</span>]</span>)</span>)</span>
+
+<span class="hljs-list">(<span class="hljs-keyword">deftest</span> hug-tests
+  <span class="hljs-list">(<span class="hljs-keyword">testing</span> <span class="hljs-string">"HuggableCutie likes hugs"</span>
+    <span class="hljs-list">(<span class="hljs-keyword"><span class="hljs-built_in">let</span></span> <span class="hljs-collection">[cutie <span class="hljs-list">(<span class="hljs-keyword">-&gt;HuggableCutie</span> <span class="hljs-string">"Test"</span>)</span>]</span>
+      <span class="hljs-list">(<span class="hljs-keyword">is</span> <span class="hljs-list">(<span class="hljs-keyword">huggable?</span> cutie)</span>)</span>
+      <span class="hljs-list">(<span class="hljs-keyword">is</span> <span class="hljs-list">(<span class="hljs-keyword"><span class="hljs-built_in">=</span></span> <span class="hljs-string">"Test gets a hug!"</span> <span class="hljs-list">(<span class="hljs-keyword">hug</span> cutie)</span>)</span>)</span>)</span>)</span>
+  <span class="hljs-list">(<span class="hljs-keyword">testing</span> <span class="hljs-string">"EmpathicCutie doesn't want hugs"</span>
+    <span class="hljs-list">(<span class="hljs-keyword"><span class="hljs-built_in">let</span></span> <span class="hljs-collection">[cutie <span class="hljs-list">(<span class="hljs-keyword">-&gt;EmpathicCutie</span> <span class="hljs-string">"Test"</span>)</span>]</span>
+      <span class="hljs-list">(<span class="hljs-keyword">is</span> <span class="hljs-list">(<span class="hljs-keyword"><span class="hljs-built_in">not</span></span> <span class="hljs-list">(<span class="hljs-keyword">huggable?</span> cutie)</span>)</span>)</span>
+      <span class="hljs-list">(<span class="hljs-keyword">is</span> <span class="hljs-list">(<span class="hljs-keyword">thrown?</span> IllegalArgumentException <span class="hljs-list">(<span class="hljs-keyword">hug</span> cutie)</span>)</span>)</span>)</span>)</span>)</span>
+
+<span class="hljs-list">(<span class="hljs-keyword">deftest</span> empathy-tests
+  <span class="hljs-list">(<span class="hljs-keyword">testing</span> <span class="hljs-string">"EmpathicCutie likes empathy"</span>
+    <span class="hljs-list">(<span class="hljs-keyword"><span class="hljs-built_in">let</span></span> <span class="hljs-collection">[cutie <span class="hljs-list">(<span class="hljs-keyword">-&gt;EmpathicCutie</span> <span class="hljs-string">"Test"</span>)</span>]</span>
+      <span class="hljs-list">(<span class="hljs-keyword">is</span> <span class="hljs-list">(<span class="hljs-keyword"><span class="hljs-built_in">not</span></span> <span class="hljs-list">(<span class="hljs-keyword">huggable?</span> cutie)</span>)</span>)</span>
+      <span class="hljs-list">(<span class="hljs-keyword">is</span> <span class="hljs-list">(<span class="hljs-keyword"><span class="hljs-built_in">=</span></span> <span class="hljs-string">"Test is comforted by your empathy - thank you!"</span> <span class="hljs-list">(<span class="hljs-keyword">empathy</span> cutie)</span>)</span>)</span>)</span>)</span>
+  <span class="hljs-list">(<span class="hljs-keyword">testing</span> <span class="hljs-string">"HuggableCutie doesn't want empathy"</span>
+    <span class="hljs-list">(<span class="hljs-keyword"><span class="hljs-built_in">let</span></span> <span class="hljs-collection">[cutie <span class="hljs-list">(<span class="hljs-keyword">-&gt;HuggableCutie</span> <span class="hljs-string">"Test"</span>)</span>]</span>
+      <span class="hljs-list">(<span class="hljs-keyword">is</span> <span class="hljs-list">(<span class="hljs-keyword">huggable?</span> cutie)</span>)</span>
+      <span class="hljs-list">(<span class="hljs-keyword">is</span> <span class="hljs-list">(<span class="hljs-keyword">thrown?</span> IllegalArgumentException <span class="hljs-list">(<span class="hljs-keyword">empathy</span> cutie)</span>)</span>)</span>)</span>)</span>)</span>
+</code></pre>
+
+    </main>
+    <footer>
+        <a href="https://github.com/zkat/maybe-hugs">
+          <span class="mega-octicon octicon-mark-github"></span>
+        </a>
+        <a href="http://creativecommons.org/publicdomain/zero/1.0/">
+          <img src="https://camo.githubusercontent.com/c5160f944848828fa33126d9a697e9abe43ea98f/687474703a2f2f692e6372656174697665636f6d6d6f6e732e6f72672f702f7a65726f2f312e302f38387833312e706e67"/>
+        </a>
+    </footer>
+  </div>
+</body>

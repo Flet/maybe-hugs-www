@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Droid+Sans+Mono" />
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/octicons/3.0.1/octicons.min.css"/>
+<link rel="stylesheet" type="text/css" href="main.css" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/tomorrow-night-eighties.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+<body>
+  <div id="container"><banner>
+  <a href="index.html">maybehug.me</a>
+</banner>
+  <nav>
+  <a href="c.html">c++</a>
+  <a href="clojure.html">clojure</a>
+  <a href="go.html">go</a>
+  <a href="haskell.html">haskell</a>
+  <a href="hy.html">hy</a>
+  <a href="java.html">java</a>
+  <a href="javascript.html">javascript</a>
+  <a href="perl.html">perl</a>
+  <a href="perl6.html">perl6</a>
+  <a href="php.html">php</a>
+  <a href="python.html">python</a>
+  <a href="ruby.html">ruby</a>
+  <a href="rust.html">rust</a>
+  <a href="scala.html">scala</a>
+</nav>
+    <main>
+      <h2 id="scala">scala</h2>
+<h3 id="maybehug-scala">MaybeHug.scala</h3>
+<pre><code class="hljs scala"><span class="hljs-keyword">sealed</span> <span class="hljs-class"><span class="hljs-keyword">trait</span> <span class="hljs-title">MaybeHug</span>[</span>+<span class="hljs-type">E</span>, +<span class="hljs-type">A</span>]
+<span class="hljs-keyword">case</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Hug</span>[</span>+<span class="hljs-type">E</span>](get: <span class="hljs-type">E</span>) <span class="hljs-keyword">extends</span> <span class="hljs-type">MaybeHug</span>[<span class="hljs-type">E</span>, <span class="hljs-type">Nothing</span>]
+<span class="hljs-keyword">case</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Empathy</span>[</span>+<span class="hljs-type">A</span>](get: <span class="hljs-type">A</span>) <span class="hljs-keyword">extends</span> <span class="hljs-type">MaybeHug</span>[<span class="hljs-type">Nothing</span>, <span class="hljs-type">A</span>]
+
+<span class="hljs-class"><span class="hljs-keyword">object</span> <span class="hljs-title">Cutie</span> {</span>
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">empathic</span>:</span> <span class="hljs-type">MaybeHug</span>[<span class="hljs-type">String</span>, <span class="hljs-type">String</span>] =
+    <span class="hljs-type">Empathy</span>(<span class="hljs-string">"Cutie prefers empathy! "</span>)
+
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">huggable</span>:</span> <span class="hljs-type">MaybeHug</span>[<span class="hljs-type">String</span>, <span class="hljs-type">String</span>] =
+    <span class="hljs-type">Hug</span>(<span class="hljs-string">"HUG !"</span>)
+
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">hug</span>(</span>p: <span class="hljs-type">MaybeHug</span>[<span class="hljs-type">String</span>, <span class="hljs-type">String</span>]): <span class="hljs-type">String</span> =
+    p <span class="hljs-keyword">match</span> {
+      <span class="hljs-keyword">case</span> <span class="hljs-type">Hug</span>(s) =&gt; s
+      <span class="hljs-keyword">case</span> <span class="hljs-type">Empathy</span>(s) =&gt; s
+    }
+}
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">kate</span> =</span> <span class="hljs-type">Cutie</span>.huggable
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">john</span> =</span> <span class="hljs-type">Cutie</span>.empathic
+
+println(<span class="hljs-type">Cutie</span>.hug(kate))
+println(<span class="hljs-type">Cutie</span>.hug(john))
+</code></pre>
+
+    </main>
+    <footer>
+        <a href="https://github.com/zkat/maybe-hugs">
+          <span class="mega-octicon octicon-mark-github"></span>
+        </a>
+        <a href="http://creativecommons.org/publicdomain/zero/1.0/">
+          <img src="https://camo.githubusercontent.com/c5160f944848828fa33126d9a697e9abe43ea98f/687474703a2f2f692e6372656174697665636f6d6d6f6e732e6f72672f702f7a65726f2f312e302f38387833312e706e67"/>
+        </a>
+    </footer>
+  </div>
+</body>
