@@ -10,6 +10,7 @@
   <a href="index.html">maybehug.me</a>
 </banner>
   <nav>
+  <a href="bash.html">bash</a>
   <a href="c.html">c++</a>
   <a href="clojure.html">clojure</a>
   <a href="go.html">go</a>
@@ -28,39 +29,78 @@
     <main>
       <h2 id="perl6">perl6</h2>
 <h2 id="maybe-hugs">Maybe-Hugs</h2>
-<pre><code class="hljs perl6">use Test;
-need Cutie;
+<p>First we&#39;ll need some cuties...</p>
+<pre><code class="hljs perl6">need Cutie;
 use Maybe::Hug;
 
-role Huggable does Cutie {
-  has Bool $.hug-ok is rw = False;
-  method accept-hugs() { $.hug-ok }
+role HugAllCuties does Cutie {
+  multi method accept-hugs (Cutie $from) { True }
+}
+role HugNoCuties does Cutie {
+  multi method accept-hugs (Cutie $from) { False }
+}
+role HugSomeCuties does Cutie {
+  has @.whom;
+  multi method accept-hugs (Cutie $from) { Bool(@.whom.first: {$_ === $from}) }
+}
+role HugSometimes does Cutie {
+  has $.in-the-mood is rw = False;
+  multi method accept-hugs (Cutie $from) { $.in-the-mood }
 }
 
-role AlternatingHuggable does Cutie {
-  has $!hugs = 0;
-  method accept-hugs() { Bool(++$!hugs % 2) }
-}
-
-my Cutie $alice = &quot;Alice&quot; does Huggable(:hug-ok);
-my Cutie $betty = &quot;Betty&quot; does Huggable;
-my Cutie $carol = &quot;Carol&quot; does AlternatingHuggable;
-my $elision = &quot;Elision&quot;;
-
-plan 6;
-
-ok maybe-hug($alice), &quot;$alice Hugs&quot;;
-
-ok !maybe-hug($betty), &quot;$betty Didn&#39;t positively affirm huggability, so no hugs&quot;;
-
-ok maybe-hug($carol), &quot;$carol wants one this time&quot;;
-ok !maybe-hug($carol), &quot;$carol doesn&#39;t now though&quot;;
-
-throws-like { maybe-hug $elision }, X::TypeCheck, &quot;$elision doesn&#39;t even&quot;;
-
-$alice.hug-ok = False;
-ok !maybe-hug($alice), &quot;$alice changed her mind&quot;;
+my Cutie $alice = &quot;Alice&quot; does HugAllCuties;
+my Cutie $betty = &quot;Betty&quot; does HugNoCuties;
+my Cutie $carol = &quot;Carol&quot; does HugSomeCuties(:whom($alice));
+my Cutie $danielle = &quot;Danielle&quot; does HugSometimes;
 </code></pre>
+<p>Now, if we offer hugs to Alice…</p>
+<pre><code>given {{$alice}} {
+  .hugs: { say &quot;HUGS!&quot; }
+  .empathy: { say &quot;Empathy!&quot; }
+}
+</code></pre><p>We&#39;ll find Alice always wants hugs.  Alternatively, trying the same thing
+with Betty would find her desire for empathy every time.</p>
+<p>Carol by contrast is a bit different, she&#39;ll take hugs from Alice but no one else:</p>
+<pre><code>given $alice ==&gt; {{$carol}} {
+  .hugs: { say "HUGS!" }
+  .empathy: { say "Empathy!" }
+}
+</code></pre><p>Trying the same thing with <code>$betty ==&gt; {{$carol}}</code> shows that Carol would
+prefer empathy from Betty.</p>
+<p>Alternatively you could say this with <code>{{$carol}}.by($betty)</code>.</p>
+<p>Finally, more realistically, Danielle sometimes is ok with hugs and sometimes isn&#39;t...</p>
+<pre><code>given $alice ==&gt; {{$danielle}} {
+  .hugs: { say "HUGS!" }
+  .empathy: { say "Empathy!" }
+}
+</code></pre><p>Will show her desire for empathy, but if she&#39;s later feeling more touchy feely...</p>
+<pre><code>$danielle.in-the-mood = True
+given $alice ==&gt; {{$danielle}} {
+  .hugs: { say "HUGS!" }
+  .empathy: { say "Empathy!" }
+}
+</code></pre><p>Then the same offer will result in HUGS.</p>
+<h2 id="what-s-going-on">What&#39;s going on</h2>
+<p>The <code>Maybe::Hug</code> module introduces a new circumfix operator <code>{{ }}</code> which
+when wrapped around a <code>Cutie</code> returns a <code>Maybe::Hug</code> object.  If you feed
+the operator, eg <code>$person ==&gt; {{$cutie}}</code> then that person is added to the
+<code>Maybe::Hug</code> as the person offering the hug.</p>
+<h2 id="exported-functions">Exported functions</h2>
+<h3 id="circumfix-cutie-where-can-accept-hugs-from-">circumfix:&lt;{{ }}&gt;($cutie where {.can(&#39;accept-hugs&#39;)}, $from?)</h3>
+<p>Constructs a new Maybe::Hug object... literally just defined as:</p>
+<pre><code>Maybe::Hug.new(:$cutie, :$from)
+</code></pre><h2 id="maybe-hug">Maybe::Hug</h2>
+<h3 id="-new-cutie-where-can-accept-hugs-from-">.new(:$cutie where {.can(&#39;accept-hugs&#39;)}, :$from)</h3>
+<p>Constructs a new Maybe::Hug. We need a $cutie, but $from is optional.</p>
+<h3 id="-by-from-returns-maybe-hug">.by($from) returns Maybe::Hug</h3>
+<p>Returns a new Maybe::Hug object where hugging is being done by $from</p>
+<h3 id="-bool-">.Bool()</h3>
+<p>If used in boolean context, the Maybe::Hug will return true if the cutie
+prefers hugs, false if they prefer empathy.</p>
+<h3 id="-hugs-stuff-to-do-if-they-want-hugs-">.hugs: { stuff to do if they want hugs }</h3>
+<p>Executes the block if the cutie prefers hugs</p>
+<h3 id="-empathy-stuff-to-do-if-they-want-empathy-">.empathy: { stuff to do if they want empathy }</h3>
+<p>Executes the block if the cutie prefers empathy</p>
 <h3 id="meta-info">META.info</h3>
 <pre><code class="hljs info">{
     &quot;name&quot;        : &quot;Maybe::Hugs&quot;,
@@ -78,50 +118,77 @@ ok !maybe-hug($alice), &quot;$alice changed her mind&quot;;
 </code></pre>
 <h3 id="lib-cutie-pm">lib/Cutie.pm</h3>
 <pre><code class="hljs pm">role Cutie {
-  method accept-hugs { … }
+  multi method accept-hugs (Mu $from) { False }
 }
 </code></pre>
 <h3 id="lib-maybe-hug-pm">lib/Maybe/Hug.pm</h3>
 <pre><code class="hljs pm">class Maybe::Hug {
-  has $.cutie where { .can(&#39;accept-hugs&#39;) };
-  method hug { $.cutie.accept-hugs() ?? &quot;HUG!&quot; but True !! &quot;Empathy!&quot; but False }
+  has $.cutie where { .can('accept-hugs') };
+  has $.from;
+  method hugs(&amp;dothething) { dothething() if self }
+  method empathy(&amp;dothething) { dothething() unless self }
+  method by($from) { Maybe::Hug.new(:$!cutie, :$from) }
+  method Bool() { $!cutie.accept-hugs($!from) }
 }
 
-sub maybe-hug($cutie) is export { Maybe::Hug.new(:$cutie).hug() }
+sub circumfix:&lt;{{ }}&gt;($cutie, $from?) is export { Maybe::Hug.new(:$cutie, :$from) }
 </code></pre>
 <h3 id="t-basic-t">t/basic.t</h3>
 <pre><code class="hljs t">use Test;
 need Cutie;
 use Maybe::Hug;
 
-role Huggable does Cutie {
-  has Bool $.hug-ok is rw = False;
-  method accept-hugs() { $.hug-ok }
+role HugAllCuties does Cutie {
+  multi method accept-hugs (Any $from) { True }
+}
+role HugNoCuties does Cutie {
+  multi method accept-hugs (Any $from) { False }
+}
+role HugSomeCuties does Cutie {
+  has @.whom;
+  multi method accept-hugs (Cutie $from) { Bool(@.whom.first: {$_ === $from}) }
+}
+role HugSometimes does Cutie {
+  has $.in-the-mood is rw = False;
+  multi method accept-hugs (Any $from) { $.in-the-mood }
 }
 
-role AlternatingHuggable does Cutie {
-  has $!hugs = 0;
-  method accept-hugs() { Bool(++$!hugs % 2) }
+my Cutie $alice = "Alice" does HugAllCuties;
+my Cutie $betty = "Betty" does HugNoCuties;
+my Cutie $carol = "Carol" does HugSomeCuties(:whom($alice));
+my Cutie $danielle = "Danielle" does HugSometimes;
+my $elision = "Elision";
+
+plan 12;
+
+my $wants-hugs = {
+  my $msg = "{.cutie} wants hugs{.from ?? " from {.from}" !! "" }";
+  .hugs: { pass $msg }
+  .empathy: { flunk $msg }
+}
+my $wants-empathy = {
+  my $msg = "{.cutie} wants empathy{.from ?? " from {.from}" !! "" }";
+  .hugs: { flunk $msg }
+  .empathy: { pass $msg }
 }
 
-my Cutie $alice = &quot;Alice&quot; does Huggable(:hug-ok);
-my Cutie $betty = &quot;Betty&quot; does Huggable;
-my Cutie $carol = &quot;Carol&quot; does AlternatingHuggable;
-my $elision = &quot;Elision&quot;;
+given {{$alice}} { $wants-hugs($_) };
+given $betty ==&gt; {{$alice}} { $wants-hugs($_) }
+given $carol ==&gt; {{$alice}} { $wants-hugs($_) }
 
-plan 6;
+given {{$betty}} { $wants-empathy($_) };
+given $alice ==&gt; {{$betty}} { $wants-empathy($_) };
+given $carol ==&gt; {{$betty}} { $wants-empathy($_) };
 
-ok maybe-hug($alice), &quot;$alice Hugs&quot;;
+given {{$carol}} { $wants-empathy($_) };
+given $alice ==&gt; {{$carol}} { $wants-hugs($_) };
+given $betty ==&gt; {{$carol}} { $wants-empathy($_) };
 
-ok !maybe-hug($betty), &quot;$betty Didn&#39;t positively affirm huggability, so no hugs&quot;;
+throws-like { {{$elision}} }, X::TypeCheck, "$elision doesn't even";
 
-ok maybe-hug($carol), &quot;$carol wants one this time&quot;;
-ok !maybe-hug($carol), &quot;$carol doesn&#39;t now though&quot;;
-
-throws-like { maybe-hug $elision }, X::TypeCheck, &quot;$elision doesn&#39;t even&quot;;
-
-$alice.hug-ok = False;
-ok !maybe-hug($alice), &quot;$alice changed her mind&quot;;
+given {{$danielle}} { $wants-empathy($_) }
+$danielle.in-the-mood = True;
+given {{$danielle}} { $wants-hugs($_) }
 </code></pre>
 
     </main>
