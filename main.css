@@ -52,7 +52,7 @@ nav > a:hover {
   color: #73AB84;
 }
 nav {
-  background-color: #2D2D2D;  
+  background-color: #2D2D2D;
   width:100%;
   text-align: center;
 }
@@ -64,7 +64,7 @@ banner > a {
 }
 
 footer {
-  position: absolute; 
+  position: absolute;
   bottom: 0;
   left: 0;
   text-align: center;
@@ -85,6 +85,9 @@ footer > a {
 #container {
   min-height:100%;
   position:relative;
+  max-width: 950px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 main  {

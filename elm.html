@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Droid+Sans+Mono" />
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/octicons/3.0.1/octicons.min.css"/>
+<link rel="stylesheet" type="text/css" href="main.css" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/tomorrow-night-eighties.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+<body>
+  <div id="container"><banner>
+  <a href="index.html">maybehug.me</a>
+</banner>
+  <nav>
+  <a href="bash.html">bash</a>
+  <a href="c.html">c++</a>
+  <a href="clojure.html">clojure</a>
+  <a href="elm.html">elm</a>
+  <a href="go.html">go</a>
+  <a href="haskell.html">haskell</a>
+  <a href="hy.html">hy</a>
+  <a href="java.html">java</a>
+  <a href="javascript.html">javascript</a>
+  <a href="perl.html">perl</a>
+  <a href="perl6.html">perl6</a>
+  <a href="php.html">php</a>
+  <a href="python.html">python</a>
+  <a href="ruby.html">ruby</a>
+  <a href="rust.html">rust</a>
+  <a href="scala.html">scala</a>
+</nav>
+    <main>
+      <h2 id="elm">elm</h2>
+<h1 id="maybe-hugs-in-elm">Maybe Hugs in Elm</h1>
+<p>How to run this thing:</p>
+<ol>
+<li>Run <code>npm install</code>. This will install the correct elm version locally and also run <code>elm-make</code> as an npm postinstall hook. When <code>npm install</code> has finished there should be a file called <code>elm.js</code>.</li>
+<li>Serve the current directory with the HTTP server of your choice.</li>
+</ol>
+<h2 id="development">Development</h2>
+<p>You can either</p>
+<ul>
+<li><code>npm run make</code>: to run elm-make after every change to (re-)create <code>elm.js</code>, while serving this directory with your favourite HTTP server, or</li>
+<li><code>npm start</code>: start elm-reactor, which starts a server with live reload on <a href="http://localhost:8000/MaybeHugs.elm">http://localhost:8000/MaybeHugs.elm</a>. (Unfortunately, this does not use the custom static html, so the styling will be missing. You can also access <a href="http://localhost:8000/index.html">http://localhost:8000/index.html</a> but I couldn&#39;t get the live reload to work there).</li>
+</ul>
+<h3 id="cutie-elm">Cutie.elm</h3>
+<pre><code class="hljs elm"><span class="hljs-module"><span class="hljs-keyword">module</span> Cutie <span class="hljs-container">(<span class="hljs-type">Cutie</span>, <span class="hljs-title">cutie</span>, <span class="hljs-title">maybeHug</span>, <span class="hljs-title">wantsHug</span>)</span> <span class="hljs-keyword">where</span></span>
+
+<span class="hljs-typedef"><span class="hljs-keyword">type</span> <span class="hljs-keyword">alias</span> <span class="hljs-type">Cutie</span> =</span>
+    { name : <span class="hljs-type">String</span>
+    , acceptsHugs : <span class="hljs-type">Bool</span>
+    }
+
+<span class="hljs-title">cutie</span> : <span class="hljs-type">String</span> -&gt; <span class="hljs-type">Bool</span> -&gt; <span class="hljs-type">Cutie</span>
+<span class="hljs-title">cutie</span> name acceptsHugs = { name = name, acceptsHugs = acceptsHugs }
+
+<span class="hljs-title">wantsHug</span> : <span class="hljs-type">Cutie</span> -&gt; <span class="hljs-type">Bool</span>
+<span class="hljs-title">wantsHug</span> cutie = cutie.acceptsHugs
+
+<span class="hljs-title">maybeHug</span> : <span class="hljs-type">Cutie</span> -&gt; <span class="hljs-type">String</span>
+<span class="hljs-title">maybeHug</span> cutie = cutie.name ++
+    <span class="hljs-keyword">if</span> wantsHug cutie <span class="hljs-keyword">then</span> <span class="hljs-string">" would like a hug!"</span> <span class="hljs-keyword">else</span> <span class="hljs-string">" prefers empathy."</span>
+</code></pre>
+<h3 id="maybehugs-elm">MaybeHugs.elm</h3>
+<pre><code class="hljs elm"><span class="hljs-module"><span class="hljs-keyword">module</span> MaybeHugs <span class="hljs-keyword">where</span></span>
+
+<span class="hljs-import"><span class="hljs-keyword">import</span> Array <span class="hljs-keyword">exposing</span> <span class="hljs-container">(<span class="hljs-type">Array</span>, <span class="hljs-title">fromList</span>, <span class="hljs-title">get</span>, <span class="hljs-title">length</span>)</span></span>
+<span class="hljs-import"><span class="hljs-keyword">import</span> Html <span class="hljs-keyword">exposing</span> <span class="hljs-container">(..)</span></span>
+<span class="hljs-import"><span class="hljs-keyword">import</span> Html.Attributes <span class="hljs-keyword">exposing</span> <span class="hljs-container">(..)</span></span>
+<span class="hljs-import"><span class="hljs-keyword">import</span> List <span class="hljs-keyword">exposing</span> <span class="hljs-container">(<span class="hljs-title">drop</span>, <span class="hljs-title">map</span>)</span></span>
+<span class="hljs-import"><span class="hljs-keyword">import</span> Maybe <span class="hljs-keyword">exposing</span> <span class="hljs-container">(<span class="hljs-title">withDefault</span>)</span></span>
+<span class="hljs-import"><span class="hljs-keyword">import</span> Random</span>
+<span class="hljs-import"><span class="hljs-keyword">import</span> Random <span class="hljs-keyword">exposing</span> <span class="hljs-container">(<span class="hljs-type">Seed</span>, <span class="hljs-type">Generator</span>)</span></span>
+<span class="hljs-import"><span class="hljs-keyword">import</span> Signal <span class="hljs-keyword">exposing</span> <span class="hljs-container">(<span class="hljs-type">Signal</span>, (&lt;~)</span>, <span class="hljs-container">(~)</span>, foldp)</span>
+<span class="hljs-import"><span class="hljs-keyword">import</span> Time <span class="hljs-keyword">exposing</span> <span class="hljs-container">(<span class="hljs-title">every</span>, <span class="hljs-title">second</span>)</span></span>
+
+<span class="hljs-import"><span class="hljs-keyword">import</span> Cutie <span class="hljs-keyword">exposing</span> <span class="hljs-container">(..)</span></span>
+
+<span class="hljs-title">names</span> : <span class="hljs-type">Array</span> <span class="hljs-type">String</span>
+<span class="hljs-title">names</span> = fromList [
+    <span class="hljs-string">"Treena"</span>
+  , <span class="hljs-string">"Roger"</span>
+  , <span class="hljs-string">"Patsy"</span>
+  , <span class="hljs-string">"Tesha"</span>
+  , <span class="hljs-string">"Madie"</span>
+  , <span class="hljs-string">"Wendie"</span>
+  , <span class="hljs-string">"Kendra"</span>
+  , <span class="hljs-string">"Hedy"</span>
+  , <span class="hljs-string">"Milan"</span>
+  , <span class="hljs-string">"Debbra"</span>
+  , <span class="hljs-string">"Al"</span>
+  , <span class="hljs-string">"Rosita"</span>
+  , <span class="hljs-string">"Sharleen"</span>
+  , <span class="hljs-string">"Lekisha"</span>
+  , <span class="hljs-string">"Reina"</span>
+  , <span class="hljs-string">"Voncile"</span>
+  , <span class="hljs-string">"Amie"</span>
+  , <span class="hljs-string">"Ashlea"</span>
+  , <span class="hljs-string">"Rosetta"</span>
+  , <span class="hljs-string">"Brynn"</span>
+  ]
+
+<span class="hljs-title">random</span> generator max seed = seed |&gt; (<span class="hljs-type">Random</span>.generate &lt;| generator <span class="hljs-number">0</span> max) |&gt; fst
+
+<span class="hljs-title">randomFloat</span> : <span class="hljs-type">Seed</span> -&gt; <span class="hljs-type">Float</span>
+<span class="hljs-title">randomFloat</span> seed = random <span class="hljs-type">Random</span>.float <span class="hljs-number">1</span> seed
+
+<span class="hljs-title">randomNameIdx</span> : <span class="hljs-type">Seed</span> -&gt; <span class="hljs-type">Int</span>
+<span class="hljs-title">randomNameIdx</span> seed =
+  <span class="hljs-keyword">let</span> n = (length names) - <span class="hljs-number">1</span>
+  <span class="hljs-keyword">in</span> random <span class="hljs-type">Random</span>.int n seed
+
+<span class="hljs-title">randomName</span> : <span class="hljs-type">Seed</span> -&gt; <span class="hljs-type">String</span>
+<span class="hljs-title">randomName</span> seed = randomNameIdx seed |&gt; (\idx -&gt; get idx names |&gt; withDefault <span class="hljs-string">"?"</span>)
+
+<span class="hljs-title">randomBool</span> : <span class="hljs-type">Seed</span> -&gt; <span class="hljs-type">Bool</span>
+<span class="hljs-title">randomBool</span> seed = randomFloat seed |&gt; (\f -&gt; <span class="hljs-keyword">if</span> f &gt; <span class="hljs-number">0.5</span> <span class="hljs-keyword">then</span> <span class="hljs-type">True</span> <span class="hljs-keyword">else</span> <span class="hljs-type">False</span>)
+
+<span class="hljs-title">randomCutie</span> : <span class="hljs-type">Seed</span> -&gt; <span class="hljs-type">Cutie</span>
+<span class="hljs-title">randomCutie</span> seed = cutie (randomName seed) (randomBool seed)
+
+<span class="hljs-title">timedSeedSignal</span> : <span class="hljs-type">Signal</span> <span class="hljs-type">Seed</span>
+<span class="hljs-title">timedSeedSignal</span> = <span class="hljs-type">Random</span>.initialSeed &lt;&lt; round &lt;~ every second
+
+<span class="hljs-title">cutieSignal</span> : <span class="hljs-type">Signal</span> <span class="hljs-type">Cutie</span>
+<span class="hljs-title">cutieSignal</span> = randomCutie &lt;~ timedSeedSignal
+
+<span class="hljs-title">update</span> : <span class="hljs-type">Cutie</span> -&gt; <span class="hljs-type">List</span> <span class="hljs-type">Cutie</span> -&gt; <span class="hljs-type">List</span> <span class="hljs-type">Cutie</span>
+<span class="hljs-title">update</span> newCutie cuties =
+  <span class="hljs-keyword">let</span> cuties' = cuties ++ [newCutie]
+  <span class="hljs-keyword">in</span> <span class="hljs-keyword">if</span> (<span class="hljs-type">List</span>.length cuties') &gt; <span class="hljs-number">5</span> <span class="hljs-keyword">then</span> drop <span class="hljs-number">1</span> cuties' <span class="hljs-keyword">else</span> cuties'
+
+<span class="hljs-title">cutiesSignal</span> : <span class="hljs-type">Signal</span> (<span class="hljs-type">List</span> <span class="hljs-type">Cutie</span>)
+<span class="hljs-title">cutiesSignal</span> = foldp update [] cutieSignal
+
+<span class="hljs-title">cutieView</span> : <span class="hljs-type">Cutie</span> -&gt; <span class="hljs-type">Html</span>
+<span class="hljs-title">cutieView</span> cutie = p [class <span class="hljs-string">"cutie"</span>] [text &lt;| maybeHug cutie]
+
+<span class="hljs-title">main</span> : <span class="hljs-type">Signal</span> <span class="hljs-type">Html</span>
+<span class="hljs-title">main</span> =
+  (\ cuties -&gt;
+    section
+    [ id <span class="hljs-string">"maybehugapp"</span> ]
+    [ h1 [] [ text <span class="hljs-string">"Maybe Hugs"</span> ]
+    , h2 [] [ text <span class="hljs-string">"in Elm"</span> ]
+    , div [] (map cutieView cuties)
+    ]
+  ) &lt;~ cutiesSignal
+</code></pre>
+<h3 id="elm-package-json">elm-package.json</h3>
+<pre><code class="hljs json">{
+    "<span class="hljs-attribute">version</span>": <span class="hljs-value"><span class="hljs-string">"1.0.0"</span></span>,
+    "<span class="hljs-attribute">summary</span>": <span class="hljs-value"><span class="hljs-string">"Conditional hugging implementation in elm"</span></span>,
+    "<span class="hljs-attribute">repository</span>": <span class="hljs-value"><span class="hljs-string">"https://github.com/zkat/maybe-hugs.git"</span></span>,
+    "<span class="hljs-attribute">license</span>": <span class="hljs-value"><span class="hljs-string">"CC0-1.0"</span></span>,
+    "<span class="hljs-attribute">source-directories</span>": <span class="hljs-value">[
+        <span class="hljs-string">"."</span>
+    ]</span>,
+    "<span class="hljs-attribute">exposed-modules</span>": <span class="hljs-value">[]</span>,
+    "<span class="hljs-attribute">dependencies</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">elm-lang/core</span>": <span class="hljs-value"><span class="hljs-string">"2.1.0 &lt;= v &lt; 3.0.0"</span></span>,
+        "<span class="hljs-attribute">evancz/elm-html</span>": <span class="hljs-value"><span class="hljs-string">"4.0.1 &lt;= v &lt; 5.0.0"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">elm-version</span>": <span class="hljs-value"><span class="hljs-string">"0.15.1 &lt;= v &lt; 0.16.0"</span>
+</span>}
+</code></pre>
+<h3 id="index-html">index.html</h3>
+<pre><code class="hljs html"><span class="hljs-doctype">&lt;!DOCTYPE HTML&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">html</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-title">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">meta</span> <span class="hljs-attribute">charset</span>=<span class="hljs-value">"UTF-8"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">title</span>&gt;</span>Elm • Maybe Hugs<span class="hljs-tag">&lt;/<span class="hljs-title">title</span>&gt;</span>
+  <span class="hljs-comment">&lt;!--script type="text/javascript" src="/_reactor/debug.js"&gt;&lt;/script--&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text/javascript"</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"elm.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">link</span> <span class="hljs-attribute">rel</span>=<span class="hljs-value">"stylesheet"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"style.css"</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">head</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-title">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">body</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text/javascript"</span>&gt;</span><span class="actionscript">
+<span class="hljs-keyword">var</span> todomvc = Elm.fullscreen(Elm.MaybeHugs, {});
+</span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+
+<span class="hljs-tag">&lt;/<span class="hljs-title">html</span>&gt;</span>
+</code></pre>
+<h3 id="package-json">package.json</h3>
+<pre><code class="hljs json">{
+  "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"maybe-hugs-elm"</span></span>,
+  "<span class="hljs-attribute">version</span>": <span class="hljs-value"><span class="hljs-string">"1.0.0"</span></span>,
+  "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Conditional hugging implementation in elm"</span></span>,
+  "<span class="hljs-attribute">scripts</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">start</span>": <span class="hljs-value"><span class="hljs-string">"ELM_HOME=node_modules/elm/share elm-reactor"</span></span>,
+    "<span class="hljs-attribute">make</span>": <span class="hljs-value"><span class="hljs-string">"elm-make MaybeHugs.elm"</span></span>,
+    "<span class="hljs-attribute">postinstall</span>": <span class="hljs-value"><span class="hljs-string">"npm run make"</span>
+  </span>}</span>,
+  "<span class="hljs-attribute">repository</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"git"</span></span>,
+    "<span class="hljs-attribute">url</span>": <span class="hljs-value"><span class="hljs-string">"https://github.com/zkat/maybe-hugs.git"</span>
+  </span>}</span>,
+  "<span class="hljs-attribute">author</span>": <span class="hljs-value"><span class="hljs-string">"Bastian Krol &lt;bastian.krol@web.de&gt;"</span></span>,
+  "<span class="hljs-attribute">license</span>": <span class="hljs-value"><span class="hljs-string">"CC0-1.0"</span></span>,
+  "<span class="hljs-attribute">keywords</span>": <span class="hljs-value">[
+    <span class="hljs-string">"hugs"</span>,
+    <span class="hljs-string">"cute"</span>
+  ]</span>,
+  "<span class="hljs-attribute">homepage</span>": <span class="hljs-value"><span class="hljs-string">"https://github.com/zkat/maybe-hugs#readme"</span></span>,
+  "<span class="hljs-attribute">dependencies</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">elm</span>": <span class="hljs-value"><span class="hljs-string">"^2.0.0"</span>
+  </span>}
+</span>}
+</code></pre>
+<h3 id="style-css">style.css</h3>
+<pre><code class="hljs css"><span class="hljs-tag">html</span>,
+<span class="hljs-tag">body</span> <span class="hljs-rules">{
+  <span class="hljs-rule"><span class="hljs-attribute">margin</span>:<span class="hljs-value"> <span class="hljs-number">0</span></span></span>;
+  <span class="hljs-rule"><span class="hljs-attribute">padding</span>:<span class="hljs-value"> <span class="hljs-number">0</span></span></span>;
+}</span>
+
+<span class="hljs-tag">body</span> <span class="hljs-rules">{
+  <span class="hljs-rule"><span class="hljs-attribute">font</span>:<span class="hljs-value"> <span class="hljs-number">16px</span> <span class="hljs-string">'Helvetica Neue'</span>, Helvetica, Arial, sans-serif</span></span>;
+  <span class="hljs-rule"><span class="hljs-attribute">line-height</span>:<span class="hljs-value"> <span class="hljs-number">1.5em</span></span></span>;
+  <span class="hljs-rule"><span class="hljs-attribute">background-color</span>:<span class="hljs-value"> <span class="hljs-hexcolor">#eaeaea</span></span></span>;
+  <span class="hljs-rule"><span class="hljs-attribute">color</span>:<span class="hljs-value"> <span class="hljs-hexcolor">#444</span></span></span>;
+  <span class="hljs-rule"><span class="hljs-attribute">width</span>:<span class="hljs-value"> <span class="hljs-number">550px</span></span></span>;
+  <span class="hljs-rule"><span class="hljs-attribute">margin</span>:<span class="hljs-value"> <span class="hljs-number">0</span> auto</span></span>;
+  <span class="hljs-rule"><span class="hljs-attribute">-webkit-font-smoothing</span>:<span class="hljs-value"> antialiased</span></span>;
+  <span class="hljs-rule"><span class="hljs-attribute">-moz-font-smoothing</span>:<span class="hljs-value"> antialiased</span></span>;
+  <span class="hljs-rule"><span class="hljs-attribute">-ms-font-smoothing</span>:<span class="hljs-value"> antialiased</span></span>;
+  <span class="hljs-rule"><span class="hljs-attribute">-o-font-smoothing</span>:<span class="hljs-value"> antialiased</span></span>;
+  <span class="hljs-rule"><span class="hljs-attribute">font-smoothing</span>:<span class="hljs-value"> antialiased</span></span>;
+}</span>
+
+<span class="hljs-id">#maybehugapp</span> <span class="hljs-rules">{
+  <span class="hljs-rule"><span class="hljs-attribute">background</span>:<span class="hljs-value"> <span class="hljs-hexcolor">#fff</span></span></span>;
+  <span class="hljs-rule"><span class="hljs-attribute">background</span>:<span class="hljs-value"> <span class="hljs-function">rgba</span>(<span class="hljs-number">255</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span>, <span class="hljs-number">0.9</span>)</span></span>;
+  <span class="hljs-rule"><span class="hljs-attribute">margin-top</span>:<span class="hljs-value"> <span class="hljs-number">50px</span></span></span>;
+  <span class="hljs-rule"><span class="hljs-attribute">height</span>:<span class="hljs-value"> <span class="hljs-number">430px</span></span></span>;
+  <span class="hljs-rule"><span class="hljs-attribute">border</span>:<span class="hljs-value"> <span class="hljs-number">1px</span> solid <span class="hljs-hexcolor">#ccc</span></span></span>;
+  <span class="hljs-rule"><span class="hljs-attribute">position</span>:<span class="hljs-value"> relative</span></span>;
+  <span class="hljs-rule"><span class="hljs-attribute">border-top-left-radius</span>:<span class="hljs-value"> <span class="hljs-number">2px</span></span></span>;
+  <span class="hljs-rule"><span class="hljs-attribute">border-top-right-radius</span>:<span class="hljs-value"> <span class="hljs-number">2px</span></span></span>;
+  <span class="hljs-rule"><span class="hljs-attribute">box-shadow</span>:<span class="hljs-value"> <span class="hljs-number">0</span> <span class="hljs-number">2px</span> <span class="hljs-number">6px</span> <span class="hljs-number">0</span> <span class="hljs-function">rgba</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0.2</span>),
+  <span class="hljs-number">0</span> <span class="hljs-number">25px</span> <span class="hljs-number">50px</span> <span class="hljs-number">0</span> <span class="hljs-function">rgba</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0.15</span>)</span></span>;
+}</span>
+
+<span class="hljs-id">#maybehugapp</span> <span class="hljs-tag">h1</span>, <span class="hljs-id">#maybehugapp</span> <span class="hljs-tag">h2</span> <span class="hljs-rules">{
+  <span class="hljs-rule"><span class="hljs-attribute">width</span>:<span class="hljs-value"> <span class="hljs-number">100%</span></span></span>;
+  <span class="hljs-rule"><span class="hljs-attribute">font-weight</span>:<span class="hljs-value"> bold</span></span>;
+  <span class="hljs-rule"><span class="hljs-attribute">text-align</span>:<span class="hljs-value"> center</span></span>;
+  <span class="hljs-rule"><span class="hljs-attribute">color</span>:<span class="hljs-value"> <span class="hljs-hexcolor">#aaa</span></span></span>;
+  <span class="hljs-rule"><span class="hljs-attribute">color</span>:<span class="hljs-value"> <span class="hljs-function">rgba</span>(<span class="hljs-number">128</span>, <span class="hljs-number">128</span>, <span class="hljs-number">128</span>, <span class="hljs-number">0.3</span>)</span></span>;
+  <span class="hljs-rule"><span class="hljs-attribute">text-shadow</span>:<span class="hljs-value"> -<span class="hljs-number">1px</span> -<span class="hljs-number">1px</span> <span class="hljs-function">rgba</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0.2</span>)</span></span>;
+  <span class="hljs-rule"><span class="hljs-attribute">-webkit-text-rendering</span>:<span class="hljs-value"> optimizeLegibility</span></span>;
+  <span class="hljs-rule"><span class="hljs-attribute">-moz-text-rendering</span>:<span class="hljs-value"> optimizeLegibility</span></span>;
+  <span class="hljs-rule"><span class="hljs-attribute">-ms-text-rendering</span>:<span class="hljs-value"> optimizeLegibility</span></span>;
+  <span class="hljs-rule"><span class="hljs-attribute">-o-text-rendering</span>:<span class="hljs-value"> optimizeLegibility</span></span>;
+  <span class="hljs-rule"><span class="hljs-attribute">text-rendering</span>:<span class="hljs-value"> optimizeLegibility</span></span>;
+}</span>
+
+<span class="hljs-id">#maybehugapp</span> <span class="hljs-tag">h1</span> <span class="hljs-rules">{
+  <span class="hljs-rule"><span class="hljs-attribute">font-size</span>:<span class="hljs-value"> <span class="hljs-number">70px</span></span></span>;
+}</span>
+
+<span class="hljs-id">#maybehugapp</span> <span class="hljs-tag">h2</span> <span class="hljs-rules">{
+  <span class="hljs-rule"><span class="hljs-attribute">font-size</span>:<span class="hljs-value"> <span class="hljs-number">30px</span></span></span>;
+}</span>
+
+<span class="hljs-class">.cutie</span> <span class="hljs-rules">{
+  <span class="hljs-rule"><span class="hljs-attribute">width</span>:<span class="hljs-value"> <span class="hljs-number">300px</span></span></span>;
+  <span class="hljs-rule"><span class="hljs-attribute">display</span>:<span class="hljs-value"> block</span></span>;
+  <span class="hljs-rule"><span class="hljs-attribute">margin-left</span>:<span class="hljs-value"> auto</span></span>;
+  <span class="hljs-rule"><span class="hljs-attribute">margin-right</span>:<span class="hljs-value"> auto</span></span>;
+  <span class="hljs-rule"><span class="hljs-attribute">text-align</span>:<span class="hljs-value"> center</span></span>;
+  <span class="hljs-rule"><span class="hljs-attribute">box-shadow</span>:<span class="hljs-value"> <span class="hljs-number">0</span> <span class="hljs-number">2px</span> <span class="hljs-number">6px</span> <span class="hljs-number">0</span> <span class="hljs-function">rgba</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0.2</span>)</span></span>;
+}</span>
+</code></pre>
+
+    </main>
+    <footer>
+        <a href="https://github.com/zkat/maybe-hugs">
+          <span class="mega-octicon octicon-mark-github"></span>
+        </a>
+        <a href="http://creativecommons.org/publicdomain/zero/1.0/">
+          <img src="https://camo.githubusercontent.com/c5160f944848828fa33126d9a697e9abe43ea98f/687474703a2f2f692e6372656174697665636f6d6d6f6e732e6f72672f702f7a65726f2f312e302f38387833312e706e67"/>
+        </a>
+    </footer>
+  </div>
+</body>
