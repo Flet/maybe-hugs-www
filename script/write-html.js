@@ -12,7 +12,7 @@ marked.setOptions({
   highlight: function (code, lang) {
     return highlightjs.highlightAuto(code, [ lang ]).value;
   },
-  langPrefix:'hljs ' // le sigh: https://github.com/chjj/marked/pull/418
+  langPrefix: 'hljs ' // le sigh: https://github.com/chjj/marked/pull/418
 });
 
 hb.registerHelper('markdown', function (data) {
