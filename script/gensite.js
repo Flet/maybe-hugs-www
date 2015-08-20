@@ -72,21 +72,21 @@ function processDirectory (name) {
 
     var fileData = fs.readFileSync(filePath, {encoding: 'utf8'});
     var content = '';
-    
-    if (f === 'README.md') {
+
+    if (f === 'README.md' || f === 'readme.markdown') {
       content = fileData;
-      data = content + data; // put README at the top
+      data = content + '\n' + data; // put README at the top
     } else {
       content += '### ' + f + '\n\n';
       content += '```' + path.extname(filePath) + '\n';
       content += fileData;
       content += '```\n\n\n';
-      data += content
+      data += content;
     }
 
   });
 
-  data = '## ' + name + '\n\n' + data
+  data = '## ' + name + '\n\n' + data;
 
   writeHtml({name: name, data: data, tocData: directories});
 }
