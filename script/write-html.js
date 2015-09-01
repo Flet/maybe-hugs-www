@@ -28,12 +28,17 @@ function writeHtml (passedOpts) {
   var opts = extend(passedOpts);
 
   opts.nav = opts.tocData.map(function (item) {
-    return {url: slug(item) + '.html', title: item};
+    return {url: customSlug(item) + '.html', title: item};
   });
 
   var output = genPage(opts);
 
-  var name = slug(opts.name) + '.html';
+  var name = customSlug(opts.name) + '.html';
   console.log('writing ' + name);
   fs.writeFileSync(path.join('build', name), output, {encoding: 'utf8'});
+}
+
+function customSlug (name) {
+  var customName = name.replace(/\+/g, 'plus');
+  return slug(customName);
 }
