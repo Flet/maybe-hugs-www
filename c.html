@@ -11,7 +11,8 @@
 </banner>
   <nav>
   <a href="bash.html">bash</a>
-  <a href="c.html">c++</a>
+  <a href="c.html">c</a>
+  <a href="cplusplus.html">c++</a>
   <a href="clojure.html">clojure</a>
   <a href="elm.html">elm</a>
   <a href="go.html">go</a>
@@ -28,145 +29,46 @@
   <a href="scala.html">scala</a>
 </nav>
     <main>
-      <h2 id="c-">c++</h2>
-<h3 id="cutie-cpp">Cutie.cpp</h3>
-<pre><code class="hljs cpp"><span class="hljs-preprocessor">#<span class="hljs-keyword">include</span> <span class="hljs-string">"Cutie.h"</span></span>
+      <h2 id="c">c</h2>
+<h3 id="maybe_hug-c">maybe_hug.c</h3>
+<pre><code class="hljs c"><span class="hljs-preprocessor">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-preprocessor">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span>
 
-Cutie::Cutie()
-{
-    <span class="hljs-comment">// Assume no hugs by default to be safe</span>
-    <span class="hljs-keyword">this</span>-&gt;respondsToHugs = <span class="hljs-literal">false</span>;
-    <span class="hljs-keyword">this</span>-&gt;hugs = <span class="hljs-number">0</span>;
-    <span class="hljs-keyword">this</span>-&gt;tlc = <span class="hljs-number">0</span>;
+<span class="hljs-comment">//Define the person to test with</span>
+<span class="hljs-preprocessor">#<span class="hljs-keyword">define</span> NAME         <span class="hljs-string">"Amber"</span></span>
+<span class="hljs-preprocessor">#<span class="hljs-keyword">define</span> ISCUTIE      <span class="hljs-number">1</span></span>
+<span class="hljs-preprocessor">#<span class="hljs-keyword">define</span> LIKESCONTACT <span class="hljs-number">1</span></span>
+
+<span class="hljs-keyword">typedef</span> <span class="hljs-keyword">struct</span> {
+    <span class="hljs-keyword">char</span>  *name;
+    <span class="hljs-keyword">short</span> likesPhysicalContact;
+    <span class="hljs-keyword">short</span> isCutie;
+} human;
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">executeHug</span><span class="hljs-params">(human person)</span> </span>{
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%s accepted your offer!\n"</span>,person.name);
+    sleep(<span class="hljs-number">3</span>);
+    <span class="hljs-built_in">puts</span>(<span class="hljs-string">"*hugs*"</span>);
+    sleep(<span class="hljs-number">3</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"You Hugged %s! :^)\n"</span>,person.name);
 }
 
-<span class="hljs-keyword">void</span> Cutie::setAcceptsHugs(<span class="hljs-keyword">bool</span> value)
-{
-    <span class="hljs-keyword">this</span>-&gt;respondsToHugs = value;
-}
-
-<span class="hljs-keyword">bool</span> Cutie::acceptsHugs()
-{
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>-&gt;respondsToHugs;
-}
-
-<span class="hljs-keyword">void</span> Cutie::hug()
-{
-    ++hugs;
-}
-
-<span class="hljs-keyword">void</span> Cutie::empathy()
-{
-    ++tlc;
-}
-
-<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> Cutie::getNumberOfHugs()
-{
-    <span class="hljs-keyword">return</span> hugs;
-}
-
-<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> Cutie::getNumberOfTlc()
-{
-    <span class="hljs-keyword">return</span> tlc;
-}
-</code></pre>
-<h3 id="cutie-h">Cutie.h</h3>
-<pre><code class="hljs h"><span class="hljs-preprocessor">#<span class="hljs-keyword">ifndef</span> _CUTIE_H_</span>
-<span class="hljs-preprocessor">#<span class="hljs-keyword">define</span> _CUTIE_H_</span>
-
-<span class="hljs-keyword">class</span> Cutie
-{
-<span class="hljs-keyword">private</span>:
-    <span class="hljs-keyword">bool</span> respondsToHugs;
-    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> hugs;
-    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> tlc;
-
-<span class="hljs-keyword">public</span>:
-    Cutie();
-
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">setAcceptsHugs</span><span class="hljs-params">(<span class="hljs-keyword">bool</span> value)</span></span>;
-    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">acceptsHugs</span><span class="hljs-params">()</span></span>;
-
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">hug</span><span class="hljs-params">()</span></span>;
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">empathy</span><span class="hljs-params">()</span></span>;
-
-    <span class="hljs-function"><span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getNumberOfHugs</span><span class="hljs-params">()</span></span>;
-    <span class="hljs-function"><span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getNumberOfTlc</span><span class="hljs-params">()</span></span>;
-};
-
-<span class="hljs-preprocessor">#<span class="hljs-keyword">endif</span></span>
-</code></pre>
-<h3 id="maybehug-cpp">MaybeHug.cpp</h3>
-<pre><code class="hljs cpp"><span class="hljs-preprocessor">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
-<span class="hljs-preprocessor">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;typeinfo&gt;</span></span>
-<span class="hljs-preprocessor">#<span class="hljs-keyword">include</span> <span class="hljs-string">"Cutie.h"</span></span>
-<span class="hljs-preprocessor">#<span class="hljs-keyword">include</span> <span class="hljs-string">"MaybeHug.h"</span></span>
-
-MaybeHug::MaybeHug(Cutie* cutie)
-{
-    <span class="hljs-keyword">if</span> (cutie == <span class="hljs-literal">NULL</span>)
-    {
-        <span class="hljs-keyword">throw</span> NoCutieException();
-    }
-    <span class="hljs-keyword">this</span>-&gt;cutie = cutie;
-}
-
-<span class="hljs-keyword">void</span> MaybeHug::hug()
-{
-    <span class="hljs-keyword">if</span> (cutie-&gt;acceptsHugs())
-    {
-        cutie-&gt;hug();
-    }
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">offerHug</span><span class="hljs-params">(human person)</span> </span>{
+    <span class="hljs-built_in">puts</span>(<span class="hljs-string">"You asked for a hug."</span>);
+    sleep(<span class="hljs-number">3</span>);
+    <span class="hljs-keyword">if</span> (person.likesPhysicalContact)
+        executeHug(person);
     <span class="hljs-keyword">else</span>
-    {
-        cutie-&gt;empathy();
-    }
-}
-</code></pre>
-<h3 id="maybehug-h">MaybeHug.h</h3>
-<pre><code class="hljs h"><span class="hljs-preprocessor">#<span class="hljs-keyword">ifndef</span> _MAYBEHUG_H_</span>
-<span class="hljs-preprocessor">#<span class="hljs-keyword">define</span> _MAYBEHUG_H_</span>
-
-<span class="hljs-keyword">class</span> MaybeHug
-{
-<span class="hljs-keyword">private</span>:
-    <span class="hljs-keyword">class</span> NoCutieException { };
-    Cutie* cutie;
-
-<span class="hljs-keyword">public</span>:
-    MaybeHug(Cutie* cutie);
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">hug</span><span class="hljs-params">()</span></span>;
-};
-
-<span class="hljs-preprocessor">#<span class="hljs-keyword">endif</span></span>
-</code></pre>
-<h3 id="main-cpp">main.cpp</h3>
-<pre><code class="hljs cpp"><span class="hljs-preprocessor">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
-<span class="hljs-preprocessor">#<span class="hljs-keyword">include</span> <span class="hljs-string">"Cutie.h"</span></span>
-<span class="hljs-preprocessor">#<span class="hljs-keyword">include</span> <span class="hljs-string">"MaybeHug.h"</span></span>
-
-<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">testHugger</span><span class="hljs-params">(Cutie* &amp;cutie, <span class="hljs-keyword">bool</span> testVal)</span></span>;
-
-<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
-</span>{
-    <span class="hljs-comment">// Test out the hugging capabilities</span>
-
-    Cutie* hugger = <span class="hljs-keyword">new</span> Cutie();
-    Cutie* nonHugger = <span class="hljs-keyword">new</span> Cutie();
-    testHugger(hugger, <span class="hljs-literal">true</span>);
-    testHugger(nonHugger, <span class="hljs-literal">false</span>);
-
-    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Hugger got "</span> &lt;&lt; hugger-&gt;getNumberOfHugs() &lt;&lt; <span class="hljs-string">" hugs "</span>
-        &lt;&lt; <span class="hljs-string">" and "</span> &lt;&lt; hugger-&gt;getNumberOfTlc() &lt;&lt; <span class="hljs-string">" empathies.\n"</span>;
-    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Non-hugger got "</span> &lt;&lt; nonHugger-&gt;getNumberOfHugs() &lt;&lt; <span class="hljs-string">" hugs "</span>
-        &lt;&lt; <span class="hljs-string">" and "</span> &lt;&lt; nonHugger-&gt;getNumberOfTlc() &lt;&lt; <span class="hljs-string">" empathies.\n"</span>;
+        <span class="hljs-built_in">puts</span>(<span class="hljs-string">"They'd rather not, thanks for being considerate."</span>);
 }
 
-<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">testHugger</span><span class="hljs-params">(Cutie* &amp;cutie, <span class="hljs-keyword">bool</span> testVal)</span>
-</span>{
-    cutie-&gt;setAcceptsHugs(testVal);
-    <span class="hljs-function">MaybeHug <span class="hljs-title">maybeHug</span><span class="hljs-params">(cutie)</span></span>;
-    maybeHug.hug();
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    human person = {NAME,LIKESCONTACT,ISCUTIE};
+    <span class="hljs-keyword">if</span> (person.isCutie)
+        offerHug(person);
+    <span class="hljs-keyword">else</span>
+        <span class="hljs-built_in">puts</span>(<span class="hljs-string">"They're not as cute as you first thought..."</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
 }
 </code></pre>
 

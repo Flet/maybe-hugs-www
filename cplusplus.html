@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Droid+Sans+Mono" />
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/octicons/3.0.1/octicons.min.css"/>
+<link rel="stylesheet" type="text/css" href="main.css" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/tomorrow-night-eighties.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+<body>
+  <div id="container"><banner>
+  <a href="index.html">maybehug.me</a>
+</banner>
+  <nav>
+  <a href="bash.html">bash</a>
+  <a href="c.html">c</a>
+  <a href="cplusplus.html">c++</a>
+  <a href="clojure.html">clojure</a>
+  <a href="elm.html">elm</a>
+  <a href="go.html">go</a>
+  <a href="haskell.html">haskell</a>
+  <a href="hy.html">hy</a>
+  <a href="java.html">java</a>
+  <a href="javascript.html">javascript</a>
+  <a href="perl.html">perl</a>
+  <a href="perl6.html">perl6</a>
+  <a href="php.html">php</a>
+  <a href="python.html">python</a>
+  <a href="ruby.html">ruby</a>
+  <a href="rust.html">rust</a>
+  <a href="scala.html">scala</a>
+</nav>
+    <main>
+      <h2 id="c-">c++</h2>
+<h3 id="cutie-cpp">Cutie.cpp</h3>
+<pre><code class="hljs cpp"><span class="hljs-preprocessor">#<span class="hljs-keyword">include</span> <span class="hljs-string">"Cutie.h"</span></span>
+
+Cutie::Cutie()
+{
+    <span class="hljs-comment">// Assume no hugs by default to be safe</span>
+    <span class="hljs-keyword">this</span>-&gt;respondsToHugs = <span class="hljs-literal">false</span>;
+    <span class="hljs-keyword">this</span>-&gt;hugs = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">this</span>-&gt;tlc = <span class="hljs-number">0</span>;
+}
+
+<span class="hljs-keyword">void</span> Cutie::setAcceptsHugs(<span class="hljs-keyword">bool</span> value)
+{
+    <span class="hljs-keyword">this</span>-&gt;respondsToHugs = value;
+}
+
+<span class="hljs-keyword">bool</span> Cutie::acceptsHugs()
+{
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>-&gt;respondsToHugs;
+}
+
+<span class="hljs-keyword">void</span> Cutie::hug()
+{
+    ++hugs;
+}
+
+<span class="hljs-keyword">void</span> Cutie::empathy()
+{
+    ++tlc;
+}
+
+<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> Cutie::getNumberOfHugs()
+{
+    <span class="hljs-keyword">return</span> hugs;
+}
+
+<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> Cutie::getNumberOfTlc()
+{
+    <span class="hljs-keyword">return</span> tlc;
+}
+</code></pre>
+<h3 id="cutie-h">Cutie.h</h3>
+<pre><code class="hljs h"><span class="hljs-preprocessor">#<span class="hljs-keyword">ifndef</span> _CUTIE_H_</span>
+<span class="hljs-preprocessor">#<span class="hljs-keyword">define</span> _CUTIE_H_</span>
+
+<span class="hljs-keyword">class</span> Cutie
+{
+<span class="hljs-keyword">private</span>:
+    <span class="hljs-keyword">bool</span> respondsToHugs;
+    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> hugs;
+    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> tlc;
+
+<span class="hljs-keyword">public</span>:
+    Cutie();
+
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">setAcceptsHugs</span><span class="hljs-params">(<span class="hljs-keyword">bool</span> value)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">acceptsHugs</span><span class="hljs-params">()</span></span>;
+
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">hug</span><span class="hljs-params">()</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">empathy</span><span class="hljs-params">()</span></span>;
+
+    <span class="hljs-function"><span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getNumberOfHugs</span><span class="hljs-params">()</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getNumberOfTlc</span><span class="hljs-params">()</span></span>;
+};
+
+<span class="hljs-preprocessor">#<span class="hljs-keyword">endif</span></span>
+</code></pre>
+<h3 id="maybehug-cpp">MaybeHug.cpp</h3>
+<pre><code class="hljs cpp"><span class="hljs-preprocessor">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-preprocessor">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;typeinfo&gt;</span></span>
+<span class="hljs-preprocessor">#<span class="hljs-keyword">include</span> <span class="hljs-string">"Cutie.h"</span></span>
+<span class="hljs-preprocessor">#<span class="hljs-keyword">include</span> <span class="hljs-string">"MaybeHug.h"</span></span>
+
+MaybeHug::MaybeHug(Cutie* cutie)
+{
+    <span class="hljs-keyword">if</span> (cutie == <span class="hljs-literal">NULL</span>)
+    {
+        <span class="hljs-keyword">throw</span> NoCutieException();
+    }
+    <span class="hljs-keyword">this</span>-&gt;cutie = cutie;
+}
+
+<span class="hljs-keyword">void</span> MaybeHug::hug()
+{
+    <span class="hljs-keyword">if</span> (cutie-&gt;acceptsHugs())
+    {
+        cutie-&gt;hug();
+    }
+    <span class="hljs-keyword">else</span>
+    {
+        cutie-&gt;empathy();
+    }
+}
+</code></pre>
+<h3 id="maybehug-h">MaybeHug.h</h3>
+<pre><code class="hljs h"><span class="hljs-preprocessor">#<span class="hljs-keyword">ifndef</span> _MAYBEHUG_H_</span>
+<span class="hljs-preprocessor">#<span class="hljs-keyword">define</span> _MAYBEHUG_H_</span>
+
+<span class="hljs-keyword">class</span> MaybeHug
+{
+<span class="hljs-keyword">private</span>:
+    <span class="hljs-keyword">class</span> NoCutieException { };
+    Cutie* cutie;
+
+<span class="hljs-keyword">public</span>:
+    MaybeHug(Cutie* cutie);
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">hug</span><span class="hljs-params">()</span></span>;
+};
+
+<span class="hljs-preprocessor">#<span class="hljs-keyword">endif</span></span>
+</code></pre>
+<h3 id="main-cpp">main.cpp</h3>
+<pre><code class="hljs cpp"><span class="hljs-preprocessor">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-preprocessor">#<span class="hljs-keyword">include</span> <span class="hljs-string">"Cutie.h"</span></span>
+<span class="hljs-preprocessor">#<span class="hljs-keyword">include</span> <span class="hljs-string">"MaybeHug.h"</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">testHugger</span><span class="hljs-params">(Cutie* &amp;cutie, <span class="hljs-keyword">bool</span> testVal)</span></span>;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>{
+    <span class="hljs-comment">// Test out the hugging capabilities</span>
+
+    Cutie* hugger = <span class="hljs-keyword">new</span> Cutie();
+    Cutie* nonHugger = <span class="hljs-keyword">new</span> Cutie();
+    testHugger(hugger, <span class="hljs-literal">true</span>);
+    testHugger(nonHugger, <span class="hljs-literal">false</span>);
+
+    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Hugger got "</span> &lt;&lt; hugger-&gt;getNumberOfHugs() &lt;&lt; <span class="hljs-string">" hugs "</span>
+        &lt;&lt; <span class="hljs-string">" and "</span> &lt;&lt; hugger-&gt;getNumberOfTlc() &lt;&lt; <span class="hljs-string">" empathies.\n"</span>;
+    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Non-hugger got "</span> &lt;&lt; nonHugger-&gt;getNumberOfHugs() &lt;&lt; <span class="hljs-string">" hugs "</span>
+        &lt;&lt; <span class="hljs-string">" and "</span> &lt;&lt; nonHugger-&gt;getNumberOfTlc() &lt;&lt; <span class="hljs-string">" empathies.\n"</span>;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">testHugger</span><span class="hljs-params">(Cutie* &amp;cutie, <span class="hljs-keyword">bool</span> testVal)</span>
+</span>{
+    cutie-&gt;setAcceptsHugs(testVal);
+    <span class="hljs-function">MaybeHug <span class="hljs-title">maybeHug</span><span class="hljs-params">(cutie)</span></span>;
+    maybeHug.hug();
+}
+</code></pre>
+
+    </main>
+    <footer>
+        <a href="https://github.com/zkat/maybe-hugs">
+          <span class="mega-octicon octicon-mark-github"></span>
+        </a>
+        <a href="http://creativecommons.org/publicdomain/zero/1.0/">
+          <img src="https://camo.githubusercontent.com/c5160f944848828fa33126d9a697e9abe43ea98f/687474703a2f2f692e6372656174697665636f6d6d6f6e732e6f72672f702f7a65726f2f312e302f38387833312e706e67"/>
+        </a>
+    </footer>
+  </div>
+</body>
