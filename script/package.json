@@ -20,9 +20,6 @@
   },
   "dependencies": {
     "handlebars": "^3.0.3",
-    "highlight.js": "^8.7.0",
-    "highlightjs": "^8.7.0",
-    "marked": "^0.3.5",
     "marky-markdown": "^5.4.0",
     "semistandard": "*",
     "shelljs": "^0.5.2",
