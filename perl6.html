@@ -5,11 +5,10 @@
 <link rel="stylesheet" type="text/css" href="main.css" />
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/tomorrow-night-eighties.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
-<body>
-  <div id="container"><banner>
-  <a href="index.html">maybehug.me</a>
-</banner>
-  <nav>
+<body><header>
+  <a href="index.html">maybe-hugs</a>
+</header>
+<nav>
   <a href="bash.html">bash</a>
   <a href="c.html">c</a>
   <a href="cplusplus.html">c++</a>
@@ -28,179 +27,65 @@
   <a href="rust.html">rust</a>
   <a href="scala.html">scala</a>
 </nav>
+  <div id="container">
+
     <main>
-      <h2 id="perl6">perl6</h2>
-<h2 id="maybe-hugs">Maybe-Hugs</h2>
-<p>First we&#39;ll need some cuties...</p>
-<pre><code class="hljs perl6">need Cutie;
-use Maybe::Hug;
-
-role HugAllCuties does Cutie {
-  multi method accept-hugs (Cutie $from) { True }
-}
-role HugNoCuties does Cutie {
-  multi method accept-hugs (Cutie $from) { False }
-}
-role HugSomeCuties does Cutie {
-  has @.whom;
-  multi method accept-hugs (Cutie $from) { Bool(@.whom.first: {$_ === $from}) }
-}
-role HugSometimes does Cutie {
-  has $.in-the-mood is rw = False;
-  multi method accept-hugs (Cutie $from) { $.in-the-mood }
-}
-
-my Cutie $alice = &quot;Alice&quot; does HugAllCuties;
-my Cutie $betty = &quot;Betty&quot; does HugNoCuties;
-my Cutie $carol = &quot;Carol&quot; does HugSomeCuties(:whom($alice));
-my Cutie $danielle = &quot;Danielle&quot; does HugSometimes;
-</code></pre>
-<p>Now, if we offer hugs to Alice…</p>
-<pre><code>given {{$alice}} {
-  .hugs: { say &quot;HUGS!&quot; }
-  .empathy: { say &quot;Empathy!&quot; }
-}
-</code></pre><p>We&#39;ll find Alice always wants hugs.  Alternatively, trying the same thing
+      <h2 id="user-content-perl6" class="deep-link"><a href="#perl6">perl6</a></h2>
+<h2 id="user-content-maybe-hugs" class="deep-link"><a href="#maybe-hugs">Maybe-Hugs</a></h2>
+<p>First we&apos;ll need some cuties...</p>
+<pre><code class="highlight"><pre class="editor editor-colors"><div class="line"><span class="text"><span>need&#xA0;Cutie;</span></span></div><div class="line"><span class="text"><span>use&#xA0;Maybe::Hug;</span></span></div><div class="line"><span class="text"><span>&#xA0;</span></span></div><div class="line"><span class="text"><span>role&#xA0;HugAllCuties&#xA0;does&#xA0;Cutie&#xA0;{</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;multi&#xA0;method&#xA0;accept-hugs&#xA0;(Cutie&#xA0;$from)&#xA0;{&#xA0;True&#xA0;}</span></span></div><div class="line"><span class="text"><span>}</span></span></div><div class="line"><span class="text"><span>role&#xA0;HugNoCuties&#xA0;does&#xA0;Cutie&#xA0;{</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;multi&#xA0;method&#xA0;accept-hugs&#xA0;(Cutie&#xA0;$from)&#xA0;{&#xA0;False&#xA0;}</span></span></div><div class="line"><span class="text"><span>}</span></span></div><div class="line"><span class="text"><span>role&#xA0;HugSomeCuties&#xA0;does&#xA0;Cutie&#xA0;{</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;has&#xA0;@.whom;</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;multi&#xA0;method&#xA0;accept-hugs&#xA0;(Cutie&#xA0;$from)&#xA0;{&#xA0;Bool(@.whom.first:&#xA0;{$_&#xA0;===&#xA0;$from})&#xA0;}</span></span></div><div class="line"><span class="text"><span>}</span></span></div><div class="line"><span class="text"><span>role&#xA0;HugSometimes&#xA0;does&#xA0;Cutie&#xA0;{</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;has&#xA0;$.in-the-mood&#xA0;is&#xA0;rw&#xA0;=&#xA0;False;</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;multi&#xA0;method&#xA0;accept-hugs&#xA0;(Cutie&#xA0;$from)&#xA0;{&#xA0;$.in-the-mood&#xA0;}</span></span></div><div class="line"><span class="text"><span>}</span></span></div><div class="line"><span class="text"><span>&#xA0;</span></span></div><div class="line"><span class="text"><span>my&#xA0;Cutie&#xA0;$alice&#xA0;=&#xA0;&quot;Alice&quot;&#xA0;does&#xA0;HugAllCuties;</span></span></div><div class="line"><span class="text"><span>my&#xA0;Cutie&#xA0;$betty&#xA0;=&#xA0;&quot;Betty&quot;&#xA0;does&#xA0;HugNoCuties;</span></span></div><div class="line"><span class="text"><span>my&#xA0;Cutie&#xA0;$carol&#xA0;=&#xA0;&quot;Carol&quot;&#xA0;does&#xA0;HugSomeCuties(:whom($alice));</span></span></div><div class="line"><span class="text"><span>my&#xA0;Cutie&#xA0;$danielle&#xA0;=&#xA0;&quot;Danielle&quot;&#xA0;does&#xA0;HugSometimes;</span></span></div></pre></code></pre>
+<p>Now, if we offer hugs to Alice&#x2026;</p>
+<pre><code><pre class="editor editor-colors"><div class="line"><span class="text"><span>given&#xA0;{{$alice}}&#xA0;{</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;.hugs:&#xA0;{&#xA0;say&#xA0;&quot;HUGS!&quot;&#xA0;}</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;.empathy:&#xA0;{&#xA0;say&#xA0;&quot;Empathy!&quot;&#xA0;}</span></span></div><div class="line"><span class="text"><span>}</span></span></div></pre></code></pre>
+<p>We&apos;ll find Alice always wants hugs.  Alternatively, trying the same thing
 with Betty would find her desire for empathy every time.</p>
-<p>Carol by contrast is a bit different, she&#39;ll take hugs from Alice but no one else:</p>
-<pre><code>given $alice ==&gt; {{$carol}} {
-  .hugs: { say "HUGS!" }
-  .empathy: { say "Empathy!" }
-}
-</code></pre><p>Trying the same thing with <code>$betty ==&gt; {{$carol}}</code> shows that Carol would
+<p>Carol by contrast is a bit different, she&apos;ll take hugs from Alice but no one else:</p>
+<pre><code><pre class="editor editor-colors"><div class="line"><span class="text"><span>given&#xA0;$alice&#xA0;==&gt;&#xA0;{{$carol}}&#xA0;{</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;.hugs:&#xA0;{&#xA0;say&#xA0;&quot;HUGS!&quot;&#xA0;}</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;.empathy:&#xA0;{&#xA0;say&#xA0;&quot;Empathy!&quot;&#xA0;}</span></span></div><div class="line"><span class="text"><span>}</span></span></div></pre></code></pre>
+<p>Trying the same thing with <code>$betty ==&gt; {{$carol}}</code> shows that Carol would
 prefer empathy from Betty.</p>
 <p>Alternatively you could say this with <code>{{$carol}}.by($betty)</code>.</p>
-<p>Finally, more realistically, Danielle sometimes is ok with hugs and sometimes isn&#39;t...</p>
-<pre><code>given $alice ==&gt; {{$danielle}} {
-  .hugs: { say "HUGS!" }
-  .empathy: { say "Empathy!" }
-}
-</code></pre><p>Will show her desire for empathy, but if she&#39;s later feeling more touchy feely...</p>
-<pre><code>$danielle.in-the-mood = True
-given $alice ==&gt; {{$danielle}} {
-  .hugs: { say "HUGS!" }
-  .empathy: { say "Empathy!" }
-}
-</code></pre><p>Then the same offer will result in HUGS.</p>
-<h2 id="what-s-going-on">What&#39;s going on</h2>
+<p>Finally, more realistically, Danielle sometimes is ok with hugs and sometimes isn&apos;t...</p>
+<pre><code><pre class="editor editor-colors"><div class="line"><span class="text"><span>given&#xA0;$alice&#xA0;==&gt;&#xA0;{{$danielle}}&#xA0;{</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;.hugs:&#xA0;{&#xA0;say&#xA0;&quot;HUGS!&quot;&#xA0;}</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;.empathy:&#xA0;{&#xA0;say&#xA0;&quot;Empathy!&quot;&#xA0;}</span></span></div><div class="line"><span class="text"><span>}</span></span></div></pre></code></pre>
+<p>Will show her desire for empathy, but if she&apos;s later feeling more touchy feely...</p>
+<pre><code><pre class="editor editor-colors"><div class="line"><span class="text"><span>$danielle.in-the-mood&#xA0;=&#xA0;True</span></span></div><div class="line"><span class="text"><span>given&#xA0;$alice&#xA0;==&gt;&#xA0;{{$danielle}}&#xA0;{</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;.hugs:&#xA0;{&#xA0;say&#xA0;&quot;HUGS!&quot;&#xA0;}</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;.empathy:&#xA0;{&#xA0;say&#xA0;&quot;Empathy!&quot;&#xA0;}</span></span></div><div class="line"><span class="text"><span>}</span></span></div></pre></code></pre>
+<p>Then the same offer will result in HUGS.</p>
+<h2 id="user-content-what-s-going-on" class="deep-link"><a href="#what-s-going-on">What&apos;s going on</a></h2>
 <p>The <code>Maybe::Hug</code> module introduces a new circumfix operator <code>{{ }}</code> which
 when wrapped around a <code>Cutie</code> returns a <code>Maybe::Hug</code> object.  If you feed
 the operator, eg <code>$person ==&gt; {{$cutie}}</code> then that person is added to the
 <code>Maybe::Hug</code> as the person offering the hug.</p>
-<h2 id="exported-functions">Exported functions</h2>
-<h3 id="circumfix-cutie-where-can-accept-hugs-from-">circumfix:&lt;{{ }}&gt;($cutie where {.can(&#39;accept-hugs&#39;)}, $from?)</h3>
+<h2 id="user-content-exported-functions" class="deep-link"><a href="#exported-functions">Exported functions</a></h2>
+<h3 id="user-content-circumfix-cutie-where-can-accept-hugs-from" class="deep-link"><a href="#circumfix-cutie-where-can-accept-hugs-from">circumfix:&lt;{{ }}&gt;($cutie where {.can(&apos;accept-hugs&apos;)}, $from?)</a></h3>
 <p>Constructs a new Maybe::Hug object... literally just defined as:</p>
-<pre><code>Maybe::Hug.new(:$cutie, :$from)
-</code></pre><h2 id="maybe-hug">Maybe::Hug</h2>
-<h3 id="-new-cutie-where-can-accept-hugs-from-">.new(:$cutie where {.can(&#39;accept-hugs&#39;)}, :$from)</h3>
+<pre><code><pre class="editor editor-colors"><div class="line"><span class="text"><span>Maybe::Hug.new(:$cutie,&#xA0;:$from)</span></span></div></pre></code></pre>
+<h2 id="user-content-maybe-hug" class="deep-link"><a href="#maybe-hug">Maybe::Hug</a></h2>
+<h3 id="user-content-new-cutie-where-can-accept-hugs-from" class="deep-link"><a href="#new-cutie-where-can-accept-hugs-from">.new(:$cutie where {.can(&apos;accept-hugs&apos;)}, :$from)</a></h3>
 <p>Constructs a new Maybe::Hug. We need a $cutie, but $from is optional.</p>
-<h3 id="-by-from-returns-maybe-hug">.by($from) returns Maybe::Hug</h3>
+<h3 id="user-content-by-from-returns-maybe-hug" class="deep-link"><a href="#by-from-returns-maybe-hug">.by($from) returns Maybe::Hug</a></h3>
 <p>Returns a new Maybe::Hug object where hugging is being done by $from</p>
-<h3 id="-bool-">.Bool()</h3>
+<h3 id="user-content-bool" class="deep-link"><a href="#bool">.Bool()</a></h3>
 <p>If used in boolean context, the Maybe::Hug will return true if the cutie
 prefers hugs, false if they prefer empathy.</p>
-<h3 id="-hugs-stuff-to-do-if-they-want-hugs-">.hugs: { stuff to do if they want hugs }</h3>
+<h3 id="user-content-hugs-stuff-to-do-if-they-want-hugs" class="deep-link"><a href="#hugs-stuff-to-do-if-they-want-hugs">.hugs: { stuff to do if they want hugs }</a></h3>
 <p>Executes the block if the cutie prefers hugs</p>
-<h3 id="-empathy-stuff-to-do-if-they-want-empathy-">.empathy: { stuff to do if they want empathy }</h3>
+<h3 id="user-content-empathy-stuff-to-do-if-they-want-empathy" class="deep-link"><a href="#empathy-stuff-to-do-if-they-want-empathy">.empathy: { stuff to do if they want empathy }</a></h3>
 <p>Executes the block if the cutie prefers empathy</p>
-<h3 id="meta-info">META.info</h3>
-<pre><code class="hljs info">{
-    &quot;name&quot;        : &quot;Maybe::Hugs&quot;,
-    &quot;version&quot;     : &quot;1.0.0&quot;,
-    &quot;description&quot; : &quot;Conditional hugging implementation for Perl6&quot;,
-    &quot;provides&quot;    : {
-        &quot;Maybe::Hug&quot; : &quot;lib/Maybe/Hug.pm&quot;,
-        &quot;Cutie&quot;      : &quot;lib/Cutie.pm&quot;
-    },
-    &quot;author&quot;      : &quot;Rebecca Turner&quot;,
-    &quot;depends&quot;     : [],
-    &quot;source-type&quot; : &quot;git&quot;,
-    &quot;source-url&quot;  : &quot;git://github.com/zkat/maybe-hugs.git&quot;
-}
-</code></pre>
-<h3 id="lib-cutie-pm">lib/Cutie.pm</h3>
-<pre><code class="hljs pm">role Cutie {
-  multi method accept-hugs (Mu $from) { False }
-}
-</code></pre>
-<h3 id="lib-maybe-hug-pm">lib/Maybe/Hug.pm</h3>
-<pre><code class="hljs pm">class Maybe::Hug {
-  has $.cutie where { .can('accept-hugs') };
-  has $.from;
-  method hugs(&amp;dothething) { dothething() if self }
-  method empathy(&amp;dothething) { dothething() unless self }
-  method by($from) { Maybe::Hug.new(:$!cutie, :$from) }
-  method Bool() { $!cutie.accept-hugs($!from) }
-}
-
-sub circumfix:&lt;{{ }}&gt;($cutie, $from?) is export { Maybe::Hug.new(:$cutie, :$from) }
-</code></pre>
-<h3 id="t-basic-t">t/basic.t</h3>
-<pre><code class="hljs t">use Test;
-need Cutie;
-use Maybe::Hug;
-
-role HugAllCuties does Cutie {
-  multi method accept-hugs (Any $from) { True }
-}
-role HugNoCuties does Cutie {
-  multi method accept-hugs (Any $from) { False }
-}
-role HugSomeCuties does Cutie {
-  has @.whom;
-  multi method accept-hugs (Cutie $from) { Bool(@.whom.first: {$_ === $from}) }
-}
-role HugSometimes does Cutie {
-  has $.in-the-mood is rw = False;
-  multi method accept-hugs (Any $from) { $.in-the-mood }
-}
-
-my Cutie $alice = "Alice" does HugAllCuties;
-my Cutie $betty = "Betty" does HugNoCuties;
-my Cutie $carol = "Carol" does HugSomeCuties(:whom($alice));
-my Cutie $danielle = "Danielle" does HugSometimes;
-my $elision = "Elision";
-
-plan 12;
-
-my $wants-hugs = {
-  my $msg = "{.cutie} wants hugs{.from ?? " from {.from}" !! "" }";
-  .hugs: { pass $msg }
-  .empathy: { flunk $msg }
-}
-my $wants-empathy = {
-  my $msg = "{.cutie} wants empathy{.from ?? " from {.from}" !! "" }";
-  .hugs: { flunk $msg }
-  .empathy: { pass $msg }
-}
-
-given {{$alice}} { $wants-hugs($_) };
-given $betty ==&gt; {{$alice}} { $wants-hugs($_) }
-given $carol ==&gt; {{$alice}} { $wants-hugs($_) }
-
-given {{$betty}} { $wants-empathy($_) };
-given $alice ==&gt; {{$betty}} { $wants-empathy($_) };
-given $carol ==&gt; {{$betty}} { $wants-empathy($_) };
-
-given {{$carol}} { $wants-empathy($_) };
-given $alice ==&gt; {{$carol}} { $wants-hugs($_) };
-given $betty ==&gt; {{$carol}} { $wants-empathy($_) };
-
-throws-like { {{$elision}} }, X::TypeCheck, "$elision doesn't even";
-
-given {{$danielle}} { $wants-empathy($_) }
-$danielle.in-the-mood = True;
-given {{$danielle}} { $wants-hugs($_) }
-</code></pre>
+<h6 id="user-content-meta-info" class="deep-link"><a href="#meta-info">META.info</a></h6>
+<pre><code class="highlight"><pre class="editor editor-colors"><div class="line"><span class="text"><span>{</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;&#xA0;&#xA0;&quot;name&quot;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;:&#xA0;&quot;Maybe::Hugs&quot;,</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;&#xA0;&#xA0;&quot;version&quot;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;:&#xA0;&quot;1.0.0&quot;,</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;&#xA0;&#xA0;&quot;description&quot;&#xA0;:&#xA0;&quot;Conditional&#xA0;hugging&#xA0;implementation&#xA0;for&#xA0;Perl6&quot;,</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;&#xA0;&#xA0;&quot;provides&quot;&#xA0;&#xA0;&#xA0;&#xA0;:&#xA0;{</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&quot;Maybe::Hug&quot;&#xA0;:&#xA0;&quot;lib/Maybe/Hug.pm&quot;,</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&quot;Cutie&quot;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;:&#xA0;&quot;lib/Cutie.pm&quot;</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;&#xA0;&#xA0;},</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;&#xA0;&#xA0;&quot;author&quot;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;:&#xA0;&quot;Rebecca&#xA0;Turner&quot;,</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;&#xA0;&#xA0;&quot;depends&quot;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;:&#xA0;[],</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;&#xA0;&#xA0;&quot;source-type&quot;&#xA0;:&#xA0;&quot;git&quot;,</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;&#xA0;&#xA0;&quot;source-url&quot;&#xA0;&#xA0;:&#xA0;&quot;git://github.com/zkat/maybe-hugs.git&quot;</span></span></div><div class="line"><span class="text"><span>}</span></span></div><div class="line"><span class="text"><span>&#xA0;</span></span></div></pre></code></pre>
+<h6 id="user-content-lib-cutie-pm" class="deep-link"><a href="#lib-cutie-pm">lib/Cutie.pm</a></h6>
+<pre><code class="highlight"><pre class="editor editor-colors"><div class="line"><span class="source perl"><span>role&#xA0;Cutie&#xA0;{</span></span></div><div class="line"><span class="source perl"><span>&#xA0;&#xA0;multi&#xA0;method&#xA0;accept-hugs&#xA0;(Mu&#xA0;</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>from</span></span><span>)&#xA0;{</span><span class="constant other bareword perl"><span>&#xA0;False&#xA0;</span></span><span>}</span></span></div><div class="line"><span class="source perl"><span>}</span></span></div><div class="line"><span class="source perl"><span>&#xA0;</span></span></div></pre></code></pre>
+<h6 id="user-content-lib-maybe-hug-pm" class="deep-link"><a href="#lib-maybe-hug-pm">lib/Maybe/Hug.pm</a></h6>
+<pre><code class="highlight"><pre class="editor editor-colors"><div class="line"><span class="source perl"><span>class&#xA0;Maybe::Hug&#xA0;{</span></span></div><div class="line"><span class="source perl"><span>&#xA0;&#xA0;has&#xA0;$.cutie&#xA0;where&#xA0;{&#xA0;.can(</span><span class="string quoted single perl"><span class="punctuation string begin perl"><span>&apos;</span></span><span>accept-hugs</span><span class="punctuation string end perl"><span>&apos;</span></span></span><span>)&#xA0;};</span></span></div><div class="line"><span class="source perl"><span>&#xA0;&#xA0;has&#xA0;$.from;</span></span></div><div class="line"><span class="source perl"><span>&#xA0;&#xA0;method&#xA0;hugs(&amp;dothething)&#xA0;{&#xA0;dothething()&#xA0;</span><span class="keyword control perl"><span>if</span></span><span>&#xA0;self&#xA0;}</span></span></div><div class="line"><span class="source perl"><span>&#xA0;&#xA0;method&#xA0;empathy(&amp;dothething)&#xA0;{&#xA0;dothething()&#xA0;</span><span class="keyword control perl"><span>unless</span></span><span>&#xA0;self&#xA0;}</span></span></div><div class="line"><span class="source perl"><span>&#xA0;&#xA0;method&#xA0;by(</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>from</span></span><span>)&#xA0;{&#xA0;Maybe::Hug.new(:$!cutie,&#xA0;:</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>from</span></span><span>)&#xA0;}</span></span></div><div class="line"><span class="source perl"><span>&#xA0;&#xA0;method&#xA0;Bool()&#xA0;{&#xA0;$!cutie.accept-hugs($!from)&#xA0;}</span></span></div><div class="line"><span class="source perl"><span>}</span></span></div><div class="line"><span class="source perl"><span>&#xA0;</span></span></div><div class="line"><span class="source perl"><span class="meta function perl"><span class="storage type perl"><span>sub</span></span><span>&#xA0;</span><span class="entity name function perl"><span>circumfix</span></span></span><span>:&lt;{{&#xA0;}}&gt;(</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>cutie</span></span><span>,&#xA0;</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>from</span></span><span>?)&#xA0;is&#xA0;export&#xA0;{&#xA0;Maybe::Hug.new(:</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>cutie</span></span><span>,&#xA0;:</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>from</span></span><span>)&#xA0;}</span></span></div><div class="line"><span class="source perl"><span>&#xA0;</span></span></div></pre></code></pre>
+<h6 id="user-content-t-basic-t" class="deep-link"><a href="#t-basic-t">t/basic.t</a></h6>
+<pre><code class="highlight"><pre class="editor editor-colors"><div class="line"><span class="source perl"><span class="keyword control perl"><span>use</span></span><span>&#xA0;Test;</span></span></div><div class="line"><span class="source perl"><span>need&#xA0;Cutie;</span></span></div><div class="line"><span class="source perl"><span class="keyword control perl"><span>use</span></span><span>&#xA0;Maybe::Hug;</span></span></div><div class="line"><span class="source perl"><span>&#xA0;</span></span></div><div class="line"><span class="source perl"><span>role&#xA0;HugAllCuties&#xA0;does&#xA0;Cutie&#xA0;{</span></span></div><div class="line"><span class="source perl"><span>&#xA0;&#xA0;multi&#xA0;method&#xA0;accept-hugs&#xA0;(Any&#xA0;</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>from</span></span><span>)&#xA0;{</span><span class="constant other bareword perl"><span>&#xA0;True&#xA0;</span></span><span>}</span></span></div><div class="line"><span class="source perl"><span>}</span></span></div><div class="line"><span class="source perl"><span>role&#xA0;HugNoCuties&#xA0;does&#xA0;Cutie&#xA0;{</span></span></div><div class="line"><span class="source perl"><span>&#xA0;&#xA0;multi&#xA0;method&#xA0;accept-hugs&#xA0;(Any&#xA0;</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>from</span></span><span>)&#xA0;{</span><span class="constant other bareword perl"><span>&#xA0;False&#xA0;</span></span><span>}</span></span></div><div class="line"><span class="source perl"><span>}</span></span></div><div class="line"><span class="source perl"><span>role&#xA0;HugSomeCuties&#xA0;does&#xA0;Cutie&#xA0;{</span></span></div><div class="line"><span class="source perl"><span>&#xA0;&#xA0;has&#xA0;@.whom;</span></span></div><div class="line"><span class="source perl"><span>&#xA0;&#xA0;multi&#xA0;method&#xA0;accept-hugs&#xA0;(Cutie&#xA0;</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>from</span></span><span>)&#xA0;{&#xA0;Bool(@.whom.first:&#xA0;{</span><span class="variable other perl"><span class="punctuation variable perl"><span>$</span></span><span>_</span></span><span>&#xA0;===&#xA0;</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>from</span></span><span>})&#xA0;}</span></span></div><div class="line"><span class="source perl"><span>}</span></span></div><div class="line"><span class="source perl"><span>role&#xA0;HugSometimes&#xA0;does&#xA0;Cutie&#xA0;{</span></span></div><div class="line"><span class="source perl"><span>&#xA0;&#xA0;has&#xA0;$.in-the-mood&#xA0;is&#xA0;rw&#xA0;=&#xA0;False;</span></span></div><div class="line"><span class="source perl"><span>&#xA0;&#xA0;multi&#xA0;method&#xA0;accept-hugs&#xA0;(Any&#xA0;</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>from</span></span><span>)&#xA0;{&#xA0;$.in-the-mood&#xA0;}</span></span></div><div class="line"><span class="source perl"><span>}</span></span></div><div class="line"><span class="source perl"><span>&#xA0;</span></span></div><div class="line"><span class="source perl"><span class="storage modifier perl"><span>my</span></span><span>&#xA0;Cutie&#xA0;</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>alice</span></span><span>&#xA0;=&#xA0;</span><span class="string quoted double perl"><span class="punctuation string begin perl"><span>&quot;</span></span><span>Alice</span><span class="punctuation string end perl"><span>&quot;</span></span></span><span>&#xA0;does&#xA0;HugAllCuties;</span></span></div><div class="line"><span class="source perl"><span class="storage modifier perl"><span>my</span></span><span>&#xA0;Cutie&#xA0;</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>betty</span></span><span>&#xA0;=&#xA0;</span><span class="string quoted double perl"><span class="punctuation string begin perl"><span>&quot;</span></span><span>Betty</span><span class="punctuation string end perl"><span>&quot;</span></span></span><span>&#xA0;does&#xA0;HugNoCuties;</span></span></div><div class="line"><span class="source perl"><span class="storage modifier perl"><span>my</span></span><span>&#xA0;Cutie&#xA0;</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>carol</span></span><span>&#xA0;=&#xA0;</span><span class="string quoted double perl"><span class="punctuation string begin perl"><span>&quot;</span></span><span>Carol</span><span class="punctuation string end perl"><span>&quot;</span></span></span><span>&#xA0;does&#xA0;HugSomeCuties(:whom(</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>alice</span></span><span>));</span></span></div><div class="line"><span class="source perl"><span class="storage modifier perl"><span>my</span></span><span>&#xA0;Cutie&#xA0;</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>danielle</span></span><span>&#xA0;=&#xA0;</span><span class="string quoted double perl"><span class="punctuation string begin perl"><span>&quot;</span></span><span>Danielle</span><span class="punctuation string end perl"><span>&quot;</span></span></span><span>&#xA0;does&#xA0;HugSometimes;</span></span></div><div class="line"><span class="source perl"><span class="storage modifier perl"><span>my</span></span><span>&#xA0;</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>elision</span></span><span>&#xA0;=&#xA0;</span><span class="string quoted double perl"><span class="punctuation string begin perl"><span>&quot;</span></span><span>Elision</span><span class="punctuation string end perl"><span>&quot;</span></span></span><span>;</span></span></div><div class="line"><span class="source perl"><span>&#xA0;</span></span></div><div class="line"><span class="source perl"><span>plan&#xA0;12;</span></span></div><div class="line"><span class="source perl"><span>&#xA0;</span></span></div><div class="line"><span class="source perl"><span class="storage modifier perl"><span>my</span></span><span>&#xA0;</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>wants</span></span><span>-hugs&#xA0;=&#xA0;{</span></span></div><div class="line"><span class="source perl"><span>&#xA0;&#xA0;</span><span class="storage modifier perl"><span>my</span></span><span>&#xA0;</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>msg</span></span><span>&#xA0;=&#xA0;</span><span class="string quoted double perl"><span class="punctuation string begin perl"><span>&quot;</span></span><span>{.cutie}&#xA0;wants&#xA0;hugs{.from&#xA0;??&#xA0;</span><span class="punctuation string end perl"><span>&quot;</span></span></span><span>&#xA0;from&#xA0;{.from}</span><span class="string quoted double perl"><span class="punctuation string begin perl"><span>&quot;</span></span><span>&#xA0;!!&#xA0;</span><span class="punctuation string end perl"><span>&quot;</span></span><span class="punctuation string begin perl"><span>&quot;</span></span><span>&#xA0;}</span><span class="punctuation string end perl"><span>&quot;</span></span></span><span>;</span></span></div><div class="line"><span class="source perl"><span>&#xA0;&#xA0;.hugs:&#xA0;{&#xA0;pass&#xA0;</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>msg</span></span><span>&#xA0;}</span></span></div><div class="line"><span class="source perl"><span>&#xA0;&#xA0;.empathy:&#xA0;{&#xA0;flunk&#xA0;</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>msg</span></span><span>&#xA0;}</span></span></div><div class="line"><span class="source perl"><span>}</span></span></div><div class="line"><span class="source perl"><span class="storage modifier perl"><span>my</span></span><span>&#xA0;</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>wants</span></span><span>-empathy&#xA0;=&#xA0;{</span></span></div><div class="line"><span class="source perl"><span>&#xA0;&#xA0;</span><span class="storage modifier perl"><span>my</span></span><span>&#xA0;</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>msg</span></span><span>&#xA0;=&#xA0;</span><span class="string quoted double perl"><span class="punctuation string begin perl"><span>&quot;</span></span><span>{.cutie}&#xA0;wants&#xA0;empathy{.from&#xA0;??&#xA0;</span><span class="punctuation string end perl"><span>&quot;</span></span></span><span>&#xA0;from&#xA0;{.from}</span><span class="string quoted double perl"><span class="punctuation string begin perl"><span>&quot;</span></span><span>&#xA0;!!&#xA0;</span><span class="punctuation string end perl"><span>&quot;</span></span><span class="punctuation string begin perl"><span>&quot;</span></span><span>&#xA0;}</span><span class="punctuation string end perl"><span>&quot;</span></span></span><span>;</span></span></div><div class="line"><span class="source perl"><span>&#xA0;&#xA0;.hugs:&#xA0;{&#xA0;flunk&#xA0;</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>msg</span></span><span>&#xA0;}</span></span></div><div class="line"><span class="source perl"><span>&#xA0;&#xA0;.empathy:&#xA0;{&#xA0;pass&#xA0;</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>msg</span></span><span>&#xA0;}</span></span></div><div class="line"><span class="source perl"><span>}</span></span></div><div class="line"><span class="source perl"><span>&#xA0;</span></span></div><div class="line"><span class="source perl"><span>given&#xA0;{{</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>alice</span></span><span>}}&#xA0;{&#xA0;</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>wants</span></span><span>-hugs(</span><span class="variable other perl"><span class="punctuation variable perl"><span>$</span></span><span>_</span></span><span>)&#xA0;};</span></span></div><div class="line"><span class="source perl"><span>given&#xA0;</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>betty</span></span><span>&#xA0;==&gt;&#xA0;{{</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>alice</span></span><span>}}&#xA0;{&#xA0;</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>wants</span></span><span>-hugs(</span><span class="variable other perl"><span class="punctuation variable perl"><span>$</span></span><span>_</span></span><span>)&#xA0;}</span></span></div><div class="line"><span class="source perl"><span>given&#xA0;</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>carol</span></span><span>&#xA0;==&gt;&#xA0;{{</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>alice</span></span><span>}}&#xA0;{&#xA0;</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>wants</span></span><span>-hugs(</span><span class="variable other perl"><span class="punctuation variable perl"><span>$</span></span><span>_</span></span><span>)&#xA0;}</span></span></div><div class="line"><span class="source perl"><span>&#xA0;</span></span></div><div class="line"><span class="source perl"><span>given&#xA0;{{</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>betty</span></span><span>}}&#xA0;{&#xA0;</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>wants</span></span><span>-empathy(</span><span class="variable other perl"><span class="punctuation variable perl"><span>$</span></span><span>_</span></span><span>)&#xA0;};</span></span></div><div class="line"><span class="source perl"><span>given&#xA0;</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>alice</span></span><span>&#xA0;==&gt;&#xA0;{{</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>betty</span></span><span>}}&#xA0;{&#xA0;</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>wants</span></span><span>-empathy(</span><span class="variable other perl"><span class="punctuation variable perl"><span>$</span></span><span>_</span></span><span>)&#xA0;};</span></span></div><div class="line"><span class="source perl"><span>given&#xA0;</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>carol</span></span><span>&#xA0;==&gt;&#xA0;{{</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>betty</span></span><span>}}&#xA0;{&#xA0;</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>wants</span></span><span>-empathy(</span><span class="variable other perl"><span class="punctuation variable perl"><span>$</span></span><span>_</span></span><span>)&#xA0;};</span></span></div><div class="line"><span class="source perl"><span>&#xA0;</span></span></div><div class="line"><span class="source perl"><span>given&#xA0;{{</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>carol</span></span><span>}}&#xA0;{&#xA0;</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>wants</span></span><span>-empathy(</span><span class="variable other perl"><span class="punctuation variable perl"><span>$</span></span><span>_</span></span><span>)&#xA0;};</span></span></div><div class="line"><span class="source perl"><span>given&#xA0;</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>alice</span></span><span>&#xA0;==&gt;&#xA0;{{</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>carol</span></span><span>}}&#xA0;{&#xA0;</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>wants</span></span><span>-hugs(</span><span class="variable other perl"><span class="punctuation variable perl"><span>$</span></span><span>_</span></span><span>)&#xA0;};</span></span></div><div class="line"><span class="source perl"><span>given&#xA0;</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>betty</span></span><span>&#xA0;==&gt;&#xA0;{{</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>carol</span></span><span>}}&#xA0;{&#xA0;</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>wants</span></span><span>-empathy(</span><span class="variable other perl"><span class="punctuation variable perl"><span>$</span></span><span>_</span></span><span>)&#xA0;};</span></span></div><div class="line"><span class="source perl"><span>&#xA0;</span></span></div><div class="line"><span class="source perl"><span>throws-like&#xA0;{&#xA0;{{</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>elision</span></span><span>}}&#xA0;},&#xA0;X::TypeCheck,&#xA0;</span><span class="string quoted double perl"><span class="punctuation string begin perl"><span>&quot;</span></span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>elision</span></span><span>&#xA0;doesn&apos;t&#xA0;even</span><span class="punctuation string end perl"><span>&quot;</span></span></span><span>;</span></span></div><div class="line"><span class="source perl"><span>&#xA0;</span></span></div><div class="line"><span class="source perl"><span>given&#xA0;{{</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>danielle</span></span><span>}}&#xA0;{&#xA0;</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>wants</span></span><span>-empathy(</span><span class="variable other perl"><span class="punctuation variable perl"><span>$</span></span><span>_</span></span><span>)&#xA0;}</span></span></div><div class="line"><span class="source perl"><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>danielle</span></span><span>.in-the-mood&#xA0;=&#xA0;True;</span></span></div><div class="line"><span class="source perl"><span>given&#xA0;{{</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>danielle</span></span><span>}}&#xA0;{&#xA0;</span><span class="variable other readwrite global perl"><span class="punctuation variable perl"><span>$</span></span><span>wants</span></span><span>-hugs(</span><span class="variable other perl"><span class="punctuation variable perl"><span>$</span></span><span>_</span></span><span>)&#xA0;}</span></span></div><div class="line"><span class="source perl"><span>&#xA0;</span></span></div></pre></code></pre>
 
     </main>
-    <footer>
-        <a href="https://github.com/zkat/maybe-hugs">
-          <span class="mega-octicon octicon-mark-github"></span>
-        </a>
-        <a href="http://creativecommons.org/publicdomain/zero/1.0/">
-          <img src="https://camo.githubusercontent.com/c5160f944848828fa33126d9a697e9abe43ea98f/687474703a2f2f692e6372656174697665636f6d6d6f6e732e6f72672f702f7a65726f2f312e302f38387833312e706e67"/>
-        </a>
-    </footer>
   </div>
+  <footer>
+    <a href="https://github.com/zkat/maybe-hugs">
+      <span class="mega-octicon octicon-mark-github"></span>
+    </a>
+    <a href="http://creativecommons.org/publicdomain/zero/1.0/">
+      <img src="https://camo.githubusercontent.com/c5160f944848828fa33126d9a697e9abe43ea98f/687474703a2f2f692e6372656174697665636f6d6d6f6e732e6f72672f702f7a65726f2f312e302f38387833312e706e67"/>
+    </a>
+</footer>
 </body>

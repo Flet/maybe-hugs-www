@@ -5,11 +5,10 @@
 <link rel="stylesheet" type="text/css" href="main.css" />
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/tomorrow-night-eighties.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
-<body>
-  <div id="container"><banner>
-  <a href="index.html">maybehug.me</a>
-</banner>
-  <nav>
+<body><header>
+  <a href="index.html">maybe-hugs</a>
+</header>
+<nav>
   <a href="bash.html">bash</a>
   <a href="c.html">c</a>
   <a href="cplusplus.html">c++</a>
@@ -28,41 +27,21 @@
   <a href="rust.html">rust</a>
   <a href="scala.html">scala</a>
 </nav>
+  <div id="container">
+
     <main>
-      <h2 id="hy">hy</h2>
-<h3 id="maybehug-hy">MaybeHug.hy</h3>
-<pre><code class="hljs hy">(defclass MaybeHug [object]
-  [[--init-- (fn [self cutie]
-    (setv self._cutie cutie)
-    None)]
-  [hug (fn [self]
-    (if (callable (getattr self._cutie &quot;hug&quot; None))
-      (.hug self._cutie)
-      (print &quot;Cutie prefers emphaty! &quot;)))]])
-
-(defclass Huggable [MaybeHug]
-  [[hug (fn [self]
-    (print &quot;HUG!&quot;))]])
-
-(defclass Empathic [MaybeHug] [])
-
-(do
-  (setv kate (Empathic &quot;kate&quot;))
-  (setv john (Huggable &quot;john&quot;))
-
-(do
-  (.hug kate)
-  (.hug john))
-</code></pre>
+      <h2 id="user-content-hy" class="deep-link"><a href="#hy">hy</a></h2>
+<h6 id="user-content-maybehug-hy" class="deep-link"><a href="#maybehug-hy">MaybeHug.hy</a></h6>
+<pre><code class="highlight"><pre class="editor editor-colors"><div class="line"><span class="text"><span>(defclass&#xA0;MaybeHug&#xA0;[object]</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;[[--init--&#xA0;(fn&#xA0;[self&#xA0;cutie]</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;&#xA0;&#xA0;(setv&#xA0;self._cutie&#xA0;cutie)</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;&#xA0;&#xA0;None)]</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;[hug&#xA0;(fn&#xA0;[self]</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;&#xA0;&#xA0;(if&#xA0;(callable&#xA0;(getattr&#xA0;self._cutie&#xA0;&quot;hug&quot;&#xA0;None))</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;(.hug&#xA0;self._cutie)</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;(print&#xA0;&quot;Cutie&#xA0;prefers&#xA0;emphaty!&#xA0;&quot;)))]])</span></span></div><div class="line"><span class="text"><span>&#xA0;</span></span></div><div class="line"><span class="text"><span>(defclass&#xA0;Huggable&#xA0;[MaybeHug]</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;[[hug&#xA0;(fn&#xA0;[self]</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;&#xA0;&#xA0;(print&#xA0;&quot;HUG!&quot;))]])</span></span></div><div class="line"><span class="text"><span>&#xA0;</span></span></div><div class="line"><span class="text"><span>(defclass&#xA0;Empathic&#xA0;[MaybeHug]&#xA0;[])</span></span></div><div class="line"><span class="text"><span>&#xA0;</span></span></div><div class="line"><span class="text"><span>(do</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;(setv&#xA0;kate&#xA0;(Empathic&#xA0;&quot;kate&quot;))</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;(setv&#xA0;john&#xA0;(Huggable&#xA0;&quot;john&quot;))</span></span></div><div class="line"><span class="text"><span>&#xA0;</span></span></div><div class="line"><span class="text"><span>(do</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;(.hug&#xA0;kate)</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;(.hug&#xA0;john))</span></span></div><div class="line"><span class="text"><span>&#xA0;</span></span></div></pre></code></pre>
 
     </main>
-    <footer>
-        <a href="https://github.com/zkat/maybe-hugs">
-          <span class="mega-octicon octicon-mark-github"></span>
-        </a>
-        <a href="http://creativecommons.org/publicdomain/zero/1.0/">
-          <img src="https://camo.githubusercontent.com/c5160f944848828fa33126d9a697e9abe43ea98f/687474703a2f2f692e6372656174697665636f6d6d6f6e732e6f72672f702f7a65726f2f312e302f38387833312e706e67"/>
-        </a>
-    </footer>
   </div>
+  <footer>
+    <a href="https://github.com/zkat/maybe-hugs">
+      <span class="mega-octicon octicon-mark-github"></span>
+    </a>
+    <a href="http://creativecommons.org/publicdomain/zero/1.0/">
+      <img src="https://camo.githubusercontent.com/c5160f944848828fa33126d9a697e9abe43ea98f/687474703a2f2f692e6372656174697665636f6d6d6f6e732e6f72672f702f7a65726f2f312e302f38387833312e706e67"/>
+    </a>
+</footer>
 </body>

@@ -3,20 +3,13 @@ module.exports = writeHtml;
 var extend = require('xtend');
 var fs = require('fs');
 var hb = require('handlebars');
-var marked = require('marked');
 var path = require('path');
 var slug = require('slugg');
-var highlightjs = require('highlight.js');
 
-marked.setOptions({
-  highlight: function (code, lang) {
-    return highlightjs.highlightAuto(code, [ lang ]).value;
-  },
-  langPrefix: 'hljs ' // le sigh: https://github.com/chjj/marked/pull/418
-});
+var marky = require('marky-markdown');
 
 hb.registerHelper('markdown', function (data) {
-  return new hb.SafeString(marked(data));
+  return new hb.SafeString(marky(data).html());
 });
 
 var toc = fs.readFileSync(path.join('template', 'toc.html'), {encoding: 'utf8'});
@@ -34,7 +27,6 @@ function writeHtml (passedOpts) {
   var output = genPage(opts);
 
   var name = customSlug(opts.name) + '.html';
-  console.log('writing ' + name);
   fs.writeFileSync(path.join('build', name), output, {encoding: 'utf8'});
 }
 

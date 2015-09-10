@@ -5,11 +5,10 @@
 <link rel="stylesheet" type="text/css" href="main.css" />
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/tomorrow-night-eighties.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
-<body>
-  <div id="container"><banner>
-  <a href="index.html">maybehug.me</a>
-</banner>
-  <nav>
+<body><header>
+  <a href="index.html">maybe-hugs</a>
+</header>
+<nav>
   <a href="bash.html">bash</a>
   <a href="c.html">c</a>
   <a href="cplusplus.html">c++</a>
@@ -28,68 +27,23 @@
   <a href="rust.html">rust</a>
   <a href="scala.html">scala</a>
 </nav>
+  <div id="container">
+
     <main>
-      <h2 id="ruby">ruby</h2>
-<h3 id="maybe_hugs-rb">maybe_hugs.rb</h3>
-<pre><code class="hljs rb"><span class="hljs-comment"># Maybe hug a cutie</span>
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MaybeHug</span></span>
-  <span class="hljs-keyword">attr_reader</span> <span class="hljs-symbol">:cutie</span>
-
-  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">initialize</span><span class="hljs-params">(cutie)</span></span>
-    <span class="hljs-variable">@cutie</span> = cutie
-  <span class="hljs-keyword">end</span>
-
-  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">hug</span></span>
-    <span class="hljs-keyword">if</span> cutie.respond_to? <span class="hljs-symbol">:hug</span>
-      cutie.hug
-    <span class="hljs-keyword">else</span>
-      <span class="hljs-string">'Cutie prefers empathy!'</span>
-    <span class="hljs-keyword">end</span>
-  <span class="hljs-keyword">end</span>
-<span class="hljs-keyword">end</span>
-</code></pre>
-<h3 id="maybe_hugs_test-rb">maybe_hugs_test.rb</h3>
-<pre><code class="hljs rb"><span class="hljs-keyword">require</span> <span class="hljs-string">'minitest/autorun'</span>
-require_relative <span class="hljs-string">'./maybe_hugs'</span>
-
-<span class="hljs-comment"># Ensure cuties get hugs</span>
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestMaybeHugs</span> <span class="hljs-inheritance">&lt; <span class="hljs-parent">Minitest::Test</span></span></span>
-  <span class="hljs-comment"># A huggable cutie</span>
-  <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Cutie</span></span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">hug</span></span>
-      <span class="hljs-string">'HUG!'</span>
-    <span class="hljs-keyword">end</span>
-  <span class="hljs-keyword">end</span>
-
-  <span class="hljs-comment"># A non-huggleable cutie</span>
-  <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NoHugs</span></span>
-  <span class="hljs-keyword">end</span>
-
-  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">setup</span></span>
-    <span class="hljs-variable">@huggable_cutie</span> = <span class="hljs-constant">Cutie</span>.new
-    <span class="hljs-variable">@empathy_cutie</span> = <span class="hljs-constant">NoHugs</span>.new
-  <span class="hljs-keyword">end</span>
-
-  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_cuties_get_hugs</span></span>
-    maybe = <span class="hljs-constant">MaybeHug</span>.new(<span class="hljs-variable">@huggable_cutie</span>)
-    assert_equal <span class="hljs-string">'HUG!'</span>, maybe.hug
-  <span class="hljs-keyword">end</span>
-
-  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_cuties_get_empathy</span></span>
-    maybe = <span class="hljs-constant">MaybeHug</span>.new(<span class="hljs-variable">@empathy_cutie</span>)
-    assert_equal <span class="hljs-string">'Cutie prefers empathy!'</span>, maybe.hug
-  <span class="hljs-keyword">end</span>
-<span class="hljs-keyword">end</span>
-</code></pre>
+      <h2 id="user-content-ruby" class="deep-link"><a href="#ruby">ruby</a></h2>
+<h6 id="user-content-maybe-hugs-rb" class="deep-link"><a href="#maybe-hugs-rb">maybe_hugs.rb</a></h6>
+<pre><code class="highlight"><pre class="editor editor-colors"><div class="line"><span class="source ruby"><span class="comment line number-sign ruby"><span class="punctuation comment ruby"><span>#</span></span><span>&#xA0;Maybe&#xA0;hug&#xA0;a&#xA0;cutie</span><span>&#xA0;</span></span></span></div><div class="line"><span class="source ruby"><span class="meta class ruby"><span class="keyword control class ruby"><span>class</span></span><span>&#xA0;</span><span class="entity name type class ruby"><span>MaybeHug</span></span></span></span></div><div class="line"><span class="source ruby"><span>&#xA0;&#xA0;</span><span class="keyword other special-method ruby"><span>attr_reader</span></span><span>&#xA0;</span><span class="constant other symbol ruby"><span class="punctuation constant ruby"><span>:</span></span><span>cutie</span></span></span></div><div class="line"><span class="source ruby"><span>&#xA0;</span></span></div><div class="line"><span class="source ruby"><span>&#xA0;&#xA0;</span><span class="meta function method with-arguments ruby"><span class="keyword control def ruby"><span>def</span></span><span>&#xA0;</span><span class="entity name function ruby"><span>initialize</span></span><span class="punctuation ruby"><span>(</span></span><span class="variable function ruby"><span>cutie</span></span><span class="punctuation ruby"><span>)</span></span></span></span></div><div class="line"><span class="source ruby"><span>&#xA0;&#xA0;&#xA0;&#xA0;</span><span class="variable other readwrite instance ruby"><span class="punctuation variable ruby"><span>@</span></span><span>cutie</span></span><span>&#xA0;</span><span class="keyword operator assignment ruby"><span>=</span></span><span>&#xA0;cutie</span></span></div><div class="line"><span class="source ruby"><span>&#xA0;&#xA0;</span><span class="keyword control ruby"><span>end</span></span></span></div><div class="line"><span class="source ruby"><span>&#xA0;</span></span></div><div class="line"><span class="source ruby"><span>&#xA0;&#xA0;</span><span class="meta function method without-arguments ruby"><span class="keyword control def ruby"><span>def</span></span><span>&#xA0;</span><span class="entity name function ruby"><span>hug</span></span></span></span></div><div class="line"><span class="source ruby"><span>&#xA0;&#xA0;&#xA0;&#xA0;</span><span class="keyword control ruby"><span>if</span></span><span>&#xA0;cutie</span><span class="punctuation separator method ruby"><span>.</span></span><span>respond_to?&#xA0;</span><span class="constant other symbol ruby"><span class="punctuation constant ruby"><span>:</span></span><span>hug</span></span></span></div><div class="line"><span class="source ruby"><span>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;cutie</span><span class="punctuation separator method ruby"><span>.</span></span><span>hug</span></span></div><div class="line"><span class="source ruby"><span>&#xA0;&#xA0;&#xA0;&#xA0;</span><span class="keyword control ruby"><span>else</span></span></span></div><div class="line"><span class="source ruby"><span>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span class="string quoted single ruby"><span class="punctuation string begin ruby"><span>&apos;</span></span><span>Cutie&#xA0;prefers&#xA0;empathy!</span><span class="punctuation string end ruby"><span>&apos;</span></span></span></span></div><div class="line"><span class="source ruby"><span>&#xA0;&#xA0;&#xA0;&#xA0;</span><span class="keyword control ruby"><span>end</span></span></span></div><div class="line"><span class="source ruby"><span>&#xA0;&#xA0;</span><span class="keyword control ruby"><span>end</span></span></span></div><div class="line"><span class="source ruby"><span class="keyword control ruby"><span>end</span></span></span></div><div class="line"><span class="source ruby"><span>&#xA0;</span></span></div></pre></code></pre>
+<h6 id="user-content-maybe-hugs-test-rb" class="deep-link"><a href="#maybe-hugs-test-rb">maybe_hugs_test.rb</a></h6>
+<pre><code class="highlight"><pre class="editor editor-colors"><div class="line"><span class="source ruby"><span class="meta require ruby"><span class="keyword other special-method ruby"><span>require</span></span><span>&#xA0;</span><span class="string quoted single ruby"><span class="punctuation string begin ruby"><span>&apos;</span></span><span>minitest/autorun</span><span class="punctuation string end ruby"><span>&apos;</span></span></span></span></span></div><div class="line"><span class="source ruby"><span class="meta require ruby"><span class="keyword other special-method ruby"><span>require_relative</span></span><span>&#xA0;</span><span class="string quoted single ruby"><span class="punctuation string begin ruby"><span>&apos;</span></span><span>./maybe_hugs</span><span class="punctuation string end ruby"><span>&apos;</span></span></span></span></span></div><div class="line"><span class="source ruby"><span>&#xA0;</span></span></div><div class="line"><span class="source ruby"><span class="comment line number-sign ruby"><span class="punctuation comment ruby"><span>#</span></span><span>&#xA0;Ensure&#xA0;cuties&#xA0;get&#xA0;hugs</span><span>&#xA0;</span></span></span></div><div class="line"><span class="source ruby"><span class="meta class ruby"><span class="keyword control class ruby"><span>class</span></span><span>&#xA0;</span><span class="entity name type class ruby"><span>TestMaybeHugs</span><span class="entity other ruby"><span>&#xA0;</span><span class="punctuation separator ruby"><span>&lt;</span></span><span>&#xA0;Minitest::Test</span></span></span></span></span></div><div class="line"><span class="source ruby"><span class="punctuation comment ruby"><span>&#xA0;&#xA0;</span></span><span class="comment line number-sign ruby"><span class="punctuation comment ruby"><span>#</span></span><span>&#xA0;A&#xA0;huggable&#xA0;cutie</span><span>&#xA0;</span></span></span></div><div class="line"><span class="source ruby"><span class="meta class ruby"><span>&#xA0;&#xA0;</span><span class="keyword control class ruby"><span>class</span></span><span>&#xA0;</span><span class="entity name type class ruby"><span>Cutie</span></span></span></span></div><div class="line"><span class="source ruby"><span>&#xA0;&#xA0;&#xA0;&#xA0;</span><span class="meta function method without-arguments ruby"><span class="keyword control def ruby"><span>def</span></span><span>&#xA0;</span><span class="entity name function ruby"><span>hug</span></span></span></span></div><div class="line"><span class="source ruby"><span>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span class="string quoted single ruby"><span class="punctuation string begin ruby"><span>&apos;</span></span><span>HUG!</span><span class="punctuation string end ruby"><span>&apos;</span></span></span></span></div><div class="line"><span class="source ruby"><span>&#xA0;&#xA0;&#xA0;&#xA0;</span><span class="keyword control ruby"><span>end</span></span></span></div><div class="line"><span class="source ruby"><span>&#xA0;&#xA0;</span><span class="keyword control ruby"><span>end</span></span></span></div><div class="line"><span class="source ruby"><span>&#xA0;</span></span></div><div class="line"><span class="source ruby"><span class="punctuation comment ruby"><span>&#xA0;&#xA0;</span></span><span class="comment line number-sign ruby"><span class="punctuation comment ruby"><span>#</span></span><span>&#xA0;A&#xA0;non-huggleable&#xA0;cutie</span><span>&#xA0;</span></span></span></div><div class="line"><span class="source ruby"><span class="meta class ruby"><span>&#xA0;&#xA0;</span><span class="keyword control class ruby"><span>class</span></span><span>&#xA0;</span><span class="entity name type class ruby"><span>NoHugs</span></span></span></span></div><div class="line"><span class="source ruby"><span>&#xA0;&#xA0;</span><span class="keyword control ruby"><span>end</span></span></span></div><div class="line"><span class="source ruby"><span>&#xA0;</span></span></div><div class="line"><span class="source ruby"><span>&#xA0;&#xA0;</span><span class="meta function method without-arguments ruby"><span class="keyword control def ruby"><span>def</span></span><span>&#xA0;</span><span class="entity name function ruby"><span>setup</span></span></span></span></div><div class="line"><span class="source ruby"><span>&#xA0;&#xA0;&#xA0;&#xA0;</span><span class="variable other readwrite instance ruby"><span class="punctuation variable ruby"><span>@</span></span><span>huggable_cutie</span></span><span>&#xA0;</span><span class="keyword operator assignment ruby"><span>=</span></span><span>&#xA0;</span><span class="support class ruby"><span>Cutie</span></span><span class="punctuation separator method ruby"><span>.</span></span><span class="keyword other special-method ruby"><span>new</span></span></span></div><div class="line"><span class="source ruby"><span>&#xA0;&#xA0;&#xA0;&#xA0;</span><span class="variable other readwrite instance ruby"><span class="punctuation variable ruby"><span>@</span></span><span>empathy_cutie</span></span><span>&#xA0;</span><span class="keyword operator assignment ruby"><span>=</span></span><span>&#xA0;</span><span class="support class ruby"><span>NoHugs</span></span><span class="punctuation separator method ruby"><span>.</span></span><span class="keyword other special-method ruby"><span>new</span></span></span></div><div class="line"><span class="source ruby"><span>&#xA0;&#xA0;</span><span class="keyword control ruby"><span>end</span></span></span></div><div class="line"><span class="source ruby"><span>&#xA0;</span></span></div><div class="line"><span class="source ruby"><span>&#xA0;&#xA0;</span><span class="meta function method without-arguments ruby"><span class="keyword control def ruby"><span>def</span></span><span>&#xA0;</span><span class="entity name function ruby"><span>test_cuties_get_hugs</span></span></span></span></div><div class="line"><span class="source ruby"><span>&#xA0;&#xA0;&#xA0;&#xA0;maybe&#xA0;</span><span class="keyword operator assignment ruby"><span>=</span></span><span>&#xA0;</span><span class="support class ruby"><span>MaybeHug</span></span><span class="punctuation separator method ruby"><span>.</span></span><span class="keyword other special-method ruby"><span>new</span></span><span class="punctuation section function ruby"><span>(</span></span><span class="variable other readwrite instance ruby"><span class="punctuation variable ruby"><span>@</span></span><span>huggable_cutie</span></span><span class="punctuation section function ruby"><span>)</span></span></span></div><div class="line"><span class="source ruby"><span>&#xA0;&#xA0;&#xA0;&#xA0;assert_equal&#xA0;</span><span class="string quoted single ruby"><span class="punctuation string begin ruby"><span>&apos;</span></span><span>HUG!</span><span class="punctuation string end ruby"><span>&apos;</span></span></span><span class="punctuation separator object ruby"><span>,</span></span><span>&#xA0;maybe</span><span class="punctuation separator method ruby"><span>.</span></span><span>hug</span></span></div><div class="line"><span class="source ruby"><span>&#xA0;&#xA0;</span><span class="keyword control ruby"><span>end</span></span></span></div><div class="line"><span class="source ruby"><span>&#xA0;</span></span></div><div class="line"><span class="source ruby"><span>&#xA0;&#xA0;</span><span class="meta function method without-arguments ruby"><span class="keyword control def ruby"><span>def</span></span><span>&#xA0;</span><span class="entity name function ruby"><span>test_cuties_get_empathy</span></span></span></span></div><div class="line"><span class="source ruby"><span>&#xA0;&#xA0;&#xA0;&#xA0;maybe&#xA0;</span><span class="keyword operator assignment ruby"><span>=</span></span><span>&#xA0;</span><span class="support class ruby"><span>MaybeHug</span></span><span class="punctuation separator method ruby"><span>.</span></span><span class="keyword other special-method ruby"><span>new</span></span><span class="punctuation section function ruby"><span>(</span></span><span class="variable other readwrite instance ruby"><span class="punctuation variable ruby"><span>@</span></span><span>empathy_cutie</span></span><span class="punctuation section function ruby"><span>)</span></span></span></div><div class="line"><span class="source ruby"><span>&#xA0;&#xA0;&#xA0;&#xA0;assert_equal&#xA0;</span><span class="string quoted single ruby"><span class="punctuation string begin ruby"><span>&apos;</span></span><span>Cutie&#xA0;prefers&#xA0;empathy!</span><span class="punctuation string end ruby"><span>&apos;</span></span></span><span class="punctuation separator object ruby"><span>,</span></span><span>&#xA0;maybe</span><span class="punctuation separator method ruby"><span>.</span></span><span>hug</span></span></div><div class="line"><span class="source ruby"><span>&#xA0;&#xA0;</span><span class="keyword control ruby"><span>end</span></span></span></div><div class="line"><span class="source ruby"><span class="keyword control ruby"><span>end</span></span></span></div><div class="line"><span class="source ruby"><span>&#xA0;</span></span></div></pre></code></pre>
 
     </main>
-    <footer>
-        <a href="https://github.com/zkat/maybe-hugs">
-          <span class="mega-octicon octicon-mark-github"></span>
-        </a>
-        <a href="http://creativecommons.org/publicdomain/zero/1.0/">
-          <img src="https://camo.githubusercontent.com/c5160f944848828fa33126d9a697e9abe43ea98f/687474703a2f2f692e6372656174697665636f6d6d6f6e732e6f72672f702f7a65726f2f312e302f38387833312e706e67"/>
-        </a>
-    </footer>
   </div>
+  <footer>
+    <a href="https://github.com/zkat/maybe-hugs">
+      <span class="mega-octicon octicon-mark-github"></span>
+    </a>
+    <a href="http://creativecommons.org/publicdomain/zero/1.0/">
+      <img src="https://camo.githubusercontent.com/c5160f944848828fa33126d9a697e9abe43ea98f/687474703a2f2f692e6372656174697665636f6d6d6f6e732e6f72672f702f7a65726f2f312e302f38387833312e706e67"/>
+    </a>
+</footer>
 </body>

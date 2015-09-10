@@ -5,11 +5,10 @@
 <link rel="stylesheet" type="text/css" href="main.css" />
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/tomorrow-night-eighties.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
-<body>
-  <div id="container"><banner>
-  <a href="index.html">maybehug.me</a>
-</banner>
-  <nav>
+<body><header>
+  <a href="index.html">maybe-hugs</a>
+</header>
+<nav>
   <a href="bash.html">bash</a>
   <a href="c.html">c</a>
   <a href="cplusplus.html">c++</a>
@@ -28,111 +27,29 @@
   <a href="rust.html">rust</a>
   <a href="scala.html">scala</a>
 </nav>
+  <div id="container">
+
     <main>
-      <h2 id="haskell">haskell</h2>
-<h3 id="setup-hs">Setup.hs</h3>
-<pre><code class="hljs hs"><span class="hljs-import"><span class="hljs-keyword">import</span> Distribution.Simple</span>
-<span class="hljs-title">main</span> = defaultMain
-</code></pre>
-<h3 id="app-main-hs">app/Main.hs</h3>
-<pre><code class="hljs hs"><span class="hljs-module"><span class="hljs-keyword">module</span> Main <span class="hljs-keyword">where</span></span>
-
-<span class="hljs-import"><span class="hljs-keyword">import</span> <span class="hljs-keyword">qualified</span> MaybeHug</span>
-
-<span class="hljs-comment">-- any type can be an instance of Huggable</span>
-<span class="hljs-class"><span class="hljs-keyword">instance</span> <span class="hljs-type">MaybeHug</span>.<span class="hljs-type">Huggable</span> <span class="hljs-type">Int</span> <span class="hljs-keyword">where</span></span>
-  wantsHug n = <span class="hljs-type">True</span>
-
-<span class="hljs-comment">-- a Cutie</span>
-<span class="hljs-typedef"><span class="hljs-keyword">data</span> <span class="hljs-type">Cutie</span> = <span class="hljs-type">Cutie</span> <span class="hljs-container">{ <span class="hljs-title">name</span> :: <span class="hljs-type">String</span>, <span class="hljs-title">wantsHug</span> :: <span class="hljs-type">Bool</span> }</span></span>
-
-<span class="hljs-comment">-- let's make Cutie Huggable</span>
-<span class="hljs-class"><span class="hljs-keyword">instance</span> <span class="hljs-type">MaybeHug</span>.<span class="hljs-type">Huggable</span> <span class="hljs-type">Cutie</span> <span class="hljs-keyword">where</span></span>
-  wantsHug = wantsHug
-
-<span class="hljs-title">main</span> :: <span class="hljs-type">IO</span> ()
-<span class="hljs-title">main</span> = <span class="hljs-keyword">do</span>
-  <span class="hljs-comment">-- hug an Int</span>
-  putStrLn $ <span class="hljs-type">MaybeHug</span>.maybeHug (<span class="hljs-number">3</span>::<span class="hljs-type">Int</span>)
-  <span class="hljs-comment">-- hug a cutie</span>
-  putStrLn $ <span class="hljs-type">MaybeHug</span>.maybeHug $ <span class="hljs-type">Cutie</span> { name = <span class="hljs-string">"Brad"</span>, wantsHug = <span class="hljs-type">True</span> }
-  <span class="hljs-comment">-- this cutie doesn't want hugs</span>
-  putStrLn $ <span class="hljs-type">MaybeHug</span>.maybeHug $ <span class="hljs-type">Cutie</span> { name = <span class="hljs-string">"Jen"</span>, wantsHug = <span class="hljs-type">False</span> }
-</code></pre>
-<h3 id="maybe-hug-cabal">maybe-hug.cabal</h3>
-<pre><code class="hljs cabal">name:                maybe-hug
-version:             0.1.0.0
-synopsis:            Initial project template from stack
-description:         Please see README.md
-homepage:            http://github.com/name/project
-license:             CC0-1.0
-author:              Your name here
-maintainer:          your.address@example.com
--- copyright:
-category:            Web
-build-type:          Simple
--- extra-source-files:
-cabal-version:       &gt;=1.10
-
-library
-  hs-source-dirs:      src
-  exposed-modules:     MaybeHug
-  build-depends:       base &gt;= 4.7 &amp;&amp; &lt; 5
-  default-language:    Haskell2010
-
-executable maybe-hug
-  hs-source-dirs:      app
-  main-is:             Main.hs
-  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
-  build-depends:       base
-                     , maybe-hug
-  default-language:    Haskell2010
-
-test-suite maybe-hug-test
-  type:                exitcode-stdio-1.0
-  hs-source-dirs:      test
-  main-is:             Spec.hs
-  build-depends:       base
-                     , maybe-hug
-  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
-  default-language:    Haskell2010
-
-source-repository head
-  type:     git
-  location: https://github.com/name/project
-</code></pre>
-<h3 id="src-maybehug-hs">src/MaybeHug.hs</h3>
-<pre><code class="hljs hs"><span class="hljs-module"><span class="hljs-keyword">module</span> MaybeHug
-    <span class="hljs-container">( <span class="hljs-type">Huggable</span>,
-      <span class="hljs-title">maybeHug</span>,
-      <span class="hljs-title">wantsHug</span>
-    )</span> <span class="hljs-keyword">where</span></span>
-<span class="hljs-class">
-<span class="hljs-keyword">class</span> <span class="hljs-type">Huggable</span> a <span class="hljs-keyword">where</span></span>
-  wantsHug :: a -&gt; <span class="hljs-type">Bool</span>
-
-<span class="hljs-title">maybeHug</span> :: (<span class="hljs-type">Huggable</span> a) =&gt; a -&gt; <span class="hljs-type">String</span>
-<span class="hljs-title">maybeHug</span> h =
-  <span class="hljs-keyword">if</span> wantsHug h
-    <span class="hljs-keyword">then</span> <span class="hljs-string">"Hug!"</span>
-    <span class="hljs-keyword">else</span> <span class="hljs-string">"Empathy!"</span>
-</code></pre>
-<h3 id="stack-yaml">stack.yaml</h3>
-<pre><code class="hljs yaml">flags: {}
-packages:
-- &#39;.&#39;
-extra-deps: []
-resolver: lts-2.20
-</code></pre>
+      <h2 id="user-content-haskell" class="deep-link"><a href="#haskell">haskell</a></h2>
+<h6 id="user-content-setup-hs" class="deep-link"><a href="#setup-hs">Setup.hs</a></h6>
+<pre><code class="highlight"><pre class="editor editor-colors"><div class="line"><span class="text"><span>import&#xA0;Distribution.Simple</span></span></div><div class="line"><span class="text"><span>main&#xA0;=&#xA0;defaultMain</span></span></div><div class="line"><span class="text"><span>&#xA0;</span></span></div></pre></code></pre>
+<h6 id="user-content-app-main-hs" class="deep-link"><a href="#app-main-hs">app/Main.hs</a></h6>
+<pre><code class="highlight"><pre class="editor editor-colors"><div class="line"><span class="text"><span>module&#xA0;Main&#xA0;where</span></span></div><div class="line"><span class="text"><span>&#xA0;</span></span></div><div class="line"><span class="text"><span>import&#xA0;qualified&#xA0;MaybeHug</span></span></div><div class="line"><span class="text"><span>&#xA0;</span></span></div><div class="line"><span class="text"><span>--&#xA0;any&#xA0;type&#xA0;can&#xA0;be&#xA0;an&#xA0;instance&#xA0;of&#xA0;Huggable</span></span></div><div class="line"><span class="text"><span>instance&#xA0;MaybeHug.Huggable&#xA0;Int&#xA0;where</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;wantsHug&#xA0;n&#xA0;=&#xA0;True</span></span></div><div class="line"><span class="text"><span>&#xA0;</span></span></div><div class="line"><span class="text"><span>--&#xA0;a&#xA0;Cutie</span></span></div><div class="line"><span class="text"><span>data&#xA0;Cutie&#xA0;=&#xA0;Cutie&#xA0;{&#xA0;name&#xA0;::&#xA0;String,&#xA0;wantsHug&#xA0;::&#xA0;Bool&#xA0;}</span></span></div><div class="line"><span class="text"><span>&#xA0;</span></span></div><div class="line"><span class="text"><span>--&#xA0;let&apos;s&#xA0;make&#xA0;Cutie&#xA0;Huggable</span></span></div><div class="line"><span class="text"><span>instance&#xA0;MaybeHug.Huggable&#xA0;Cutie&#xA0;where</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;wantsHug&#xA0;=&#xA0;wantsHug</span></span></div><div class="line"><span class="text"><span>&#xA0;</span></span></div><div class="line"><span class="text"><span>main&#xA0;::&#xA0;IO&#xA0;()</span></span></div><div class="line"><span class="text"><span>main&#xA0;=&#xA0;do</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;--&#xA0;hug&#xA0;an&#xA0;Int</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;putStrLn&#xA0;$&#xA0;MaybeHug.maybeHug&#xA0;(3::Int)</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;--&#xA0;hug&#xA0;a&#xA0;cutie</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;putStrLn&#xA0;$&#xA0;MaybeHug.maybeHug&#xA0;$&#xA0;Cutie&#xA0;{&#xA0;name&#xA0;=&#xA0;&quot;Brad&quot;,&#xA0;wantsHug&#xA0;=&#xA0;True&#xA0;}</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;--&#xA0;this&#xA0;cutie&#xA0;doesn&apos;t&#xA0;want&#xA0;hugs</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;putStrLn&#xA0;$&#xA0;MaybeHug.maybeHug&#xA0;$&#xA0;Cutie&#xA0;{&#xA0;name&#xA0;=&#xA0;&quot;Jen&quot;,&#xA0;wantsHug&#xA0;=&#xA0;False&#xA0;}</span></span></div><div class="line"><span class="text"><span>&#xA0;</span></span></div></pre></code></pre>
+<h6 id="user-content-maybe-hug-cabal" class="deep-link"><a href="#maybe-hug-cabal">maybe-hug.cabal</a></h6>
+<pre><code class="highlight"><pre class="editor editor-colors"><div class="line"><span class="text"><span>name:&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;maybe-hug</span></span></div><div class="line"><span class="text"><span>version:&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;0.1.0.0</span></span></div><div class="line"><span class="text"><span>synopsis:&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;Initial&#xA0;project&#xA0;template&#xA0;from&#xA0;stack</span></span></div><div class="line"><span class="text"><span>description:&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;Please&#xA0;see&#xA0;README.md</span></span></div><div class="line"><span class="text"><span>homepage:&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span class="markup underline link hyperlink"><span>http://github.com/name/project</span></span></span></div><div class="line"><span class="text"><span>license:&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;CC0-1.0</span></span></div><div class="line"><span class="text"><span>author:&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;Your&#xA0;name&#xA0;here</span></span></div><div class="line"><span class="text"><span>maintainer:&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;your.address@example.com</span></span></div><div class="line"><span class="text"><span>--&#xA0;copyright:</span></span></div><div class="line"><span class="text"><span>category:&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;Web</span></span></div><div class="line"><span class="text"><span>build-type:&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;Simple</span></span></div><div class="line"><span class="text"><span>--&#xA0;extra-source-files:</span></span></div><div class="line"><span class="text"><span>cabal-version:&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&gt;=1.10</span></span></div><div class="line"><span class="text"><span>&#xA0;</span></span></div><div class="line"><span class="text"><span>library</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;hs-source-dirs:&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;src</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;exposed-modules:&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;MaybeHug</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;build-depends:&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;base&#xA0;&gt;=&#xA0;4.7&#xA0;&amp;&amp;&#xA0;&lt;&#xA0;5</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;default-language:&#xA0;&#xA0;&#xA0;&#xA0;Haskell2010</span></span></div><div class="line"><span class="text"><span>&#xA0;</span></span></div><div class="line"><span class="text"><span>executable&#xA0;maybe-hug</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;hs-source-dirs:&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;app</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;main-is:&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;Main.hs</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;ghc-options:&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;-threaded&#xA0;-rtsopts&#xA0;-with-rtsopts=-N</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;build-depends:&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;base</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;,&#xA0;maybe-hug</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;default-language:&#xA0;&#xA0;&#xA0;&#xA0;Haskell2010</span></span></div><div class="line"><span class="text"><span>&#xA0;</span></span></div><div class="line"><span class="text"><span>test-suite&#xA0;maybe-hug-test</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;type:&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;exitcode-stdio-1.0</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;hs-source-dirs:&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;test</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;main-is:&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;Spec.hs</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;build-depends:&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;base</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;,&#xA0;maybe-hug</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;ghc-options:&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;-threaded&#xA0;-rtsopts&#xA0;-with-rtsopts=-N</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;default-language:&#xA0;&#xA0;&#xA0;&#xA0;Haskell2010</span></span></div><div class="line"><span class="text"><span>&#xA0;</span></span></div><div class="line"><span class="text"><span>source-repository&#xA0;head</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;type:&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;git</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;location:&#xA0;</span><span class="markup underline link hyperlink"><span>https://github.com/name/project</span></span></span></div><div class="line"><span class="text"><span>&#xA0;</span></span></div></pre></code></pre>
+<h6 id="user-content-src-maybehug-hs" class="deep-link"><a href="#src-maybehug-hs">src/MaybeHug.hs</a></h6>
+<pre><code class="highlight"><pre class="editor editor-colors"><div class="line"><span class="text"><span>module&#xA0;MaybeHug</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;&#xA0;&#xA0;(&#xA0;Huggable,</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;maybeHug,</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;wantsHug</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;&#xA0;&#xA0;)&#xA0;where</span></span></div><div class="line"><span class="text"><span>&#xA0;</span></span></div><div class="line"><span class="text"><span>class&#xA0;Huggable&#xA0;a&#xA0;where</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;wantsHug&#xA0;::&#xA0;a&#xA0;-&gt;&#xA0;Bool</span></span></div><div class="line"><span class="text"><span>&#xA0;</span></span></div><div class="line"><span class="text"><span>maybeHug&#xA0;::&#xA0;(Huggable&#xA0;a)&#xA0;=&gt;&#xA0;a&#xA0;-&gt;&#xA0;String</span></span></div><div class="line"><span class="text"><span>maybeHug&#xA0;h&#xA0;=</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;if&#xA0;wantsHug&#xA0;h</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;&#xA0;&#xA0;then&#xA0;&quot;Hug!&quot;</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;&#xA0;&#xA0;else&#xA0;&quot;Empathy!&quot;</span></span></div><div class="line"><span class="text"><span>&#xA0;</span></span></div></pre></code></pre>
+<h6 id="user-content-stack-yaml" class="deep-link"><a href="#stack-yaml">stack.yaml</a></h6>
+<pre><code class="highlight"><pre class="editor editor-colors"><div class="line"><span class="source yaml"><span class="string unquoted yaml"><span class="entity name tag yaml"><span>flags</span><span class="punctuation separator key-value yaml"><span>:</span></span></span><span>&#xA0;</span><span class="string unquoted yaml"><span>{}</span></span></span></span></div><div class="line"><span class="source yaml"><span class="string unquoted yaml"><span class="entity name tag yaml"><span>packages</span><span class="punctuation separator key-value yaml"><span>:</span></span></span></span></span></div><div class="line"><span class="source yaml"><span class="string unquoted yaml"><span class="punctuation yaml"><span>-</span></span><span>&#xA0;</span><span class="string quoted single yaml"><span class="punctuation string begin yaml"><span>&apos;</span></span><span>.</span><span class="punctuation string end yaml"><span>&apos;</span></span></span></span></span></div><div class="line"><span class="source yaml"><span class="string unquoted yaml"><span class="entity name tag yaml"><span>extra-deps</span><span class="punctuation separator key-value yaml"><span>:</span></span></span><span>&#xA0;</span><span class="string unquoted yaml"><span>[]</span></span></span></span></div><div class="line"><span class="source yaml"><span class="string unquoted yaml"><span class="entity name tag yaml"><span>resolver</span><span class="punctuation separator key-value yaml"><span>:</span></span></span><span>&#xA0;</span><span class="string unquoted yaml"><span>lts-2.20</span></span></span></span></div><div class="line"><span class="source yaml"><span>&#xA0;</span></span></div></pre></code></pre>
 
     </main>
-    <footer>
-        <a href="https://github.com/zkat/maybe-hugs">
-          <span class="mega-octicon octicon-mark-github"></span>
-        </a>
-        <a href="http://creativecommons.org/publicdomain/zero/1.0/">
-          <img src="https://camo.githubusercontent.com/c5160f944848828fa33126d9a697e9abe43ea98f/687474703a2f2f692e6372656174697665636f6d6d6f6e732e6f72672f702f7a65726f2f312e302f38387833312e706e67"/>
-        </a>
-    </footer>
   </div>
+  <footer>
+    <a href="https://github.com/zkat/maybe-hugs">
+      <span class="mega-octicon octicon-mark-github"></span>
+    </a>
+    <a href="http://creativecommons.org/publicdomain/zero/1.0/">
+      <img src="https://camo.githubusercontent.com/c5160f944848828fa33126d9a697e9abe43ea98f/687474703a2f2f692e6372656174697665636f6d6d6f6e732e6f72672f702f7a65726f2f312e302f38387833312e706e67"/>
+    </a>
+</footer>
 </body>

@@ -5,11 +5,10 @@
 <link rel="stylesheet" type="text/css" href="main.css" />
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/tomorrow-night-eighties.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
-<body>
-  <div id="container"><banner>
-  <a href="index.html">maybehug.me</a>
-</banner>
-  <nav>
+<body><header>
+  <a href="index.html">maybe-hugs</a>
+</header>
+<nav>
   <a href="bash.html">bash</a>
   <a href="c.html">c</a>
   <a href="cplusplus.html">c++</a>
@@ -28,63 +27,23 @@
   <a href="rust.html">rust</a>
   <a href="scala.html">scala</a>
 </nav>
+  <div id="container">
+
     <main>
-      <h2 id="go">go</h2>
-<h3 id="maybehug-go">maybehug.go</h3>
-<pre><code class="hljs go"><span class="hljs-keyword">package</span> maybehug
-
-<span class="hljs-comment">// Cutie is someone to hug (or not)</span>
-<span class="hljs-keyword">type</span> Cutie <span class="hljs-keyword">interface</span> {
-    RespondsToHug() <span class="hljs-typename">bool</span>
-}
-
-<span class="hljs-comment">// MaybeHug maybe hugs a cutie</span>
-<span class="hljs-keyword">func</span> MaybeHug(c Cutie) <span class="hljs-typename">string</span> {
-    <span class="hljs-keyword">if</span> c.RespondsToHug() {
-        <span class="hljs-keyword">return</span> <span class="hljs-string">"Hug!"</span>
-    }
-    <span class="hljs-keyword">return</span> <span class="hljs-string">"Empathy!"</span>
-}
-</code></pre>
-<h3 id="maybehug_test-go">maybehug_test.go</h3>
-<pre><code class="hljs go"><span class="hljs-keyword">package</span> maybehug_test
-
-<span class="hljs-keyword">import</span> <span class="hljs-string">"fmt"</span>
-<span class="hljs-keyword">import</span> maybehugs <span class="hljs-string">"github.com/zkat/maybe-hugs/go"</span>
-
-<span class="hljs-keyword">type</span> LovelyCutie <span class="hljs-keyword">struct</span> {
-    wantsHug <span class="hljs-typename">bool</span>
-}
-
-<span class="hljs-keyword">func</span> (c LovelyCutie) RespondsToHug() <span class="hljs-typename">bool</span> {
-    <span class="hljs-keyword">return</span> c.wantsHug
-}
-
-<span class="hljs-keyword">func</span> ExampleMaybeHug() {
-    cutieNotWantingHug := LovelyCutie{
-        wantsHug: <span class="hljs-constant">false</span>,
-    }
-    fmt.Println(maybehugs.MaybeHug(cutieNotWantingHug))
-    <span class="hljs-comment">// Output: Empathy!</span>
-}
-
-<span class="hljs-keyword">func</span> ExampleMaybeHug_second() {
-    cutieWantingHug := LovelyCutie{
-        wantsHug: <span class="hljs-constant">true</span>,
-    }
-    fmt.Println(maybehugs.MaybeHug(cutieWantingHug))
-    <span class="hljs-comment">// Output: Hug!</span>
-}
-</code></pre>
+      <h2 id="user-content-go" class="deep-link"><a href="#go">go</a></h2>
+<h6 id="user-content-maybehug-go" class="deep-link"><a href="#maybehug-go">maybehug.go</a></h6>
+<pre><code class="highlight"><pre class="editor editor-colors"><div class="line"><span class="source go"><span class="keyword directive go"><span>package</span></span><span>&#xA0;</span><span class="variable go"><span>maybehug</span></span></span></div><div class="line"><span class="source go"><span>&#xA0;</span></span></div><div class="line"><span class="source go"><span class="comment line double-slash go"><span class="punctuation comment go"><span>//</span></span><span>&#xA0;Cutie&#xA0;is&#xA0;someone&#xA0;to&#xA0;hug&#xA0;(or&#xA0;not)</span></span></span></div><div class="line"><span class="source go"><span class="keyword go"><span>type</span></span><span>&#xA0;</span><span class="storage type go"><span>Cutie</span></span><span>&#xA0;</span><span class="keyword go"><span>interface</span></span><span>&#xA0;</span><span class="keyword operator go"><span>{</span></span></span></div><div class="line"><span class="source go"><span>&#xA0;&#xA0;&#xA0;&#xA0;</span><span class="support function go"><span>RespondsToHug</span></span><span class="keyword operator go"><span>(</span><span>)</span></span><span>&#xA0;</span><span class="storage type go"><span>bool</span></span></span></div><div class="line"><span class="source go"><span class="keyword operator go"><span>}</span></span></span></div><div class="line"><span class="source go"><span>&#xA0;</span></span></div><div class="line"><span class="source go"><span class="comment line double-slash go"><span class="punctuation comment go"><span>//</span></span><span>&#xA0;MaybeHug&#xA0;maybe&#xA0;hugs&#xA0;a&#xA0;cutie</span></span></span></div><div class="line"><span class="source go"><span class="keyword go"><span>func</span></span><span>&#xA0;</span><span class="support function go"><span>MaybeHug</span></span><span class="keyword operator go"><span>(</span></span><span class="variable go"><span>c</span></span><span>&#xA0;</span><span class="variable go"><span>Cutie</span></span><span class="keyword operator go"><span>)</span></span><span>&#xA0;</span><span class="storage type go"><span>string</span></span><span>&#xA0;</span><span class="keyword operator go"><span>{</span></span></span></div><div class="line"><span class="source go"><span>&#xA0;&#xA0;&#xA0;&#xA0;</span><span class="keyword conditional go"><span>if</span></span><span>&#xA0;</span><span class="variable go"><span>c</span></span><span class="keyword operator punctuation go"><span>.</span></span><span class="support function go"><span>RespondsToHug</span></span><span class="keyword operator go"><span>(</span><span>)</span></span><span>&#xA0;</span><span class="keyword operator go"><span>{</span></span></span></div><div class="line"><span class="source go"><span>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span class="keyword statement go"><span>return</span></span><span>&#xA0;</span><span class="string quoted double go"><span class="punctuation string begin go"><span>&quot;</span></span><span>Hug!</span><span class="punctuation string end go"><span>&quot;</span></span></span></span></div><div class="line"><span class="source go"><span>&#xA0;&#xA0;&#xA0;&#xA0;</span><span class="keyword operator go"><span>}</span></span></span></div><div class="line"><span class="source go"><span>&#xA0;&#xA0;&#xA0;&#xA0;</span><span class="keyword statement go"><span>return</span></span><span>&#xA0;</span><span class="string quoted double go"><span class="punctuation string begin go"><span>&quot;</span></span><span>Empathy!</span><span class="punctuation string end go"><span>&quot;</span></span></span></span></div><div class="line"><span class="source go"><span class="keyword operator go"><span>}</span></span></span></div><div class="line"><span class="source go"><span>&#xA0;</span></span></div></pre></code></pre>
+<h6 id="user-content-maybehug-test-go" class="deep-link"><a href="#maybehug-test-go">maybehug_test.go</a></h6>
+<pre><code class="highlight"><pre class="editor editor-colors"><div class="line"><span class="source go"><span class="keyword directive go"><span>package</span></span><span>&#xA0;</span><span class="variable go"><span>maybehug_test</span></span></span></div><div class="line"><span class="source go"><span>&#xA0;</span></span></div><div class="line"><span class="source go"><span class="keyword directive go"><span>import</span></span><span>&#xA0;</span><span class="string quoted double go"><span class="punctuation string begin go"><span>&quot;</span></span><span>fmt</span><span class="punctuation string end go"><span>&quot;</span></span></span></span></div><div class="line"><span class="source go"><span class="keyword directive go"><span>import</span></span><span>&#xA0;</span><span class="variable go"><span>maybehugs</span></span><span>&#xA0;</span><span class="string quoted double go"><span class="punctuation string begin go"><span>&quot;</span></span><span>github.com/zkat/maybe-hugs/go</span><span class="punctuation string end go"><span>&quot;</span></span></span></span></div><div class="line"><span class="source go"><span>&#xA0;</span></span></div><div class="line"><span class="source go"><span class="keyword go"><span>type</span></span><span>&#xA0;</span><span class="storage type go"><span>LovelyCutie</span></span><span>&#xA0;</span><span class="keyword go"><span>struct</span></span><span>&#xA0;</span><span class="keyword operator go"><span>{</span></span></span></div><div class="line"><span class="source go"><span>&#xA0;&#xA0;&#xA0;&#xA0;</span><span class="variable go"><span>wantsHug</span></span><span>&#xA0;</span><span class="storage type go"><span>bool</span></span></span></div><div class="line"><span class="source go"><span class="keyword operator go"><span>}</span></span></span></div><div class="line"><span class="source go"><span>&#xA0;</span></span></div><div class="line"><span class="source go"><span class="keyword go"><span>func</span></span><span>&#xA0;(c&#xA0;LovelyCutie)&#xA0;</span><span class="support function go"><span>RespondsToHug</span></span><span class="keyword operator go"><span>(</span><span>)</span></span><span>&#xA0;</span><span class="storage type go"><span>bool</span></span><span>&#xA0;</span><span class="keyword operator go"><span>{</span></span></span></div><div class="line"><span class="source go"><span>&#xA0;&#xA0;&#xA0;&#xA0;</span><span class="keyword statement go"><span>return</span></span><span>&#xA0;</span><span class="variable go"><span>c</span></span><span class="keyword operator punctuation go"><span>.</span></span><span class="variable go"><span>wantsHug</span></span></span></div><div class="line"><span class="source go"><span class="keyword operator go"><span>}</span></span></span></div><div class="line"><span class="source go"><span>&#xA0;</span></span></div><div class="line"><span class="source go"><span class="keyword go"><span>func</span></span><span>&#xA0;</span><span class="support function go"><span>ExampleMaybeHug</span></span><span class="keyword operator go"><span>(</span><span>)</span></span><span>&#xA0;</span><span class="keyword operator go"><span>{</span></span></span></div><div class="line"><span class="source go"><span>&#xA0;&#xA0;&#xA0;&#xA0;</span><span class="variable go"><span>cutieNotWantingHug</span></span><span>&#xA0;</span><span class="keyword operator go"><span>:=</span></span><span>&#xA0;</span><span class="variable go"><span>LovelyCutie</span></span><span class="keyword operator go"><span>{</span></span></span></div><div class="line"><span class="source go"><span>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span class="variable go"><span>wantsHug</span></span><span class="keyword operator go"><span>:</span></span><span>&#xA0;</span><span class="constant language go"><span>false</span></span><span class="keyword operator punctuation go"><span>,</span></span></span></div><div class="line"><span class="source go"><span>&#xA0;&#xA0;&#xA0;&#xA0;</span><span class="keyword operator go"><span>}</span></span></span></div><div class="line"><span class="source go"><span>&#xA0;&#xA0;&#xA0;&#xA0;</span><span class="variable go"><span>fmt</span></span><span class="keyword operator punctuation go"><span>.</span></span><span class="support function go"><span>Println</span></span><span class="keyword operator go"><span>(</span></span><span class="variable go"><span>maybehugs</span></span><span class="keyword operator punctuation go"><span>.</span></span><span class="support function go"><span>MaybeHug</span></span><span class="keyword operator go"><span>(</span></span><span class="variable go"><span>cutieNotWantingHug</span></span><span class="keyword operator go"><span>)</span><span>)</span></span></span></div><div class="line"><span class="source go"><span>&#xA0;&#xA0;&#xA0;&#xA0;</span><span class="comment line double-slash go"><span class="punctuation comment go"><span>//</span></span><span>&#xA0;Output:&#xA0;Empathy!</span></span></span></div><div class="line"><span class="source go"><span class="keyword operator go"><span>}</span></span></span></div><div class="line"><span class="source go"><span>&#xA0;</span></span></div><div class="line"><span class="source go"><span class="keyword go"><span>func</span></span><span>&#xA0;</span><span class="support function go"><span>ExampleMaybeHug_second</span></span><span class="keyword operator go"><span>(</span><span>)</span></span><span>&#xA0;</span><span class="keyword operator go"><span>{</span></span></span></div><div class="line"><span class="source go"><span>&#xA0;&#xA0;&#xA0;&#xA0;</span><span class="variable go"><span>cutieWantingHug</span></span><span>&#xA0;</span><span class="keyword operator go"><span>:=</span></span><span>&#xA0;</span><span class="variable go"><span>LovelyCutie</span></span><span class="keyword operator go"><span>{</span></span></span></div><div class="line"><span class="source go"><span>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span class="variable go"><span>wantsHug</span></span><span class="keyword operator go"><span>:</span></span><span>&#xA0;</span><span class="constant language go"><span>true</span></span><span class="keyword operator punctuation go"><span>,</span></span></span></div><div class="line"><span class="source go"><span>&#xA0;&#xA0;&#xA0;&#xA0;</span><span class="keyword operator go"><span>}</span></span></span></div><div class="line"><span class="source go"><span>&#xA0;&#xA0;&#xA0;&#xA0;</span><span class="variable go"><span>fmt</span></span><span class="keyword operator punctuation go"><span>.</span></span><span class="support function go"><span>Println</span></span><span class="keyword operator go"><span>(</span></span><span class="variable go"><span>maybehugs</span></span><span class="keyword operator punctuation go"><span>.</span></span><span class="support function go"><span>MaybeHug</span></span><span class="keyword operator go"><span>(</span></span><span class="variable go"><span>cutieWantingHug</span></span><span class="keyword operator go"><span>)</span><span>)</span></span></span></div><div class="line"><span class="source go"><span>&#xA0;&#xA0;&#xA0;&#xA0;</span><span class="comment line double-slash go"><span class="punctuation comment go"><span>//</span></span><span>&#xA0;Output:&#xA0;Hug!</span></span></span></div><div class="line"><span class="source go"><span class="keyword operator go"><span>}</span></span></span></div><div class="line"><span class="source go"><span>&#xA0;</span></span></div></pre></code></pre>
 
     </main>
-    <footer>
-        <a href="https://github.com/zkat/maybe-hugs">
-          <span class="mega-octicon octicon-mark-github"></span>
-        </a>
-        <a href="http://creativecommons.org/publicdomain/zero/1.0/">
-          <img src="https://camo.githubusercontent.com/c5160f944848828fa33126d9a697e9abe43ea98f/687474703a2f2f692e6372656174697665636f6d6d6f6e732e6f72672f702f7a65726f2f312e302f38387833312e706e67"/>
-        </a>
-    </footer>
   </div>
+  <footer>
+    <a href="https://github.com/zkat/maybe-hugs">
+      <span class="mega-octicon octicon-mark-github"></span>
+    </a>
+    <a href="http://creativecommons.org/publicdomain/zero/1.0/">
+      <img src="https://camo.githubusercontent.com/c5160f944848828fa33126d9a697e9abe43ea98f/687474703a2f2f692e6372656174697665636f6d6d6f6e732e6f72672f702f7a65726f2f312e302f38387833312e706e67"/>
+    </a>
+</footer>
 </body>

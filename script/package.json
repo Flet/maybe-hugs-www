@@ -4,9 +4,9 @@
   "version": "1.0.0",
   "author": "Dan Flettre",
   "bugs": {
-    "url": "https://github.com/flet/hyperhugs/issues"
+    "url": "https://github.com/flet/maybe-hugs-www/issues"
   },
-  "homepage": "https://github.com/flet/hyperhugs",
+  "homepage": "https://github.com/flet/maybe-hugs-www",
   "keywords": [
     "hugs",
     "maybe"
@@ -16,25 +16,30 @@
   "main": "gensite.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/flet/hyperhugs.git"
+    "url": "https://github.com/flet/maybe-hugs-www.git"
   },
   "dependencies": {
     "handlebars": "^3.0.3",
     "highlight.js": "^8.7.0",
     "highlightjs": "^8.7.0",
     "marked": "^0.3.5",
+    "marky-markdown": "^5.4.0",
     "semistandard": "*",
     "shelljs": "^0.5.2",
     "slugg": "^0.1.2",
     "xtend": "^4.0.0"
   },
   "scripts": {
-    "start": "node gensite.js",
-    "watch": "parallelshell 'npm run serve' 'nodemon --ignore build -e js,css,html'",
-    "serve": "ecstatic ../"
+    "build-css": "catw -c 'lessc -' 'style/*.less' > ../main.css",
+    "serve": "ecstatic ../",
+    "start": "node gensite.js && npm run build-css",
+    "watch": "parallelshell 'npm run serve' 'npm run watch-css' 'nodemon --ignore build -e js,css,html'",
+    "watch-css": "catw -c 'lessc -' 'style/*.less' -o ../main.css -v"
   },
   "devDependencies": {
+    "catw": "^1.0.1",
     "ecstatic": "^0.8.0",
+    "less": "^2.5.1",
     "nodemon": "^1.4.0",
     "parallelshell": "^2.0.0"
   }
