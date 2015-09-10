@@ -4,7 +4,6 @@ var extend = require('xtend');
 var fs = require('fs');
 var hb = require('handlebars');
 var path = require('path');
-var slug = require('slugg');
 
 var marky = require('marky-markdown');
 
@@ -21,16 +20,11 @@ function writeHtml (passedOpts) {
   var opts = extend(passedOpts);
 
   opts.nav = opts.tocData.map(function (item) {
-    return {url: customSlug(item) + '.html', title: item};
+    return {url: opts.slug + '.html', title: item};
   });
 
   var output = genPage(opts);
 
-  var name = customSlug(opts.name) + '.html';
+  var name = opts.slug + '.html';
   fs.writeFileSync(path.join('build', name), output, {encoding: 'utf8'});
-}
-
-function customSlug (name) {
-  var customName = name.replace(/\+/g, 'plus');
-  return slug(customName);
 }

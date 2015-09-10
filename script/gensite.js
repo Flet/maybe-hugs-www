@@ -31,6 +31,9 @@ var directories = files.filter(function (file) {
   return sh.test('-d', path.join(maybehug, file));
 });
 
+var SluggerUnique = require('slugger-unique');
+var slugger = new SluggerUnique();
+
 files.forEach(function (f) {
   var filePath = path.join(maybehug, f);
   if (f === 'README.md') {
@@ -52,7 +55,7 @@ sh.cp('-Rf', path.resolve(buildPath, '*'), path.resolve(__dirname, '..'));
 
 function convert (name, file) {
   var content = fs.readFileSync(file, {encoding: 'utf8'});
-  writeHtml({name: name, data: content, tocData: directories});
+  writeHtml({slug: name, name: name, data: content, tocData: directories});
 }
 
 function processDirectory (name) {
@@ -86,5 +89,12 @@ function processDirectory (name) {
 
   data = '## ' + name + '\n\n' + data;
 
-  writeHtml({name: name, data: data, tocData: directories});
+  var slug = customSlug(name);
+
+  writeHtml({slug: slug, name: name, data: data, tocData: directories});
+}
+
+function customSlug (name) {
+  var customName = name.replace(/\+/g, 'plus');
+  return slugger.slug(customName);
 }

@@ -23,7 +23,7 @@
     "marky-markdown": "^5.4.0",
     "semistandard": "*",
     "shelljs": "^0.5.2",
-    "slugg": "^0.1.2",
+    "slugger-unique": "^1.0.0",
     "xtend": "^4.0.0"
   },
   "scripts": {
