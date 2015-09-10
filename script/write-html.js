@@ -19,9 +19,7 @@ var genPage = hb.compile(page);
 function writeHtml (passedOpts) {
   var opts = extend(passedOpts);
 
-  opts.nav = opts.tocData.map(function (item) {
-    return {url: opts.slug + '.html', title: item};
-  });
+  opts.nav = opts.tocData;
 
   var output = genPage(opts);
 

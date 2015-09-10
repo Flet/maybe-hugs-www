@@ -6,6 +6,8 @@ var path = require('path');
 var sh = require('shelljs');
 var writeHtml = require('./write-html.js');
 var determineSyntax = require('./determine-syntax.js');
+var SluggerUnique = require('slugger-unique');
+var slugger = new SluggerUnique();
 
 var maybehug = path.join('tmp', 'maybe-hugs');
 
@@ -31,8 +33,10 @@ var directories = files.filter(function (file) {
   return sh.test('-d', path.join(maybehug, file));
 });
 
-var SluggerUnique = require('slugger-unique');
-var slugger = new SluggerUnique();
+var tocData = directories.map(function (item) {
+  return {url: customSlug(item) + '.html', title: item};
+});
+slugger.reset();
 
 files.forEach(function (f) {
   var filePath = path.join(maybehug, f);
@@ -55,7 +59,7 @@ sh.cp('-Rf', path.resolve(buildPath, '*'), path.resolve(__dirname, '..'));
 
 function convert (name, file) {
   var content = fs.readFileSync(file, {encoding: 'utf8'});
-  writeHtml({slug: name, name: name, data: content, tocData: directories});
+  writeHtml({slug: name, name: name, data: content, tocData: tocData});
 }
 
 function processDirectory (name) {
@@ -91,7 +95,7 @@ function processDirectory (name) {
 
   var slug = customSlug(name);
 
-  writeHtml({slug: slug, name: name, data: data, tocData: directories});
+  writeHtml({slug: slug, name: name, data: data, tocData: tocData});
 }
 
 function customSlug (name) {
