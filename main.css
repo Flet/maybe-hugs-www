@@ -253,14 +253,12 @@
   background-color: #751012;
 }
 body {
-  height: 100%;
   padding: 0px;
   margin: 0px;
 }
 html {
   font-family: 'Open Sans';
   font-size: 16px;
-  height: 100%;
   padding: 0px;
   margin: 0px;
 }
@@ -321,12 +319,13 @@ nav {
 header {
   background-color: #D8D8F6;
   width: 100%;
-  padding: 10px;
 }
 header > a {
+  display: block;
   color: #2D2D2D;
   font-size: 2.8rem;
   text-decoration: none;
+  padding: 10px;
 }
 footer {
   text-align: center;
