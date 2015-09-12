@@ -19,7 +19,10 @@
     "url": "https://github.com/flet/maybe-hugs-www.git"
   },
   "dependencies": {
+    "detect-dom-ready": "^1.0.2",
+    "dom-ready": "^1.0.4",
     "handlebars": "^3.0.3",
+    "hashchange": "^1.0.0",
     "marky-markdown": "^5.4.0",
     "semistandard": "*",
     "shelljs": "^0.5.2",
@@ -28,16 +31,20 @@
   },
   "scripts": {
     "build-css": "catw -c 'lessc -' 'style/*.less' > ../main.css",
+    "build-js": "browserify browser/app.js > ../bundle.js",
     "serve": "ecstatic ../",
-    "start": "node gensite.js && npm run build-css",
-    "watch": "parallelshell 'npm run serve' 'npm run watch-css' 'nodemon --ignore build -e js,css,html'",
-    "watch-css": "catw -c 'lessc -' 'style/*.less' -o ../main.css -v"
+    "start": "node gensite.js && npm run build-css && npm run build-js",
+    "watch": "parallelshell 'npm run serve' 'npm run watch-css' 'npm run watch-js' 'nodemon --ignore build -e js,css,html'",
+    "watch-css": "catw -c 'lessc -' 'style/*.less' -o ../main.css -v",
+    "watch-js": "watchify browser/*.js -o ../bundle.js -dv"
   },
   "devDependencies": {
+    "browserify": "^11.1.0",
     "catw": "^1.0.1",
     "ecstatic": "^0.8.0",
     "less": "^2.5.1",
     "nodemon": "^1.4.0",
-    "parallelshell": "^2.0.0"
+    "parallelshell": "^2.0.0",
+    "watchify": "^3.4.0"
   }
 }
