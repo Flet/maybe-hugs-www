@@ -1,28 +1,25 @@
-module.exports = writeHtml;
+module.exports.create = function (page, partials) {
+  return new HtmlWriter(page, partials)
+}
 
-var extend = require('xtend');
-var fs = require('fs');
-var hb = require('handlebars');
-var path = require('path');
+var extend = require('xtend')
+var hb = require('handlebars')
+var marky = require('marky-markdown')
 
-var marky = require('marky-markdown');
+function HtmlWriter (page, partials) {
+  this.genPage = hb.compile(page)
 
-hb.registerHelper('markdown', function (data) {
-  return new hb.SafeString(marky(data).html());
-});
+  console.log('partials', partials)
+  Object.keys(partials).forEach(function (p) {
+    hb.registerPartial(p, partials[p])
+  })
 
-var toc = fs.readFileSync(path.join('template', 'toc.html'), {encoding: 'utf8'});
-var page = fs.readFileSync(path.join('template', 'page.html'), {encoding: 'utf8'});
-hb.registerPartial('toc', toc);
-var genPage = hb.compile(page);
+  hb.registerHelper('markdown', function (data) {
+    return new hb.SafeString(marky(data).html())
+  })
+}
 
-function writeHtml (passedOpts) {
-  var opts = extend(passedOpts);
-
-  opts.nav = opts.tocData;
-
-  var output = genPage(opts);
-
-  var name = opts.slug + '.html';
-  fs.writeFileSync(path.join('build', name), output, {encoding: 'utf8'});
+HtmlWriter.prototype.convert = function (passedOpts) {
+  var opts = extend(passedOpts)
+  return this.genPage(opts)
 }

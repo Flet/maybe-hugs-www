@@ -23,13 +23,14 @@
     "dom-ready": "^1.0.4",
     "handlebars": "^3.0.3",
     "hashchange": "^1.0.0",
-    "marky-markdown": "^5.4.0",
-    "semistandard": "*",
+    "marky-markdown": "flet/marky-markdown#bananaslug",
     "shelljs": "^0.5.2",
     "slugger-unique": "^1.0.0",
+    "standard": "*",
     "xtend": "^4.0.0"
   },
   "scripts": {
+    "test": "standard *.js",
     "build-css": "catw -c 'lessc -' 'style/*.less' > ../main.css",
     "build-js": "browserify browser/app.js > ../bundle.js",
     "serve": "ecstatic ../",

@@ -1,4 +1,4 @@
-var path = require('path');
+var path = require('path')
 
 var langs = {
   'clj': 'clojure',
@@ -9,9 +9,9 @@ var langs = {
   'rb': 'ruby',
   'rs': 'rust',
   'py': 'python'
-};
+}
 
 module.exports = function (filePath) {
-  var ext = path.extname(filePath).slice(1);
-  return langs[ext] || ext;
-};
+  var ext = path.extname(filePath).slice(1)
+  return langs[ext] || ext
+}

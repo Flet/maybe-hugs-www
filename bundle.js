@@ -6,6 +6,7 @@
 var rehash = require('./rehash')
 
 rehash()
+
 },{"./rehash":2}],2:[function(require,module,exports){
 module.exports = rehash
 
@@ -39,7 +40,7 @@ function rehash (prefix) {
   })
 }
 
-},{"detect-dom-ready":4,"hashchange":6}],3:[function(require,module,exports){
+},{"detect-dom-ready":4,"hashchange":7}],3:[function(require,module,exports){
 module.exports = function(arr, obj){
   if (arr.indexOf) return arr.indexOf(obj);
   for (var i = 0; i < arr.length; ++i) {
@@ -105,6 +106,30 @@ module.exports = function(callback){
     }
 };
 },{}],6:[function(require,module,exports){
+
+var hasOwn = Object.prototype.hasOwnProperty;
+var toString = Object.prototype.toString;
+
+module.exports = function forEach (obj, fn, ctx) {
+    if (toString.call(fn) !== '[object Function]') {
+        throw new TypeError('iterator must be a function');
+    }
+    var l = obj.length;
+    if (l === +l) {
+        for (var i = 0; i < l; i++) {
+            fn.call(ctx, obj[i], i, obj);
+        }
+    } else {
+        for (var k in obj) {
+            if (hasOwn.call(obj, k)) {
+                fn.call(ctx, obj[k], k, obj);
+            }
+        }
+    }
+};
+
+
+},{}],7:[function(require,module,exports){
 var each = require('each'),
 	indexOf = require('indexof');
 
@@ -195,28 +220,4 @@ hashChange = new HashChange();
 
 module.exports = hashChange;
 
-},{"each":7,"indexof":3}],7:[function(require,module,exports){
-
-var hasOwn = Object.prototype.hasOwnProperty;
-var toString = Object.prototype.toString;
-
-module.exports = function forEach (obj, fn, ctx) {
-    if (toString.call(fn) !== '[object Function]') {
-        throw new TypeError('iterator must be a function');
-    }
-    var l = obj.length;
-    if (l === +l) {
-        for (var i = 0; i < l; i++) {
-            fn.call(ctx, obj[i], i, obj);
-        }
-    } else {
-        for (var k in obj) {
-            if (hasOwn.call(obj, k)) {
-                fn.call(ctx, obj[k], k, obj);
-            }
-        }
-    }
-};
-
-
-},{}]},{},[1]);
+},{"each":6,"indexof":3}]},{},[1]);
