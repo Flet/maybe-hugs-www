@@ -8,13 +8,13 @@ var determineSyntax = require('./determine-syntax.js')
 var SluggerUnique = require('slugger-unique')
 var slugger = new SluggerUnique()
 
-var writeHtml = require('./write-html.js')
-var templatePage = sh.cat(join('template', 'page.html'))
+var markybars = require('./markybars.js')
+var page = join('template/page.html')
 var partials = {
-  'toc': sh.cat(join('template', 'toc.html'))
+  'toc': join('template/toc.html')
 }
 
-var htmlWriter = writeHtml.create(templatePage, partials)
+var genPage = markybars.compile(page, partials)
 
 function processDirectory (groupname, files, tocData) {
   var data = ''
@@ -50,7 +50,7 @@ function processDirectory (groupname, files, tocData) {
 
   var slug = customSlug(groupname)
 
-  var htmlData = htmlWriter.convert({data: data, nav: tocData})
+  var htmlData = genPage({data: data, nav: tocData})
   fs.writeFileSync(join('build', slug), htmlData, {encoding: 'utf8'})
 }
 

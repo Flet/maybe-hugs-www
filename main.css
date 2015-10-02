@@ -33,7 +33,7 @@
   border-color: white;
 }
 .editor .selection .region {
-  background-color: #444444;
+  background-color: #444;
 }
 .editor .source.gfm {
   color: #999;

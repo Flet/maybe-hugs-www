@@ -3,44 +3,11 @@
 // this checks whether someone has clicked on an auto-generated id, and updates
 // the URL fragment to not include the prefix.
 
-var rehash = require('./rehash')
+var rehash = require('marky-deep-links')
 
 rehash()
 
-},{"./rehash":2}],2:[function(require,module,exports){
-module.exports = rehash
-
-// inspired by:
-// https://github.com/npm/newww/blob/ebbe8a3344341b08026d03c67cfe53e541e88283/assets/scripts/deep-links.js
-// TODO: make this its own npm package!
-
-// auto-generated DOM ids are prefixed with `user-content-` for security reasons
-// this checks whether someone has clicked on an auto-generated id, and updates
-// the URL fragment to not include the prefix.
-
-var hashchange = require('hashchange')
-var domReady = require('detect-dom-ready')
-
-function rehash (prefix) {
-  hashchange.update(function (hash) {
-    var prefix = prefix || 'user-content-'
-
-    if (hash.indexOf(prefix) === 0) {
-      hashchange.updateHash(hash.replace(prefix, ''))
-    } else {
-      var anchor = document.getElementById(prefix + hash)
-      if (anchor) {
-        window.scrollTo(window.scrollX, anchor.getBoundingClientRect().top + window.scrollY)
-      }
-    }
-  })
-
-  domReady(function () {
-    hashchange.update()
-  })
-}
-
-},{"detect-dom-ready":4,"hashchange":7}],3:[function(require,module,exports){
+},{"marky-deep-links":7}],2:[function(require,module,exports){
 module.exports = function(arr, obj){
   if (arr.indexOf) return arr.indexOf(obj);
   for (var i = 0; i < arr.length; ++i) {
@@ -48,7 +15,7 @@ module.exports = function(arr, obj){
   }
   return -1;
 };
-},{}],4:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 /*
  * detect-dom-ready
  * http://github.amexpub.com/modules/detect-dom-ready
@@ -58,7 +25,7 @@ module.exports = function(arr, obj){
 
 module.exports = require('./lib/detect-dom-ready');
 
-},{"./lib/detect-dom-ready":5}],5:[function(require,module,exports){
+},{"./lib/detect-dom-ready":4}],4:[function(require,module,exports){
 /*
  * detect-dom-ready
  * http://github.amexpub.com/modules
@@ -105,7 +72,7 @@ module.exports = function(callback){
         }
     }
 };
-},{}],6:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 
 var hasOwn = Object.prototype.hasOwnProperty;
 var toString = Object.prototype.toString;
@@ -129,7 +96,7 @@ module.exports = function forEach (obj, fn, ctx) {
 };
 
 
-},{}],7:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 var each = require('each'),
 	indexOf = require('indexof');
 
@@ -220,4 +187,29 @@ hashChange = new HashChange();
 
 module.exports = hashChange;
 
-},{"each":6,"indexof":3}]},{},[1]);
+},{"each":5,"indexof":2}],7:[function(require,module,exports){
+module.exports = markyDeepLinks
+
+var hashchange = require('hashchange')
+var domReady = require('detect-dom-ready')
+
+function markyDeepLinks (prefix) {
+  hashchange.update(function (hash) {
+    var prefix = prefix || 'user-content-'
+
+    if (hash.indexOf(prefix) === 0) {
+      hashchange.updateHash(hash.replace(prefix, ''))
+    } else {
+      var anchor = document.getElementById(prefix + hash)
+      if (anchor) {
+        window.scrollTo(window.scrollX, anchor.getBoundingClientRect().top + window.scrollY)
+      }
+    }
+  })
+
+  domReady(function () {
+    hashchange.update()
+  })
+}
+
+},{"detect-dom-ready":3,"hashchange":6}]},{},[1]);
