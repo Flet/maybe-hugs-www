@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Droid+Sans+Mono" />
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/octicons/3.0.1/octicons.min.css"/>
+<link rel="stylesheet" type="text/css" href="main.css" />
+<body><header>
+  <a href="index.html">maybe-hugs</a>
+</header>
+<nav>
+  <a href="bash.html">bash</a>
+  <a href="c.html">c</a>
+  <a href="cplusplus.html">c++</a>
+  <a href="clojure.html">clojure</a>
+  <a href="csharp.html">csharp</a>
+  <a href="elixir.html">elixir</a>
+  <a href="elm.html">elm</a>
+  <a href="go.html">go</a>
+  <a href="haskell.html">haskell</a>
+  <a href="hy.html">hy</a>
+  <a href="idris.html">idris</a>
+  <a href="java.html">java</a>
+  <a href="javascript.html">javascript</a>
+  <a href="perl.html">perl</a>
+  <a href="perl6.html">perl6</a>
+  <a href="php.html">php</a>
+  <a href="purescript.html">purescript</a>
+  <a href="python.html">python</a>
+  <a href="ruby.html">ruby</a>
+  <a href="rust.html">rust</a>
+  <a href="scala.html">scala</a>
+</nav>
+  <div id="container">
+
+    <main>
+      <h2 id="user-content-elixir" class="deep-link"><a href="#elixir">elixir</a></h2>
+<h6 id="user-content-cutieex" class="deep-link"><a href="#cutieex">cutie.ex</a></h6>
+<pre><code class="highlight"><pre class="editor editor-colors"><div class="line"><span class="text"><span>defmodule&#xA0;Cutie&#xA0;do</span></span></div><div class="line"><span class="text"><span>&#xA0;</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;@spec&#xA0;hug(%{})&#xA0;::&#xA0;String</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;def&#xA0;hug(cutie)&#xA0;do</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;&#xA0;&#xA0;if&#xA0;cutie[:accepts]&#xA0;do</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;cutie[:name]&#xA0;&lt;&gt;&#xA0;&quot;&#xA0;accepts&#xA0;hug!&quot;</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;&#xA0;&#xA0;else</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;cutie[:name]&#xA0;&lt;&gt;&#xA0;&quot;&#xA0;prefers&#xA0;empathy!&quot;</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;&#xA0;&#xA0;end</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;end</span></span></div><div class="line"><span class="text"><span>&#xA0;</span></span></div><div class="line"><span class="text"><span>end</span></span></div><div class="line"><span class="text"><span>&#xA0;</span></span></div></pre></code></pre>
+<h6 id="user-content-maybe_hugex" class="deep-link"><a href="#maybe_hugex">maybe_hug.ex</a></h6>
+<pre><code class="highlight"><pre class="editor editor-colors"><div class="line"><span class="text"><span>import&#xA0;IO</span></span></div><div class="line"><span class="text"><span>require&#xA0;Cutie</span></span></div><div class="line"><span class="text"><span>&#xA0;</span></span></div><div class="line"><span class="text"><span>cutie_person&#xA0;=&#xA0;%{:name&#xA0;=&gt;&#xA0;&quot;John&quot;,:accepts&#xA0;=&gt;&#xA0;true}</span></span></div><div class="line"><span class="text"><span>empathic_person&#xA0;=&#xA0;%{:name&#xA0;=&gt;&#xA0;&quot;Mary&quot;,:accepts&#xA0;=&gt;&#xA0;false}</span></span></div><div class="line"><span class="text"><span>&#xA0;</span></span></div><div class="line"><span class="text"><span>puts&#xA0;Cutie.hug(cutie_person)</span></span></div><div class="line"><span class="text"><span>puts&#xA0;Cutie.hug(empathic_person)</span></span></div><div class="line"><span class="text"><span>&#xA0;</span></span></div></pre></code></pre>
+
+    </main>
+  </div>
+  <footer>
+    <a href="https://github.com/zkat/maybe-hugs">
+      <span class="mega-octicon octicon-mark-github"></span>
+    </a>
+    <a href="http://creativecommons.org/publicdomain/zero/1.0/">
+      <img src="https://camo.githubusercontent.com/c5160f944848828fa33126d9a697e9abe43ea98f/687474703a2f2f692e6372656174697665636f6d6d6f6e732e6f72672f702f7a65726f2f312e302f38387833312e706e67"/>
+    </a>
+</footer>
+<script src="bundle.js"></script>
+</body>
