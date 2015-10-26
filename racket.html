@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Droid+Sans+Mono" />
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/octicons/3.0.1/octicons.min.css"/>
+<link rel="stylesheet" type="text/css" href="main.css" />
+<body><header>
+  <a href="index.html">maybe-hugs</a>
+</header>
+<nav>
+  <a href="bash.html">bash</a>
+  <a href="c.html">c</a>
+  <a href="cplusplus.html">c++</a>
+  <a href="clojure.html">clojure</a>
+  <a href="commonlisp.html">commonlisp</a>
+  <a href="csharp.html">csharp</a>
+  <a href="elixir.html">elixir</a>
+  <a href="elm.html">elm</a>
+  <a href="go.html">go</a>
+  <a href="haskell.html">haskell</a>
+  <a href="hy.html">hy</a>
+  <a href="idris.html">idris</a>
+  <a href="java.html">java</a>
+  <a href="javascript.html">javascript</a>
+  <a href="ocaml.html">ocaml</a>
+  <a href="perl.html">perl</a>
+  <a href="perl6.html">perl6</a>
+  <a href="php.html">php</a>
+  <a href="purescript.html">purescript</a>
+  <a href="python.html">python</a>
+  <a href="racket.html">racket</a>
+  <a href="ruby.html">ruby</a>
+  <a href="rust.html">rust</a>
+  <a href="sass.html">sass</a>
+  <a href="scala.html">scala</a>
+</nav>
+  <div id="container">
+
+    <main>
+      <h2 id="user-content-racket" class="deep-link"><a href="#racket">racket</a></h2>
+<h6 id="user-content-maybehugsrkt" class="deep-link"><a href="#maybehugsrkt">maybehugs.rkt</a></h6>
+<pre><code class="highlight"><pre class="editor editor-colors"><div class="line"><span class="text"><span>#lang&#xA0;racket</span></span></div><div class="line"><span class="text"><span>&#xA0;</span></span></div><div class="line"><span class="text"><span>(struct&#xA0;cuttie&#xA0;(name&#xA0;type))</span></span></div><div class="line"><span class="text"><span>&#xA0;</span></span></div><div class="line"><span class="text"><span>(define&#xA0;(empathic&#xA0;a-name)</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;(cuttie&#xA0;a-name&#xA0;&apos;Empathic))</span></span></div><div class="line"><span class="text"><span>&#xA0;</span></span></div><div class="line"><span class="text"><span>(define&#xA0;(huggable&#xA0;a-name)</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;(cuttie&#xA0;a-name&#xA0;&apos;Huggable))</span></span></div><div class="line"><span class="text"><span>&#xA0;</span></span></div><div class="line"><span class="text"><span>(define&#xA0;(hug&#xA0;a-cuttie)</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;(cond</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;[(eq?&#xA0;(cuttie-type&#xA0;a-cuttie)&#xA0;&apos;Empathic)&#xA0;&quot;Cutie&#xA0;prefers&#xA0;empathy!&quot;]</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;[(eq?&#xA0;(cuttie-type&#xA0;a-cuttie)&#xA0;&apos;Huggable)&#xA0;&quot;HUG&#xA0;!&quot;]))</span></span></div><div class="line"><span class="text"><span>&#xA0;</span></span></div><div class="line"><span class="text"><span>(define&#xA0;katie&#xA0;(huggable&#xA0;&apos;katie))</span></span></div><div class="line"><span class="text"><span>(define&#xA0;john&#xA0;&#xA0;(empathic&#xA0;&apos;john))</span></span></div><div class="line"><span class="text"><span>&#xA0;</span></span></div><div class="line"><span class="text"><span>(println</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;(hug&#xA0;katie))</span></span></div><div class="line"><span class="text"><span>(println</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;(hug&#xA0;john))</span></span></div></pre></code></pre>
+
+    </main>
+  </div>
+  <footer>
+    <a href="https://github.com/zkat/maybe-hugs">
+      <span class="mega-octicon octicon-mark-github"></span>
+    </a>
+    <a href="http://creativecommons.org/publicdomain/zero/1.0/">
+      <img src="https://camo.githubusercontent.com/c5160f944848828fa33126d9a697e9abe43ea98f/687474703a2f2f692e6372656174697665636f6d6d6f6e732e6f72672f702f7a65726f2f312e302f38387833312e706e67"/>
+    </a>
+</footer>
+<script src="bundle.js"></script>
+</body>
