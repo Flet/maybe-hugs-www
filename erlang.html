@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Droid+Sans+Mono" />
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/octicons/3.0.1/octicons.min.css"/>
+<link rel="stylesheet" type="text/css" href="main.css" />
+<body><header>
+  <a href="index.html">maybe-hugs</a>
+</header>
+<nav>
+  <a href="bash.html">bash</a>
+  <a href="c.html">c</a>
+  <a href="cplusplus.html">c++</a>
+  <a href="clojure.html">clojure</a>
+  <a href="commonlisp.html">commonlisp</a>
+  <a href="csharp.html">csharp</a>
+  <a href="elixir.html">elixir</a>
+  <a href="elm.html">elm</a>
+  <a href="erlang.html">erlang</a>
+  <a href="go.html">go</a>
+  <a href="haskell.html">haskell</a>
+  <a href="hy.html">hy</a>
+  <a href="idris.html">idris</a>
+  <a href="java.html">java</a>
+  <a href="javascript.html">javascript</a>
+  <a href="ocaml.html">ocaml</a>
+  <a href="ocaml-cps.html">ocaml-cps</a>
+  <a href="perl.html">perl</a>
+  <a href="perl6.html">perl6</a>
+  <a href="php.html">php</a>
+  <a href="purescript.html">purescript</a>
+  <a href="python.html">python</a>
+  <a href="racket.html">racket</a>
+  <a href="ruby.html">ruby</a>
+  <a href="rust.html">rust</a>
+  <a href="sass.html">sass</a>
+  <a href="scala.html">scala</a>
+</nav>
+  <div id="container">
+
+    <main>
+      <h2 id="user-content-erlang" class="deep-link"><a href="#erlang">erlang</a></h2>
+<h6 id="user-content-cutieerl" class="deep-link"><a href="#cutieerl">cutie.erl</a></h6>
+<pre class="editor editor-colors"><div class="line"><span class="text"><span>-module(cutie).</span></span></div><div class="line"><span class="text"><span>&#xA0;</span></span></div><div class="line"><span class="text"><span>-export([&#xA0;new/2</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;,&#xA0;hug/1</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;,&#xA0;run_example/0</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;]).</span></span></div><div class="line"><span class="text"><span>&#xA0;</span></span></div><div class="line"><span class="text"><span>-type&#xA0;maybehug()&#xA0;::&#xA0;hugs&#xA0;|&#xA0;empathy.</span></span></div><div class="line"><span class="text"><span>&#xA0;</span></span></div><div class="line"><span class="text"><span>-opaque&#xA0;cutie()&#xA0;::&#xA0;#{&#xA0;name&#xA0;=&gt;&#xA0;string()</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;,&#xA0;mood&#xA0;=&gt;&#xA0;maybehug()</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;}.</span></span></div><div class="line"><span class="text"><span>&#xA0;</span></span></div><div class="line"><span class="text"><span>-export_type([cutie/0]).</span></span></div><div class="line"><span class="text"><span>&#xA0;</span></span></div><div class="line"><span class="text"><span>-spec&#xA0;new(string(),&#xA0;maybehug()&#xA0;)&#xA0;-&gt;&#xA0;cutie().</span></span></div><div class="line"><span class="text"><span>new(Name,&#xA0;Mood)&#xA0;-&gt;</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;#{name&#xA0;=&gt;&#xA0;Name,&#xA0;mood&#xA0;=&gt;&#xA0;Mood}.</span></span></div><div class="line"><span class="text"><span>&#xA0;</span></span></div><div class="line"><span class="text"><span>-spec&#xA0;hug(cutie())&#xA0;-&gt;&#xA0;ok.</span></span></div><div class="line"><span class="text"><span>hug(_Cutie&#xA0;=&#xA0;#{mood&#xA0;:=&#xA0;hugs,&#xA0;name&#xA0;:=&#xA0;Name})&#xA0;-&gt;</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;io:format(&quot;Hugs&#xA0;for&#xA0;~s&#xA0;~n&quot;,&#xA0;[Name]);</span></span></div><div class="line"><span class="text"><span>hug(_Cutie&#xA0;=&#xA0;#{mood&#xA0;:=&#xA0;empathy,&#xA0;name&#xA0;:=&#xA0;Name})&#xA0;-&gt;</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;io:format(&quot;Empathy&#xA0;for&#xA0;~s&#xA0;~n&quot;,[Name]).</span></span></div><div class="line"><span class="text"><span>&#xA0;</span></span></div><div class="line"><span class="text"><span>run_example()&#xA0;-&gt;</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;CutieHugsReceiver&#xA0;=&#xA0;cutie:new(&quot;bear&quot;,&#xA0;hugs),</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;ok&#xA0;=&#xA0;cutie:hug(CutieHugsReceiver),</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;CutieEmpathyReceiver&#xA0;=&#xA0;cutie:new(&quot;dog&quot;,&#xA0;empathy),</span></span></div><div class="line"><span class="text"><span>&#xA0;&#xA0;ok&#xA0;=&#xA0;cutie:hug(CutieEmpathyReceiver).</span></span></div><div class="line"><span class="text"><span>&#xA0;</span></span></div></pre>
+
+    </main>
+  </div>
+  <footer>
+    <a href="https://github.com/zkat/maybe-hugs">
+      <span class="mega-octicon octicon-mark-github"></span>
+    </a>
+    <a href="http://creativecommons.org/publicdomain/zero/1.0/">
+      <img src="https://camo.githubusercontent.com/c5160f944848828fa33126d9a697e9abe43ea98f/687474703a2f2f692e6372656174697665636f6d6d6f6e732e6f72672f702f7a65726f2f312e302f38387833312e706e67"/>
+    </a>
+</footer>
+<script src="bundle.js"></script>
+</body>
